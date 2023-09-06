@@ -1,0 +1,58 @@
+# Literature {.unnumbered}
+
+## To sort
+
+### Tropical forests are approaching critical temperature thresholds
+
+@doughty2023:
+
+-   Tcrit = FvFm starts to decline
+-   Tcrit =\> leaf necrosis & death
+-   Heat tolerance increased with LMA
+-   ECOSTRESS =\> LST (Leaf Surface Temperature), 70x70m, multiple diel
+-   ground truthing wuth tower-based data
+-   Tapajos KM83
+-   leaf distribution as a same mean as tower pyrgeometer but a long positive tail going above Tcrit
+-   low probability high impact event
+-   Tleaf \~ Tair non linear
+-   ECOSTRESS LST against VIIRS (infrared), MODIS (spectro), SMAP (soil mosture)
+-   ECOSTRESS really needs quality flag filtering to match VIIRS and MODIS
+-   +2° mean =\> 0.5 to 5% above Tcrit regionally
+-   double long tails within pixel among leaves from a tree and among pixels within a region
+-   Tcrit + time = enzyme denaturation
+-   Within the century for RCP 6.0 & 8.5 but not 2.6
+-   But possible combined effects of C starve, hydraulic lim and fires
+
+### Increased Amazon carbon emissions mainly from decline in law enforcement
+
+@gatti2023: comparing 2019 & 220 under Bolsonaro to Lula's policy in term of Amazonian ecosystem metrics
+
+### Action needed to make carbon offsets from forest conservation work for climate change mitigation
+
+@west2023: criticizing REDD+ real avoided emission but see criticisms of the approach used
+
+## Climate data & projections
+
+### AFRICLIM: High-resolution climate projections for ecological applications in Africa
+
+@platts2014:
+
+-   CMIP \> CORDEX \> baseline downscaling
+-   correct observed and simulated baseline
+-   4 rainfall and 2 temperature datasets: CRU CL 2.0, WorldClim v1.4, TAMSAT TARCAT, CHIRPS
+-   spline interpolation of anomalies
+-   temperature anomalies added
+-   rainfall as absolute relative changes
+-   High-resolution projections are available globally (e.g., http://www.worldclim.org/cmip5) but are empirically derived directly from GCMs, with no dynamical downscaling.
+
+### Climatologies at high resolution for the earth's land surface areas
+
+@karger2017: CHELSA: The precipitation algorithm incorporates orographic predictors including wind ﬁelds, valley exposition, and boundary layer height, with a subsequent bias correction
+
+### CMIP5 vs. CORDEX over the Indian region: how much do we benefit from dynamical downscaling?
+
+@mishra2017: downscaling invariably leads to an improvement in the spatial pattern of surface air temperature, but compared to the driving GCMs, the errors in magnitude after downscaling are even worse in some cases
+
+### Assessment of CORDEX simulations over South America: added value on seasonal climatology and resolution considerations
+
+@falco2018: mixed results

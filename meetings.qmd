@@ -1,0 +1,21 @@
+# Meetings {.unnumbered}
+
+## 24/09/06 - Soulemane
+
+-   AGB mapping in ivory Coast
+
+    -   Based on VOD (Vegetation Optical Depth) satellite product by INRAE, see @dou2023
+
+-   Study of temporal dynamics over several periods plus future projections
+
+-   Descriptors
+
+    -   soil (density, texture, pH)
+
+    -   climate (worldclim)
+
+    -   landscape structure (% cover and isolation)
+
+-   Construction with Camille
+
+-   AGB part of work but also landscape dynamics and composition on the other hand

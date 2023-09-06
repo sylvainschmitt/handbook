@@ -1,0 +1,26 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "CIRAD handbook"
+  author: "Sylvain Schmitt"
+  date: last-modified
+  chapters:
+    - index.qmd
+    - part: admin.qmd
+    - part: climatology.qmd
+      chapters: 
+        - clim-resources.qmd
+  appendices:
+    - meetings.qmd
+    - literature.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+
+editor: visual
