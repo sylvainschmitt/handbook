@@ -1,5 +1,13 @@
 # Literature {.unnumbered}
 
+## To read
+
+-   @malhi2008
+
+-   @lovejoy2018
+
+-   @nobre2016
+
 ## To sort
 
 ### Tropical forests are approaching critical temperature thresholds
@@ -30,6 +38,56 @@
 ### Action needed to make carbon offsets from forest conservation work for climate change mitigation
 
 @west2023: criticizing REDD+ real avoided emission but see criticisms of the approach used
+
+### Climatic legacy effects on the drought response of the Amazon rainforest
+
+@vanpassel2022:
+
+-   Amazon basin resistance and resilience to drought
+
+-   based on MODIS EVI and cumulative water deficit
+
+-   increased drought frequency in central and northern Amazon
+
+-   increased drought intensity in southern Amazon
+
+-   increased wet frequency everywhere
+
+-   legacy effect of drought
+
+-   more stable forests are also more resistant and resilient
+
+### Fire may prevent future Amazon forest recovery after large-scale deforestation
+
+@drüke2023:
+
+-   Explore Amazon tipping point forest/savanna
+
+-   LPJ-Guess with fire
+
+-   Recovery after full deforestation with or without fire
+
+-   Fire prevent regrowth
+
+-   Fire contribute to irreversible transitions
+
+### Has the IPCC's revised vulnerability concept been well adopted?
+
+@estoque2022
+
+-   vulnerability \~ exposure, sensitivity, adaptive capacity (AR4)
+
+-   risk \~ hazard, exposure, vulnerability (AR5)
+
+-   exposure (AR4): hazard-centered (e.g. drought intensity)
+
+-   exposure (AR5): exposed elements (people, ecosystem)
+
+-   vulnerability (AR5) \~ sensitivity and capacity to adapt
+
+-   moved from vulnerability to risk assessment
+
+-   Fig. 1 nice summary
 
 ## Climate data & projections
 

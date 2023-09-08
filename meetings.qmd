@@ -1,21 +1,42 @@
 # Meetings {.unnumbered}
 
-## 24/09/06 - Soulemane
+## 23/09/06 - Soulemane
 
 -   AGB mapping in ivory Coast
-
     -   Based on VOD (Vegetation Optical Depth) satellite product by INRAE, see @dou2023
-
 -   Study of temporal dynamics over several periods plus future projections
-
 -   Descriptors
-
     -   soil (density, texture, pH)
-
     -   climate (worldclim)
-
     -   landscape structure (% cover and isolation)
-
 -   Construction with Camille
-
 -   AGB part of work but also landscape dynamics and composition on the other hand
+
+## 23/09/07 - Réu UR
+
+-   Prévision d'une mission en début 2024 pour raconte avec Carlos Nobre de l'INP à Sao Paulo sur les question de transition de forêts tropicales humides aux savanes Cerado (échange préliminaire avec Plinio lors du sommet sur l'Amazonie)
+-   Se renseigner sur le PEPR FORESTT (FAIRCARBON?)
+-   Demandez à Camille puis Guillaume pour accès compte zoom unité
+
+## 23/09/08 - Meeting Camille P.
+
+-   Réseaux parcelles (TmFO)
+    -   initiative internationale
+    -   Plinio S. et Jérôme C
+-   PEPR FORESTT, PC Monitoring
+    -   Biodiversity & structure
+    -   Health
+    -   Phenology
+-   GeoTrees: parcelles références télédétection carbone
+    -   S. Davies, O. Phillips, J. Chave, C. Piponiot (TmFO)
+-   CESAB (FRB) projet groupe travail TmFO (14), 2 workshop par an à Montpellier + 1 postdoc
+    -   Pb: biodiv, compo, biomasse, F exploitées, BEF, Climat ?
+-   Projet NSF S. Davies réseau de réseau avec groupes travail (Mortlaité, harmonisation, botanique, ...)
+-   Terri4Sol: C sol agri é forêts sud CI, Sci Po., Quantif C, scénario usages sols, restrospective
+-   Expat Malaisie \> restauration & conservation
+-   SOCRATES (ANR in prep.)
+    -   FUNATSU Beatriz, Lilian, Arthur, Helene, Julie
+    -   extremes climatiques
+    -   caractéristiques aléa
+    -   dynamique forêts
+    -   réponse humaine
