@@ -1,6 +1,6 @@
 # Meetings {.unnumbered}
 
-## 23/09/06 - Soulemane
+## 23/09/06 Soulemane
 
 -   AGB mapping in ivory Coast
     -   Based on VOD (Vegetation Optical Depth) satellite product by INRAE, see @dou2023
@@ -12,13 +12,13 @@
 -   Construction with Camille
 -   AGB part of work but also landscape dynamics and composition on the other hand
 
-## 23/09/07 - Réu UR
+## 23/09/07 UR
 
 -   Prévision d'une mission en début 2024 pour raconte avec Carlos Nobre de l'INP à Sao Paulo sur les question de transition de forêts tropicales humides aux savanes Cerado (échange préliminaire avec Plinio lors du sommet sur l'Amazonie)
 -   Se renseigner sur le PEPR FORESTT (FAIRCARBON?)
 -   Demandez à Camille puis Guillaume pour accès compte zoom unité
 
-## 23/09/08 - Meeting Camille P.
+## 23/09/08 Camille P.
 
 -   Réseaux parcelles (TmFO)
     -   initiative internationale
@@ -41,7 +41,7 @@
     -   dynamique forêts
     -   réponse humaine
 
-## 23/09/11 - Meeting Jean-François T.
+## 23/09/11 Jean-François T.
 
 -   Coordinateur et rédacteur en chef de Bois Forêts Tropiques
 -   Revue diamant depuis 1947
@@ -51,13 +51,13 @@
 -   Formation pour doctorant et à l'étranger en écriture et valorisation scientifique
 -   Projet avec ministère de l'agriculture haitiens sur la formation des cardres à l'écriture et la communnication scientifique (+ statistique vec collègue Martinique)
 
-## 23/09/11 - Disc Jacques T.
+## 23/09/11 Jacques T.
 
 -   2 books
 -   CC \~ Agri sens large, one chapter on forest directed by Jacques. Meeting chapter leaders end of September, for a large public ("a course")
 -   Forêts Humanité Compatible ?, one chapter on CC, more about a reflexive approach to bring readers to "forgotten questions"
 
-## 23/09/11 - Disc Guillaume L.
+## 23/09/11 Guillaume L.
 
 -   socio-éco, Q gestion resources espaces à l'échelle du territoire
 
@@ -69,7 +69,7 @@
 
 -   [Wilifried Pokam](https://www.researchgate.net/profile/Wilfried-Pokam-2) climatology Cameroon
 
-## 23/09/11 - Disc Charles D.
+## 23/09/11 Charles D.
 
 -   Botaniste et écologue (ex IUCN)
 -   Flore Afrique centrale (Gabon, Congo, Cameroun, ...)
@@ -86,3 +86,126 @@
     -   Efficacité de gestion, aires protégées et gestion participative
 -   Enseignement M1 BIOGEET
 -   Intéressé par climat pour les questions de distribution d'espèces avec projection futures (lien SDM)
+
+## 23/09/12 Camille D.
+
+-   CIRAD depuis Mars
+
+-   Ingénieur en support informatique \~ Guillaume C.
+
+-   Travail télédétection avec Julie ex CongoICB sur détection coupe d'arbre unique, ancien développement de méthode lasso par Julie mais succès \~60% sur image radar sentinel
+
+-   Projet TETIS et Laurène pour cartographie des palmiers à huile
+
+-   Travail sous python avec machine et deep learning
+
+## 23/09/12 Cartographie AGB CI
+
+**Soulémane T., Camille D., Bruno H.**
+
+-   PhD Soulémane 2 service écosystémiques : biomasse (AGB) et biodiversité
+
+-   Inventaire AGB 2016-2017
+
+-   Variation AGB à partir de 5 drivers
+
+    -   Paysage: carte forêts (1196, 2000, 2015) \> landscape metric software \> % couverture et variables de fragmentation mais nécessité d'utiliser un autre produit pour une meilleure résolution temporelle (forest\@risk?, MODIS Land Cover *too coarse*)
+
+    -   Climat: WolrdClim
+
+    -   Topography: DEM from SRTM
+
+    -   Ahntropique: Feu MODIS 2000-2016, shp aires protégées en 3 catégories, distance ville, distance route, densité population
+
+    -   Sol: SoilGrid (pas trop mauvais en CI)
+
+-   Selection de variable par groupe de driver
+
+-   Sélection de variable modèle complet avec variable sélectionnées par groupe
+
+-   Puis test avec et sans catégorie
+
+-   Utilisation de Random Forest
+
+-   Résultat paysage est primordial
+
+-   Pour la projection paassées et futures utilisation de l'indice VOD (microone \~ eau \~ biomasse) avec large échelle temporelle. Utilisation du produit brut en bande X, C, et K (L non disponible) avec la médianne annuelle rééchantillonnée à l'échelle des covariables.
+
+-   Obj: lister produits pour voir disponibilité pour étude prospective
+
+-   Moi: contacter INRAE Bordeaux pour produit VOD et se renseigner sur forest\@risk
+
+-   Note: selon l'incertitude de la prédiction de l'AGB, de la projection de la surface forestière et des projections climatiques, peut être un intérèt faible pour la projection future de la dynamique de l'AGB
+
+## 20/09/12 Jacques T.
+
+-   Formation écologue, doctorat espèces invasive *Acacia* réunion, traits fonctionels, dispersion zoochore humain et oiseaux
+-   Profil largé, généraliste, hybride avec ouverture SHS
+-   Rapport arts et sciences
+-   Travail sur philosophie et littérature (écriture de livres)
+-   Recherche sur littérature, synthèses et animation scientifique
+
+## 20/09/12 Guillaume C.
+
+-   Responsable information sécurité (présentation sera programmée ultérieurement)
+-   Ingénieur informaticien au CIRAD depuis 1996
+-   Foresterie tropicale, exploitation sylvicole, informatique, traitement des données
+-   Expertise en R et en Shiny
+-   Modélisation forestière avec le développement de SELVA
+-   Mais changement du peuplement au territoire
+-   Compétence en SIG, raster, satelittes
+-   3 PC dont 2 local 48 coeurs \~8To
+-   Rféérent GitLab CIRAD pour forge institutionnelle
+-   Serveur insitutionnel shiny aussi possible
+
+## 20/09/13 Baptiste L. M2
+
+-   Gompertz model adapted successfully from FG forest to CI agroforest (\>SI)
+-   20%+ growth spontaneous vs. planted (to be kept for another article)
+-   climate from Chelsa mean (median should be used) 1980-2011 (beware several periods)
+
+## 20/09/13 Régis P.
+
+-   Ingé agro et Eaux et Forêts
+-   Forestier puis agroforestier
+-   Burundi, Gabon, Cameroun
+-   Inventaire, plantation, agroforesterie
+-   Détaché APT Montpellier foresterie rurale tropicale
+-   Retour CIRAD encadrement doctorant et travail projet
+-   Foresterie et agroforesterie communautaire
+-   Congo, Niger, Cameroun
+-   Ex: système agroforestier à *Federbia* avec système racinaire nappe profonde et perte feuille en saison des pluies lors de la croissance maraichere (sans ombre donc), nutrition animale (déjéction pour sol) par les gousses et enrichissement en azote
+
+## 20/09/14 Vincent F.
+
+-   Pédologue depuis 25 ans
+-   Activités d'appui et activités de recherche
+-   Appui aux écologues pour la cartographie des sols notamment de Paracou et d'Afrique avec Sylvie
+-   Recherches principales sur le lien sol forêts: biomasse, flore, distribution, structure, croissance..
+-   Mais aussi de nombreux sujets variés:
+    -   Congo Mokabi termite sol croissance forêt
+    -   Sylvie modèle eau et profondeur forêts
+    -   COUAC avec Bruno H.
+    -   D. Bonal composition isotopique du sol avec carbone 14 pour l'âge et delta 13 pour le ration C3/C4 forêt savannes
+    -   4 pour 1000
+    -   Eric Nicolini sur compaction ForestTree avec Xavier
+    -   RDC fertilité sol système agroforestiers
+    -   Rôle WD + ontogénie sur facteur du sol limitant de la croissance des arbres (plutôt P jeune puis Ca vieux)
+
+## 20/09/14 Bruno H.
+
+-   100% CI
+-   2 projets: Cocoa4future et Terri4sol
+-   Cocoa4future, europe, multidisciplinaire, cacao culture de demain, toute la filière, 10 clusters de 10 parcelles, WP1 Biophysique, WP2 Biologie cacao, WP3 filière, Bruno et Annie, inclus travail de Baptiste (aide à l'encadrement pour publi en cours), inclus travail de Anne (besoin d'aide pour aboutir à une publi du travail de master sur allométrie H \~ D)
+-   Terri4Sol, FEPEM, Influencé les politiques publiques sur la fertilité du sol. Wp1 Politiques publiques, WP2 Biophysique (Camilla) avec carte C sol, WP3 opérationnel par Nitidae
+-   Dispositifs: forêts naturels (ex Tené), forêts secondaires (11 chronoséquences), forestinnov, plantations (ex CTFS), et agroforêts (15 clusters de 10 parcelles)
+-   Personnes: Ruth (relation paysan arbre) , Soulémane (carto AGB Biodiv), Elogne (dyn forest), Yves Daubi (régénération naturelle des essences commerciales), Aimé (potentiel en bois des agroforêts), isac (rôle des agroforêts en carbone et biodiversité), Blandine (carbone du sol), \~Eliot (dynamique forêts secondaires), Amani (postdoc), Evans (postdoc T4C), accueil d'un béninois pendant 3 mois sur changement climatique et distribution d'espèces d'intérèts (forte intéraction à prévoir)
+
+## 20/09/14 Sébastien Soulard - DCAF
+
+-   DCAF: direction des comptes et des affaires financières
+-   Gestion financière de projets
+-   Gestionnaire de convention
+-   IFD: indice marge pour financer CIRAD
+-   3 outils: new C3 = saisie de temps, figaro = restitution du budget comptable, et siroco = resitution budgétaire
+-   Montage de projet avec DIMS, discuté avec Sophie Beurrier

@@ -1,3 +1,60 @@
+```{r}
+#| include: false
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(terra)
+library(tidyverse)
+```
+
+
 # Resources
 
 Content.
+
+## CHELSA
+
+### Climatologies at high resolution for the earth's land surface areas
+
+refs
+
+```{r}
+#| eval: false
+base <- "https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/climatologies"
+periods <- c("2011-2040", "2041-2070", "2071-2100")
+models <- c("GFDL-ESM4", "IPSL-CM6A-LR", "MPI-ESM1-2-HR", "MRI-ESM2-0", "UKESM1-0-LL")
+scenarios <- c("ssp126", "ssp370", "ssp585")
+type <- "bio" # to extract from variable but only working with bio currently
+variables <- c("bio5")
+version <- "V.2.1" # to list
+lapply(periods, function(p){
+  lapply(models, function(m){
+    lapply(scenarios, function(s){
+      lapply(variables, function(v){
+        file <- paste0("CHELSA_", v, "_", p, "_", 
+                       tolower(m), "_", s, "_", version, ".tif")
+        url <- paste0(base, "/", p, "/", m, "/", s, "/", type, "/", file)
+        if(!file.exists(file.path("~/Documents/data/chelsa/", file)))
+          download.file(url, file.path("~/Documents/data/chelsa/", file))
+      })
+    })
+  })
+})
+```
+
+```{r}
+loc <- c(6.8160669,-5.2811359) # yakro
+rast(list.files("~/Documents/data/chelsa/", full.names = TRUE)) %>% 
+  crop(geodata::gadm(country = "Côte d'Ivoire", level = 0, path=tempdir())) %>% 
+  terra::extract(loc) %>% 
+  gather() %>% 
+  na.omit() %>% 
+  separate(key, c("dataset", "variable", "period", "model", "scenario", "version"), "_") %>% 
+  select(-dataset, -version) %>% 
+  ggplot(aes(period, value)) +
+  geom_point(aes(col = scenario)) +
+  geom_line(aes(group = paste(model, scenario), col = scenario), alpha = 0.5) +
+  geom_boxplot(aes(col = scenario), fill = NA, width = 0.5, outlier.alpha = 0) +
+  facet_wrap(~ variable) +
+  theme_bw() +
+  # scale_y_log10() +
+  theme(axis.title = element_blank())
+```

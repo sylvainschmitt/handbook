@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -161,7 +195,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#chelsa" id="toc-chelsa" class="nav-link active" data-scroll-target="#chelsa"><span class="header-section-number">1.1</span> CHELSA</a>
+  <ul class="collapse">
+  <li><a href="#climatologies-at-high-resolution-for-the-earths-land-surface-areas" id="toc-climatologies-at-high-resolution-for-the-earths-land-surface-areas" class="nav-link" data-scroll-target="#climatologies-at-high-resolution-for-the-earths-land-surface-areas"><span class="header-section-number">1.1.1</span> Climatologies at high resolution for the earth’s land surface areas</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -184,8 +227,64 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Content.</p>
+<section id="chelsa" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="chelsa"><span class="header-section-number">1.1</span> CHELSA</h2>
+<section id="climatologies-at-high-resolution-for-the-earths-land-surface-areas" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="climatologies-at-high-resolution-for-the-earths-land-surface-areas"><span class="header-section-number">1.1.1</span> Climatologies at high resolution for the earth’s land surface areas</h3>
+<p>refs</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="st">"https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/climatologies"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>periods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2011-2040"</span>, <span class="st">"2041-2070"</span>, <span class="st">"2071-2100"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"GFDL-ESM4"</span>, <span class="st">"IPSL-CM6A-LR"</span>, <span class="st">"MPI-ESM1-2-HR"</span>, <span class="st">"MRI-ESM2-0"</span>, <span class="st">"UKESM1-0-LL"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>scenarios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ssp126"</span>, <span class="st">"ssp370"</span>, <span class="st">"ssp585"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>type <span class="ot">&lt;-</span> <span class="st">"bio"</span> <span class="co"># to extract from variable but only working with bio currently</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bio5"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>version <span class="ot">&lt;-</span> <span class="st">"V.2.1"</span> <span class="co"># to list</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(periods, <span class="cf">function</span>(p){</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(models, <span class="cf">function</span>(m){</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lapply</span>(scenarios, <span class="cf">function</span>(s){</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lapply</span>(variables, <span class="cf">function</span>(v){</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CHELSA_"</span>, v, <span class="st">"_"</span>, p, <span class="st">"_"</span>, </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">tolower</span>(m), <span class="st">"_"</span>, s, <span class="st">"_"</span>, version, <span class="st">".tif"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(base, <span class="st">"/"</span>, p, <span class="st">"/"</span>, m, <span class="st">"/"</span>, s, <span class="st">"/"</span>, type, <span class="st">"/"</span>, file)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">file.path</span>(<span class="st">"~/Documents/data/chelsa/"</span>, file)))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>          <span class="fu">download.file</span>(url, <span class="fu">file.path</span>(<span class="st">"~/Documents/data/chelsa/"</span>, file))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.8160669</span>,<span class="sc">-</span><span class="fl">5.2811359</span>) <span class="co"># yakro</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rast</span>(<span class="fu">list.files</span>(<span class="st">"~/Documents/data/chelsa/"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crop</span>(geodata<span class="sc">::</span><span class="fu">gadm</span>(<span class="at">country =</span> <span class="st">"Côte d'Ivoire"</span>, <span class="at">level =</span> <span class="dv">0</span>, <span class="at">path=</span><span class="fu">tempdir</span>())) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">extract</span>(loc) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">"dataset"</span>, <span class="st">"variable"</span>, <span class="st">"period"</span>, <span class="st">"model"</span>, <span class="st">"scenario"</span>, <span class="st">"version"</span>), <span class="st">"_"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>dataset, <span class="sc">-</span>version) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(period, value)) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> scenario)) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">paste</span>(model, scenario), <span class="at">col =</span> scenario), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">col =</span> scenario), <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">outlier.alpha =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_y_log10() +</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="clim-resources_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

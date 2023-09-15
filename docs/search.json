@@ -42,32 +42,123 @@
     "text": "Description."
   },
   {
-    "objectID": "clim-resources.html",
-    "href": "clim-resources.html",
+    "objectID": "clim-resources.html#chelsa",
+    "href": "clim-resources.html#chelsa",
     "title": "1  Resources",
-    "section": "",
-    "text": "Content."
+    "section": "1.1 CHELSA",
+    "text": "1.1 CHELSA\n\n1.1.1 Climatologies at high resolution for the earth’s land surface areas\nrefs\n\n\nCode\nbase &lt;- \"https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/climatologies\"\nperiods &lt;- c(\"2011-2040\", \"2041-2070\", \"2071-2100\")\nmodels &lt;- c(\"GFDL-ESM4\", \"IPSL-CM6A-LR\", \"MPI-ESM1-2-HR\", \"MRI-ESM2-0\", \"UKESM1-0-LL\")\nscenarios &lt;- c(\"ssp126\", \"ssp370\", \"ssp585\")\ntype &lt;- \"bio\" # to extract from variable but only working with bio currently\nvariables &lt;- c(\"bio5\")\nversion &lt;- \"V.2.1\" # to list\nlapply(periods, function(p){\n  lapply(models, function(m){\n    lapply(scenarios, function(s){\n      lapply(variables, function(v){\n        file &lt;- paste0(\"CHELSA_\", v, \"_\", p, \"_\", \n                       tolower(m), \"_\", s, \"_\", version, \".tif\")\n        url &lt;- paste0(base, \"/\", p, \"/\", m, \"/\", s, \"/\", type, \"/\", file)\n        if(!file.exists(file.path(\"~/Documents/data/chelsa/\", file)))\n          download.file(url, file.path(\"~/Documents/data/chelsa/\", file))\n      })\n    })\n  })\n})\n\n\n\n\nCode\nloc &lt;- c(6.8160669,-5.2811359) # yakro\nrast(list.files(\"~/Documents/data/chelsa/\", full.names = TRUE)) %&gt;% \n  crop(geodata::gadm(country = \"Côte d'Ivoire\", level = 0, path=tempdir())) %&gt;% \n  terra::extract(loc) %&gt;% \n  gather() %&gt;% \n  na.omit() %&gt;% \n  separate(key, c(\"dataset\", \"variable\", \"period\", \"model\", \"scenario\", \"version\"), \"_\") %&gt;% \n  select(-dataset, -version) %&gt;% \n  ggplot(aes(period, value)) +\n  geom_point(aes(col = scenario)) +\n  geom_line(aes(group = paste(model, scenario), col = scenario), alpha = 0.5) +\n  geom_boxplot(aes(col = scenario), fill = NA, width = 0.5, outlier.alpha = 0) +\n  facet_wrap(~ variable) +\n  theme_bw() +\n  # scale_y_log10() +\n  theme(axis.title = element_blank())"
   },
   {
     "objectID": "meetings.html#soulemane",
     "href": "meetings.html#soulemane",
     "title": "Meetings",
-    "section": "23/09/06 - Soulemane",
-    "text": "23/09/06 - Soulemane\n\nAGB mapping in ivory Coast\n\nBased on VOD (Vegetation Optical Depth) satellite product by INRAE, see Dou et al. (2023)\n\nStudy of temporal dynamics over several periods plus future projections\nDescriptors\n\nsoil (density, texture, pH)\nclimate (worldclim)\nlandscape structure (% cover and isolation)\n\nConstruction with Camille\nAGB part of work but also landscape dynamics and composition on the other hand"
+    "section": "23/09/06 Soulemane",
+    "text": "23/09/06 Soulemane\n\nAGB mapping in ivory Coast\n\nBased on VOD (Vegetation Optical Depth) satellite product by INRAE, see Dou et al. (2023)\n\nStudy of temporal dynamics over several periods plus future projections\nDescriptors\n\nsoil (density, texture, pH)\nclimate (worldclim)\nlandscape structure (% cover and isolation)\n\nConstruction with Camille\nAGB part of work but also landscape dynamics and composition on the other hand"
   },
   {
-    "objectID": "meetings.html#réu-ur",
-    "href": "meetings.html#réu-ur",
+    "objectID": "meetings.html#ur",
+    "href": "meetings.html#ur",
     "title": "Meetings",
-    "section": "23/09/07 - Réu UR",
-    "text": "23/09/07 - Réu UR\n\nPrévision d’une mission en début 2024 pour raconte avec Carlos Nobre de l’INP à Sao Paulo sur les question de transition de forêts tropicales humides aux savanes Cerado (échange préliminaire avec Plinio lors du sommet sur l’Amazonie)\nSe renseigner sur le PEPR FORESTT (FAIRCARBON?)\nDemandez à Camille puis Guillaume pour accès compte zoom unité"
+    "section": "23/09/07 UR",
+    "text": "23/09/07 UR\n\nPrévision d’une mission en début 2024 pour raconte avec Carlos Nobre de l’INP à Sao Paulo sur les question de transition de forêts tropicales humides aux savanes Cerado (échange préliminaire avec Plinio lors du sommet sur l’Amazonie)\nSe renseigner sur le PEPR FORESTT (FAIRCARBON?)\nDemandez à Camille puis Guillaume pour accès compte zoom unité"
   },
   {
-    "objectID": "meetings.html#meeting-camille-p.",
-    "href": "meetings.html#meeting-camille-p.",
+    "objectID": "meetings.html#camille-p.",
+    "href": "meetings.html#camille-p.",
     "title": "Meetings",
-    "section": "23/09/08 - Meeting Camille P.",
-    "text": "23/09/08 - Meeting Camille P.\n\nRéseaux parcelles (TmFO)\n\ninitiative internationale\nPlinio S. et Jérôme C\n\nPEPR FORESTT, PC Monitoring\n\nBiodiversity & structure\nHealth\nPhenology\n\nGeoTrees: parcelles références télédétection carbone\n\nS. Davies, O. Phillips, J. Chave, C. Piponiot (TmFO)\n\nCESAB (FRB) projet groupe travail TmFO (14), 2 workshop par an à Montpellier + 1 postdoc\n\nPb: biodiv, compo, biomasse, F exploitées, BEF, Climat ?\n\nProjet NSF S. Davies réseau de réseau avec groupes travail (Mortlaité, harmonisation, botanique, …)\nTerri4Sol: C sol agri é forêts sud CI, Sci Po., Quantif C, scénario usages sols, restrospective\nExpat Malaisie &gt; restauration & conservation\nSOCRATES (ANR in prep.)\n\nFUNATSU Beatriz, Lilian, Arthur, Helene, Julie\nextremes climatiques\ncaractéristiques aléa\ndynamique forêts\nréponse humaine"
+    "section": "23/09/08 Camille P.",
+    "text": "23/09/08 Camille P.\n\nRéseaux parcelles (TmFO)\n\ninitiative internationale\nPlinio S. et Jérôme C\n\nPEPR FORESTT, PC Monitoring\n\nBiodiversity & structure\nHealth\nPhenology\n\nGeoTrees: parcelles références télédétection carbone\n\nS. Davies, O. Phillips, J. Chave, C. Piponiot (TmFO)\n\nCESAB (FRB) projet groupe travail TmFO (14), 2 workshop par an à Montpellier + 1 postdoc\n\nPb: biodiv, compo, biomasse, F exploitées, BEF, Climat ?\n\nProjet NSF S. Davies réseau de réseau avec groupes travail (Mortlaité, harmonisation, botanique, …)\nTerri4Sol: C sol agri é forêts sud CI, Sci Po., Quantif C, scénario usages sols, restrospective\nExpat Malaisie &gt; restauration & conservation\nSOCRATES (ANR in prep.)\n\nFUNATSU Beatriz, Lilian, Arthur, Helene, Julie\nextremes climatiques\ncaractéristiques aléa\ndynamique forêts\nréponse humaine"
+  },
+  {
+    "objectID": "meetings.html#jean-françois-t.",
+    "href": "meetings.html#jean-françois-t.",
+    "title": "Meetings",
+    "section": "23/09/11 Jean-François T.",
+    "text": "23/09/11 Jean-François T.\n\nCoordinateur et rédacteur en chef de Bois Forêts Tropiques\nRevue diamant depuis 1947\nRevue du CIRAD avec Cahier de l’agriculture et REMVT\nRédacteur scientifique dans l’unité inclus Vincent, Jacques, et Valéry\nEn dehors participait à l’appui en télédétection, SIG et base de données\nFormation pour doctorant et à l’étranger en écriture et valorisation scientifique\nProjet avec ministère de l’agriculture haitiens sur la formation des cardres à l’écriture et la communnication scientifique (+ statistique vec collègue Martinique)"
+  },
+  {
+    "objectID": "meetings.html#jacques-t.",
+    "href": "meetings.html#jacques-t.",
+    "title": "Meetings",
+    "section": "23/09/11 Jacques T.",
+    "text": "23/09/11 Jacques T.\n\n2 books\nCC ~ Agri sens large, one chapter on forest directed by Jacques. Meeting chapter leaders end of September, for a large public (“a course”)\nForêts Humanité Compatible ?, one chapter on CC, more about a reflexive approach to bring readers to “forgotten questions”"
+  },
+  {
+    "objectID": "meetings.html#guillaume-l.",
+    "href": "meetings.html#guillaume-l.",
+    "title": "Meetings",
+    "section": "23/09/11 Guillaume L.",
+    "text": "23/09/11 Guillaume L.\n\nsocio-éco, Q gestion resources espaces à l’échelle du territoire\nFilière et gouvernance, micro et méso-économie\nAfrique Centrale, Cameroun, Indonésie, Montpellier depuis 5 ans\nÉtudie effet chocs sur le socio-écosystème dont beaucoup plus impactant à court terme que le CC\nWilifried Pokam climatology Cameroon"
+  },
+  {
+    "objectID": "meetings.html#charles-d.",
+    "href": "meetings.html#charles-d.",
+    "title": "Meetings",
+    "section": "23/09/11 Charles D.",
+    "text": "23/09/11 Charles D.\n\nBotaniste et écologue (ex IUCN)\nFlore Afrique centrale (Gabon, Congo, Cameroun, …)\nQuestion histoire (dont évolutive) forêts\n\nProjet HIFORA M. Heuert et O. Hardy\nJean mallet palynologie\n\nQuestion forêts sub-montagnes\nMeliacées Afriques\n\ndiffernce espèces, délimitation taxon, aires de distribution\nDéterminants écologiques (sol) et génétiques de la qualité du bois\n\nOFAC (Observatoire forêts afrique centrale)\n\nConservation biodiversité, aires protégées, compilation de données, documentation, diffusion\nAMCE (Autre Mesures Efficaces de Conservation) pour l’objectif 30% de zones conservées dans le monde de cadre mondiale de la biodiversité\nEfficacité de gestion, aires protégées et gestion participative\n\nEnseignement M1 BIOGEET\nIntéressé par climat pour les questions de distribution d’espèces avec projection futures (lien SDM)"
+  },
+  {
+    "objectID": "meetings.html#camille-d.",
+    "href": "meetings.html#camille-d.",
+    "title": "Meetings",
+    "section": "23/09/12 Camille D.",
+    "text": "23/09/12 Camille D.\n\nCIRAD depuis Mars\nIngénieur en support informatique ~ Guillaume C.\nTravail télédétection avec Julie ex CongoICB sur détection coupe d’arbre unique, ancien développement de méthode lasso par Julie mais succès ~60% sur image radar sentinel\nProjet TETIS et Laurène pour cartographie des palmiers à huile\nTravail sous python avec machine et deep learning"
+  },
+  {
+    "objectID": "meetings.html#cartographie-agb-ci",
+    "href": "meetings.html#cartographie-agb-ci",
+    "title": "Meetings",
+    "section": "23/09/12 Cartographie AGB CI",
+    "text": "23/09/12 Cartographie AGB CI\nSoulémane T., Camille D., Bruno H.\n\nPhD Soulémane 2 service écosystémiques : biomasse (AGB) et biodiversité\nInventaire AGB 2016-2017\nVariation AGB à partir de 5 drivers\n\nPaysage: carte forêts (1196, 2000, 2015) &gt; landscape metric software &gt; % couverture et variables de fragmentation mais nécessité d’utiliser un autre produit pour une meilleure résolution temporelle (forest@risk?, MODIS Land Cover too coarse)\nClimat: WolrdClim\nTopography: DEM from SRTM\nAhntropique: Feu MODIS 2000-2016, shp aires protégées en 3 catégories, distance ville, distance route, densité population\nSol: SoilGrid (pas trop mauvais en CI)\n\nSelection de variable par groupe de driver\nSélection de variable modèle complet avec variable sélectionnées par groupe\nPuis test avec et sans catégorie\nUtilisation de Random Forest\nRésultat paysage est primordial\nPour la projection paassées et futures utilisation de l’indice VOD (microone ~ eau ~ biomasse) avec large échelle temporelle. Utilisation du produit brut en bande X, C, et K (L non disponible) avec la médianne annuelle rééchantillonnée à l’échelle des covariables.\nObj: lister produits pour voir disponibilité pour étude prospective\nMoi: contacter INRAE Bordeaux pour produit VOD et se renseigner sur forest@risk\nNote: selon l’incertitude de la prédiction de l’AGB, de la projection de la surface forestière et des projections climatiques, peut être un intérèt faible pour la projection future de la dynamique de l’AGB"
+  },
+  {
+    "objectID": "meetings.html#jacques-t.-1",
+    "href": "meetings.html#jacques-t.-1",
+    "title": "Meetings",
+    "section": "20/09/12 Jacques T.",
+    "text": "20/09/12 Jacques T.\n\nFormation écologue, doctorat espèces invasive Acacia réunion, traits fonctionels, dispersion zoochore humain et oiseaux\nProfil largé, généraliste, hybride avec ouverture SHS\nRapport arts et sciences\nTravail sur philosophie et littérature (écriture de livres)\nRecherche sur littérature, synthèses et animation scientifique"
+  },
+  {
+    "objectID": "meetings.html#guillaume-c.",
+    "href": "meetings.html#guillaume-c.",
+    "title": "Meetings",
+    "section": "20/09/12 Guillaume C.",
+    "text": "20/09/12 Guillaume C.\n\nResponsable information sécurité (présentation sera programmée ultérieurement)\nIngénieur informaticien au CIRAD depuis 1996\nForesterie tropicale, exploitation sylvicole, informatique, traitement des données\nExpertise en R et en Shiny\nModélisation forestière avec le développement de SELVA\nMais changement du peuplement au territoire\nCompétence en SIG, raster, satelittes\n3 PC dont 2 local 48 coeurs ~8To\nRféérent GitLab CIRAD pour forge institutionnelle\nServeur insitutionnel shiny aussi possible"
+  },
+  {
+    "objectID": "meetings.html#baptiste-l.-m2",
+    "href": "meetings.html#baptiste-l.-m2",
+    "title": "Meetings",
+    "section": "20/09/13 Baptiste L. M2",
+    "text": "20/09/13 Baptiste L. M2\n\nGompertz model adapted successfully from FG forest to CI agroforest (&gt;SI)\n20%+ growth spontaneous vs. planted (to be kept for another article)\nclimate from Chelsa mean (median should be used) 1980-2011 (beware several periods)"
+  },
+  {
+    "objectID": "meetings.html#régis-p.",
+    "href": "meetings.html#régis-p.",
+    "title": "Meetings",
+    "section": "20/09/13 Régis P.",
+    "text": "20/09/13 Régis P.\n\nIngé agro et Eaux et Forêts\nForestier puis agroforestier\nBurundi, Gabon, Cameroun\nInventaire, plantation, agroforesterie\nDétaché APT Montpellier foresterie rurale tropicale\nRetour CIRAD encadrement doctorant et travail projet\nForesterie et agroforesterie communautaire\nCongo, Niger, Cameroun\nEx: système agroforestier à Federbia avec système racinaire nappe profonde et perte feuille en saison des pluies lors de la croissance maraichere (sans ombre donc), nutrition animale (déjéction pour sol) par les gousses et enrichissement en azote"
+  },
+  {
+    "objectID": "meetings.html#vincent-f.",
+    "href": "meetings.html#vincent-f.",
+    "title": "Meetings",
+    "section": "20/09/14 Vincent F.",
+    "text": "20/09/14 Vincent F.\n\nPédologue depuis 25 ans\nActivités d’appui et activités de recherche\nAppui aux écologues pour la cartographie des sols notamment de Paracou et d’Afrique avec Sylvie\nRecherches principales sur le lien sol forêts: biomasse, flore, distribution, structure, croissance..\nMais aussi de nombreux sujets variés:\n\nCongo Mokabi termite sol croissance forêt\nSylvie modèle eau et profondeur forêts\nCOUAC avec Bruno H.\nD. Bonal composition isotopique du sol avec carbone 14 pour l’âge et delta 13 pour le ration C3/C4 forêt savannes\n4 pour 1000\nEric Nicolini sur compaction ForestTree avec Xavier\nRDC fertilité sol système agroforestiers\nRôle WD + ontogénie sur facteur du sol limitant de la croissance des arbres (plutôt P jeune puis Ca vieux)"
+  },
+  {
+    "objectID": "meetings.html#bruno-h.",
+    "href": "meetings.html#bruno-h.",
+    "title": "Meetings",
+    "section": "20/09/14 Bruno H.",
+    "text": "20/09/14 Bruno H.\n\n100% CI\n2 projets: Cocoa4future et Terri4sol\nCocoa4future, europe, multidisciplinaire, cacao culture de demain, toute la filière, 10 clusters de 10 parcelles, WP1 Biophysique, WP2 Biologie cacao, WP3 filière, Bruno et Annie, inclus travail de Baptiste (aide à l’encadrement pour publi en cours), inclus travail de Anne (besoin d’aide pour aboutir à une publi du travail de master sur allométrie H ~ D)\nTerri4Sol, FEPEM, Influencé les politiques publiques sur la fertilité du sol. Wp1 Politiques publiques, WP2 Biophysique (Camilla) avec carte C sol, WP3 opérationnel par Nitidae\nDispositifs: forêts naturels (ex Tené), forêts secondaires (11 chronoséquences), forestinnov, plantations (ex CTFS), et agroforêts (15 clusters de 10 parcelles)\nPersonnes: Ruth (relation paysan arbre) , Soulémane (carto AGB Biodiv), Elogne (dyn forest), Yves Daubi (régénération naturelle des essences commerciales), Aimé (potentiel en bois des agroforêts), isac (rôle des agroforêts en carbone et biodiversité), Blandine (carbone du sol), ~Eliot (dynamique forêts secondaires), Amani (postdoc), Evans (postdoc T4C), accueil d’un béninois pendant 3 mois sur changement climatique et distribution d’espèces d’intérèts (forte intéraction à prévoir)"
+  },
+  {
+    "objectID": "meetings.html#sébastien-soulard---dcaf",
+    "href": "meetings.html#sébastien-soulard---dcaf",
+    "title": "Meetings",
+    "section": "20/09/14 Sébastien Soulard - DCAF",
+    "text": "20/09/14 Sébastien Soulard - DCAF\n\nDCAF: direction des comptes et des affaires financières\nGestion financière de projets\nGestionnaire de convention\nIFD: indice marge pour financer CIRAD\n3 outils: new C3 = saisie de temps, figaro = restitution du budget comptable, et siroco = resitution budgétaire\nMontage de projet avec DIMS, discuté avec Sophie Beurrier\n\n\n\n\n\nDou, Yujie, Feng Tian, Jean-Pierre Wigneron, Torbern Tagesson, Jinyang Du, Martin Brandt, Yi Liu, Linqing Zou, John S. Kimball, and Rasmus Fensholt. 2023. “Reliability of Using Vegetation Optical Depth for Estimating Decadal and Interannual Carbon Dynamics.” Remote Sensing of Environment 285 (February): 113390. https://doi.org/10.1016/j.rse.2022.113390."
   },
   {
     "objectID": "literature.html#to-read",
@@ -96,33 +187,5 @@
     "title": "References",
     "section": "",
     "text": "Dou, Yujie, Feng Tian, Jean-Pierre Wigneron, Torbern Tagesson, Jinyang\nDu, Martin Brandt, Yi Liu, Linqing Zou, John S. Kimball, and Rasmus\nFensholt. 2023. “Reliability of Using Vegetation Optical Depth for\nEstimating Decadal and Interannual Carbon Dynamics.” Remote\nSensing of Environment 285 (February): 113390. https://doi.org/10.1016/j.rse.2022.113390.\n\n\nDoughty, Christopher E., Jenna M. Keany, Benjamin C. Wiebe, Camilo\nRey-Sanchez, Kelsey R. Carter, Kali B. Middleby, Alexander W. Cheesman,\net al. 2023. “Tropical Forests Are Approaching Critical\nTemperature Thresholds.” Nature, August. https://doi.org/10.1038/s41586-023-06391-z.\n\n\nDrüke, Markus, Boris Sakschewski, Werner von Bloh, Maik Billing,\nWolfgang Lucht, and Kirsten Thonicke. 2023. “Fire May Prevent\nFuture Amazon Forest Recovery After Large-Scale Deforestation.”\nCommunications Earth & Environment 4 (1). https://doi.org/10.1038/s43247-023-00911-5.\n\n\nEstoque, Ronald C., Asif Ishtiaque, Jagadish Parajuli, Darshana\nAthukorala, Yasin Wahid Rabby, and Makoto Ooba. 2022. “Has the\nIPCC’s Revised Vulnerability Concept Been Well\nAdopted?” Ambio 52 (2): 376–89. https://doi.org/10.1007/s13280-022-01806-z.\n\n\nFalco, Magdalena, Andrea F. Carril, Claudio G. Menéndez, Pablo G.\nZaninelli, and Laurent Z. X. Li. 2018. “Assessment of CORDEX\nSimulations over South America: Added Value on Seasonal Climatology and\nResolution Considerations.” Climate Dynamics 52 (7-8):\n4771–86. https://doi.org/10.1007/s00382-018-4412-z.\n\n\nGatti, Luciana V., Camilla L. Cunha, Luciano Marani, Henrique L. G.\nCassol, Cassiano Gustavo Messias, Egidio Arai, A. Scott Denning, et al.\n2023. “Increased Amazon Carbon Emissions Mainly from Decline in\nLaw Enforcement.” Nature, August. https://doi.org/10.1038/s41586-023-06390-0.\n\n\nKarger, Dirk Nikolaus, Olaf Conrad, Jürgen Böhner, Tobias Kawohl, Holger\nKreft, Rodrigo Wilber Soria-Auza, Niklaus E. Zimmermann, H. Peter\nLinder, and Michael Kessler. 2017. “Climatologies at High\nResolution for the Earth’s Land Surface Areas.”\nScientific Data 4 (1). https://doi.org/10.1038/sdata.2017.122.\n\n\nLovejoy, Thomas E., and Carlos Nobre. 2018. “Amazon Tipping\nPoint.” Science Advances 4 (2). https://doi.org/10.1126/sciadv.aat2340.\n\n\nMalhi, Yadvinder, J. Timmons Roberts, Richard A. Betts, Timothy J.\nKilleen, Wenhong Li, and Carlos A. Nobre. 2008. “Climate Change,\nDeforestation, and the Fate of the Amazon.” Science 319\n(5860): 169–72. https://doi.org/10.1126/science.1146961.\n\n\nMishra, Saroj Kanta, Sandeep Sahany, and Popat Salunke. 2017.\n“CMIP5 Vs. CORDEX over the Indian Region: How Much Do We Benefit\nfrom Dynamical Downscaling?” Theoretical and Applied\nClimatology 133 (3-4): 1133–41. https://doi.org/10.1007/s00704-017-2237-z.\n\n\nNobre, Carlos A., Gilvan Sampaio, Laura S. Borma, Juan Carlos\nCastilla-Rubio, José S. Silva, and Manoel Cardoso. 2016. “Land-Use\nand Climate Change Risks in the Amazon and the Need of a Novel\nSustainable Development Paradigm.” Proceedings of the\nNational Academy of Sciences 113 (39): 10759–68. https://doi.org/10.1073/pnas.1605516113.\n\n\nPlatts, Philip J., Peter A. Omeny, and Rob Marchant. 2014.\n“AFRICLIM: High-Resolution Climate Projections for Ecological\nApplications in Africa.” African Journal of Ecology 53\n(1): 103–8. https://doi.org/10.1111/aje.12180.\n\n\nVan Passel, Johanna, Wanda de Keersmaecker, Paulo N. Bernardino, Xin\nJing, Nikolaus Umlauf, Koenraad Van Meerbeek, and Ben Somers. 2022.\n“Climatic Legacy Effects on the Drought Response of the Amazon\nRainforest.” Global Change Biology 28 (19): 5808–19. https://doi.org/10.1111/gcb.16336.\n\n\nWest, Thales A. P., Sven Wunder, Erin O. Sills, Jan Börner, Sami W.\nRifai, Alexandra N. Neidermeier, Gabriel P. Frey, and Andreas Kontoleon.\n2023. “Action Needed to Make Carbon Offsets from Forest\nConservation Work for Climate Change Mitigation.”\nScience 381 (6660): 873–77. https://doi.org/10.1126/science.ade3535."
-  },
-  {
-    "objectID": "meetings.html#meeting-jean-françois-t.",
-    "href": "meetings.html#meeting-jean-françois-t.",
-    "title": "Meetings",
-    "section": "23/09/11 - Meeting Jean-François T.",
-    "text": "23/09/11 - Meeting Jean-François T.\n\nCoordinateur et rédacteur en chef de Bois Forêts Tropiques\nRevue diamant depuis 1947\nRevue du CIRAD avec Cahier de l’agriculture et REMVT\nRédacteur scientifique dans l’unité inclus Vincent, Jacques, et Valéry\nEn dehors participait à l’appui en télédétection, SIG et base de données\nFormation pour doctorant et à l’étranger en écriture et valorisation scientifique\nProjet avec ministère de l’agriculture haitiens sur la formation des cardres à l’écriture et la communnication scientifique (+ statistique vec collègue Martinique)"
-  },
-  {
-    "objectID": "meetings.html#disc-jacques-t.",
-    "href": "meetings.html#disc-jacques-t.",
-    "title": "Meetings",
-    "section": "23/09/11 - Disc Jacques T.",
-    "text": "23/09/11 - Disc Jacques T.\n\n2 books\nCC ~ Agri sens large, one chapter on forest directed by Jacques. Meeting chapter leaders end of September, for a large public (“a course”)\nForêts Humanité Compatible ?, one chapter on CC, more about a reflexive approach to bring readers to “forgotten questions”"
-  },
-  {
-    "objectID": "meetings.html#disc-guillaume-l.",
-    "href": "meetings.html#disc-guillaume-l.",
-    "title": "Meetings",
-    "section": "23/09/11 - Disc Guillaume L.",
-    "text": "23/09/11 - Disc Guillaume L.\n\nsocio-éco, Q gestion resources espaces à l’échelle du territoire\nFilière et gouvernance, micro et méso-économie\nAfrique Centrale, Cameroun, Indonésie, Montpellier depuis 5 ans\nÉtudie effet chocs sur le socio-écosystème dont beaucoup plus impactant à court terme que le CC\nWilifried Pokam climatology Cameroon"
-  },
-  {
-    "objectID": "meetings.html#disc-charles-d.",
-    "href": "meetings.html#disc-charles-d.",
-    "title": "Meetings",
-    "section": "23/09/11 - Disc Charles D.",
-    "text": "23/09/11 - Disc Charles D.\n\nBotaniste et écologue (ex IUCN)\nFlore Afrique centrale (Gabon, Congo, Cameroun, …)\nQuestion histoire (dont évolutive) forêts\n\nProjet HIFORA M. Heuert et O. Hardy\nJean mallet palynologie\n\nQuestion forêts sub-montagnes\nMeliacées Afriques\n\ndiffernce espèces, délimitation taxon, aires de distribution\nDéterminants écologiques (sol) et génétiques de la qualité du bois\n\nOFAC (Observatoire forêts afrique centrale)\n\nConservation biodiversité, aires protégées, compilation de données, documentation, diffusion\nAMCE (Autre Mesures Efficaces de Conservation) pour l’objectif 30% de zones conservées dans le monde de cadre mondiale de la biodiversité\nEfficacité de gestion, aires protégées et gestion participative\n\nEnseignement M1 BIOGEET\nIntéressé par climat pour les questions de distribution d’espèces avec projection futures (lien SDM)\n\n\n\n\n\nDou, Yujie, Feng Tian, Jean-Pierre Wigneron, Torbern Tagesson, Jinyang Du, Martin Brandt, Yi Liu, Linqing Zou, John S. Kimball, and Rasmus Fensholt. 2023. “Reliability of Using Vegetation Optical Depth for Estimating Decadal and Interannual Carbon Dynamics.” Remote Sensing of Environment 285 (February): 113390. https://doi.org/10.1016/j.rse.2022.113390."
   }
 ]
