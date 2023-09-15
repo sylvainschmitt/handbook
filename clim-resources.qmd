@@ -1,10 +1,10 @@
 ```{r}
 #| include: false
 rm(list = ls()) ; invisible(gc()) ; set.seed(42)
-library(terra)
 library(tidyverse)
+library(terra)
+library(sf)
 ```
-
 
 # Resources
 
@@ -12,11 +12,11 @@ Content.
 
 ## CHELSA
 
-### Climatologies at high resolution for the earth's land surface areas
+**Climatologies at high resolution for the earth's land surface areas**
 
 refs
 
-```{r}
+```{r dlchelsa}
 #| eval: false
 base <- "https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/climatologies"
 periods <- c("2011-2040", "2041-2070", "2071-2100")
@@ -38,12 +38,16 @@ lapply(periods, function(p){
     })
   })
 })
+geodata::gadm(country = "Côte d'Ivoire", level = 0, path = tempdir()) %>% 
+  st_as_sf() %>% 
+  write_sf("~/Documents/data/limits/ci.shp")
 ```
 
-```{r}
+```{r testchelsa}
 loc <- c(6.8160669,-5.2811359) # yakro
+ci <- st_read("~/Documents/data/limits/ci/ci.shp", quiet = TRUE)
 rast(list.files("~/Documents/data/chelsa/", full.names = TRUE)) %>% 
-  crop(geodata::gadm(country = "Côte d'Ivoire", level = 0, path=tempdir())) %>% 
+  crop(ci) %>% 
   terra::extract(loc) %>% 
   gather() %>% 
   na.omit() %>% 
@@ -55,6 +59,123 @@ rast(list.files("~/Documents/data/chelsa/", full.names = TRUE)) %>%
   geom_boxplot(aes(col = scenario), fill = NA, width = 0.5, outlier.alpha = 0) +
   facet_wrap(~ variable) +
   theme_bw() +
-  # scale_y_log10() +
-  theme(axis.title = element_blank())
+  theme(axis.title = element_blank()) +
+  ggtitle("CHELSA future scenarios for Yamoussoukro, CI")
+```
+
+## VODCA
+
+@moesinger2020: assembly of multiple VOD data sources available on [Zenodo](https://zenodo.org/record/2575599)
+
+```{r prepvodca}
+#| eval: false
+if(!file.exists("~/Documents/data/vodca/VODCA_Ku-band_1987-2017_v01.0.0"))
+  stop("First uncompress VODCA_Ku-band_1987-2017_v01.0.0.zip")
+years <- list.files("~/Documents/data/vodca/VODCA_Ku-band_1987-2017_v01.0.0/Ku-band/")
+for(year in years) {
+  vod <- list.files(file.path("~/Documents/data/vodca/VODCA_Ku-band_1987-2017_v01.0.0/Ku-band/", 
+                              year), full.names = TRUE) %>% 
+    lapply(rast) %>% 
+    lapply("[[", 1) %>% 
+    rast() %>% 
+    median(na.rm = TRUE) 
+  writeCDF(vod, file.path("~/Documents/data/vodca/", paste0(year, ".nc")), overwrite = TRUE)  
+}
+```
+
+```{r testvodca}
+vod <- rast("~/Documents/data/vodca/2015.nc") %>% 
+  crop(ci)
+ggplot() +
+  tidyterra::geom_spatraster(data = vod) +
+  geom_sf(data = ci, fill = NA, linewidth = 1) +
+  scale_fill_viridis_c(guide = "none", na.value = "white") +
+  theme_bw() +
+  ggtitle("2015 median of VOD", "Vegetation Optical Death from VODCA for 365 days")
+```
+
+```{r vodcagif}
+#| eval: false
+library(gganimate)
+list.files("~/Documents/data/vodca", full.names = TRUE, pattern = ".nc") %>% 
+  rast() %>% 
+  crop(ci) %>% 
+  as.data.frame(xy = TRUE) %>% 
+  gather(year, vod, -x, -y) %>% 
+  mutate(year = as.numeric(year)) %>% 
+  ggplot(aes(x, y, fill = vod)) +
+  geom_raster() +
+  theme_bw() +
+  coord_equal() +
+  scale_fill_viridis_c() +
+  transition_time(year) +
+  ggtitle("{round(frame_time)}") +
+  xlab("") + ylab("")
+```
+
+```{r}
+list.files("~/Documents/data/vodca", full.names = TRUE, pattern = ".nc") %>% 
+  rast() %>% 
+  crop(ci) %>% 
+  as.data.frame(xy = TRUE) %>% 
+  gather(year, vod, -x, -y) %>% 
+  mutate(year = as.numeric(year)) %>% 
+  group_by(year) %>% 
+  summarise(ll = quantile(vod, 0.025, na.rm = TRUE),
+            l = quantile(vod, 0.25, na.rm = TRUE),
+            m = quantile(vod, 0.5, na.rm = TRUE),
+            h = quantile(vod, 0.75, na.rm = TRUE),
+            hh = quantile(vod, 0.975, na.rm = TRUE)) %>% 
+  ggplot(aes(year)) +
+  geom_ribbon(aes(ymin = ll, ymax = hh), col = NA, alpha = 0.2) +
+  geom_ribbon(aes(ymin = l, ymax = h), col = NA, alpha = 0.2) +
+  geom_line(aes(y = m)) +
+  geom_smooth(aes(y = m), se = FALSE, method = 'loess', formula = 'y ~ x') +
+  theme_bw() +
+  xlab("") + ylab("") +
+  ggtitle("VODCA annual mean VOD in CI")
+```
+
+## ASCAT IB VOD
+
+@liu2021
+
+```{r prepibvod}
+#| eval: false
+vod <- list.files("~/Documents/data/ascat_ib_vod/2015/", full.names = TRUE) %>% 
+  lapply(rast) %>% 
+  lapply("[[", 2) %>% 
+  rast() %>% 
+  median(na.rm = TRUE) %>% 
+  flip("v")
+writeCDF(vod, "~/Documents/data/ascat_ib_vod/ASCAT_IB_VOD_2015.nc", overwrite = TRUE)
+```
+
+```{r testascatibvod}
+vod <- rast("~/Documents/data/ascat_ib_vod/ASCAT_IB_VOD_2015.nc") %>% 
+  crop(ci)
+ggplot() +
+  tidyterra::geom_spatraster(data = vod) +
+  geom_sf(data = ci, fill = NA, linewidth = 1) +
+  scale_fill_viridis_c(guide = "none", na.value = "white") +
+  theme_bw() +
+  ggtitle("2015 median of VOD", "Vegetation Optical Death from ASCAT-IB-VOD for 365 days")
+```
+
+```{r}
+vodca <- rast("~/Documents/data/vodca/2015.nc") %>% 
+  crop(ci)
+ib <- rast("~/Documents/data/ascat_ib_vod/ASCAT_IB_VOD_2015.nc") %>% 
+  crop(vodca)
+c(ib, vodca) %>% 
+  as.data.frame(xy = TRUE) %>% 
+  rename(VODCA_2015 = `2015`) %>% 
+  na.omit() %>% 
+  ggplot(aes(ASCAT_IB_VOD_2015, VODCA_2015)) +
+  geom_point() +
+  theme_bw() +
+  geom_smooth(method = 'loess', formula = 'y ~ x') +
+  ggpubr::stat_cor() +
+  ggtitle("ASCAT-IB-VOD vs. VODCA for 2015 in CI") +
+  xlab("") + ylab("")
 ```

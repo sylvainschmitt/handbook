@@ -114,3 +114,17 @@
 ### Assessment of CORDEX simulations over South America: added value on seasonal climatology and resolution considerations
 
 @falco2018: mixed results
+
+## Remote sensing
+
+### The global long-term microwave Vegetation Optical Depth Climate Archive (VODCA)
+
+@moesinger2020: assembly of multiple VOD data sources
+
+### ASCAT IB: A radar-based vegetation optical depth retrieved from the ASCAT scatterometer satellite
+
+@liu2021:
+
+-   tested in Africa 2015-2019
+-   against AGB, lidar tree height, NDVI, EVi and LAI
+-   AGB R=0.92, heigh R=0.89
