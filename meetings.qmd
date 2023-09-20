@@ -1,6 +1,8 @@
 # Meetings {.unnumbered}
 
-## 23/09/06 Soulemane
+## 2023
+
+### 23/09/06 Soulemane
 
 -   AGB mapping in ivory Coast
     -   Based on VOD (Vegetation Optical Depth) satellite product by INRAE, see @dou2023
@@ -12,13 +14,13 @@
 -   Construction with Camille
 -   AGB part of work but also landscape dynamics and composition on the other hand
 
-## 23/09/07 UR
+### 23/09/07 UR
 
 -   Prévision d'une mission en début 2024 pour raconte avec Carlos Nobre de l'INP à Sao Paulo sur les question de transition de forêts tropicales humides aux savanes Cerado (échange préliminaire avec Plinio lors du sommet sur l'Amazonie)
 -   Se renseigner sur le PEPR FORESTT (FAIRCARBON?)
 -   Demandez à Camille puis Guillaume pour accès compte zoom unité
 
-## 23/09/08 Camille P.
+### 23/09/08 Camille P.
 
 -   Réseaux parcelles (TmFO)
     -   initiative internationale
@@ -41,7 +43,7 @@
     -   dynamique forêts
     -   réponse humaine
 
-## 23/09/11 Jean-François T.
+### 23/09/11 Jean-François T.
 
 -   Coordinateur et rédacteur en chef de Bois Forêts Tropiques
 -   Revue diamant depuis 1947
@@ -51,13 +53,13 @@
 -   Formation pour doctorant et à l'étranger en écriture et valorisation scientifique
 -   Projet avec ministère de l'agriculture haitiens sur la formation des cardres à l'écriture et la communnication scientifique (+ statistique vec collègue Martinique)
 
-## 23/09/11 Jacques T.
+### 23/09/11 Jacques T.
 
 -   2 books
 -   CC \~ Agri sens large, one chapter on forest directed by Jacques. Meeting chapter leaders end of September, for a large public ("a course")
 -   Forêts Humanité Compatible ?, one chapter on CC, more about a reflexive approach to bring readers to "forgotten questions"
 
-## 23/09/11 Guillaume L.
+### 23/09/11 Guillaume L.
 
 -   socio-éco, Q gestion resources espaces à l'échelle du territoire
 
@@ -69,7 +71,7 @@
 
 -   [Wilifried Pokam](https://www.researchgate.net/profile/Wilfried-Pokam-2) climatology Cameroon
 
-## 23/09/11 Charles D.
+### 23/09/11 Charles D.
 
 -   Botaniste et écologue (ex IUCN)
 -   Flore Afrique centrale (Gabon, Congo, Cameroun, ...)
@@ -87,7 +89,7 @@
 -   Enseignement M1 BIOGEET
 -   Intéressé par climat pour les questions de distribution d'espèces avec projection futures (lien SDM)
 
-## 23/09/12 Camille D.
+### 23/09/12 Camille D.
 
 -   CIRAD depuis Mars
 
@@ -99,7 +101,7 @@
 
 -   Travail sous python avec machine et deep learning
 
-## 23/09/12 Cartographie AGB CI
+### 23/09/12 Cartographie AGB CI
 
 **Soulémane T., Camille D., Bruno H.**
 
@@ -137,7 +139,7 @@
 
 -   Note: selon l'incertitude de la prédiction de l'AGB, de la projection de la surface forestière et des projections climatiques, peut être un intérèt faible pour la projection future de la dynamique de l'AGB
 
-## 20/09/12 Jacques T.
+### 23/09/12 Jacques T.
 
 -   Formation écologue, doctorat espèces invasive *Acacia* réunion, traits fonctionels, dispersion zoochore humain et oiseaux
 -   Profil largé, généraliste, hybride avec ouverture SHS
@@ -145,7 +147,7 @@
 -   Travail sur philosophie et littérature (écriture de livres)
 -   Recherche sur littérature, synthèses et animation scientifique
 
-## 20/09/12 Guillaume C.
+### 23/09/12 Guillaume C.
 
 -   Responsable information sécurité (présentation sera programmée ultérieurement)
 -   Ingénieur informaticien au CIRAD depuis 1996
@@ -158,13 +160,13 @@
 -   Rféérent GitLab CIRAD pour forge institutionnelle
 -   Serveur insitutionnel shiny aussi possible
 
-## 20/09/13 Baptiste L. M2
+### 23/09/13 Baptiste L. M2
 
 -   Gompertz model adapted successfully from FG forest to CI agroforest (\>SI)
 -   20%+ growth spontaneous vs. planted (to be kept for another article)
 -   climate from Chelsa mean (median should be used) 1980-2011 (beware several periods)
 
-## 20/09/13 Régis P.
+### 23/09/13 Régis P.
 
 -   Ingé agro et Eaux et Forêts
 -   Forestier puis agroforestier
@@ -176,7 +178,7 @@
 -   Congo, Niger, Cameroun
 -   Ex: système agroforestier à *Federbia* avec système racinaire nappe profonde et perte feuille en saison des pluies lors de la croissance maraichere (sans ombre donc), nutrition animale (déjéction pour sol) par les gousses et enrichissement en azote
 
-## 20/09/14 Vincent F.
+### 23/09/14 Vincent F.
 
 -   Pédologue depuis 25 ans
 -   Activités d'appui et activités de recherche
@@ -192,7 +194,7 @@
     -   RDC fertilité sol système agroforestiers
     -   Rôle WD + ontogénie sur facteur du sol limitant de la croissance des arbres (plutôt P jeune puis Ca vieux)
 
-## 20/09/14 Bruno H.
+### 23/09/14 Bruno H.
 
 -   100% CI
 -   2 projets: Cocoa4future et Terri4sol
@@ -201,7 +203,7 @@
 -   Dispositifs: forêts naturels (ex Tené), forêts secondaires (11 chronoséquences), forestinnov, plantations (ex CTFS), et agroforêts (15 clusters de 10 parcelles)
 -   Personnes: Ruth (relation paysan arbre) , Soulémane (carto AGB Biodiv), Elogne (dyn forest), Yves Daubi (régénération naturelle des essences commerciales), Aimé (potentiel en bois des agroforêts), isac (rôle des agroforêts en carbone et biodiversité), Blandine (carbone du sol), \~Eliot (dynamique forêts secondaires), Amani (postdoc), Evans (postdoc T4C), accueil d'un béninois pendant 3 mois sur changement climatique et distribution d'espèces d'intérèts (forte intéraction à prévoir)
 
-## 20/09/14 Sébastien Soulard - DCAF
+### 23/09/14 Sébastien Soulard - DCAF
 
 -   DCAF: direction des comptes et des affaires financières
 -   Gestion financière de projets
@@ -209,3 +211,183 @@
 -   IFD: indice marge pour financer CIRAD
 -   3 outils: new C3 = saisie de temps, figaro = restitution du budget comptable, et siroco = resitution budgétaire
 -   Montage de projet avec DIMS, discuté avec Sophie Beurrier
+
+### 23/09/15 Marion C.
+
+-   Ingénieur forestier, restauration, Amazonie
+-   Travail en écologie du paysage avec Lilian, Julie et Helene
+-   Restauration = technique (régé et plantation) + gouvernance (territoire, outils, intelligence collective)
+-   Projet DESIRA sur la Colombie, Q stabilisation frontière agricole forêts avec réorganisation des activités pour limité l'extension du front
+-   Anciennement à l'ONFI Colombie appelé ANDINA
+-   Coordination d'une composante sur le design du paysage
+-   Utilisation d'un outils comme élément de discussion: ForLant issue du premier projet sur Paragominas
+-   Propose un outils de prospective paysagère pour des questions d'aménagement à partir d'une plateforme compilant des données cartographiques
+-   Projet Ideas sur cette base avec plus d'engagement des acteurs
+-   Pour le moment aucun facteur climatique dans le projet donc possiblité de recherches dans cette direction
+-   Projet terrAmaz (AFD), Brazil, Colombie, Ecuador, Peru
+-   Innovation et divulgation sur les territoires amazoniens
+-   ingénierie du territoire, organisation des institutions, élévage, gestion forestière, financement innovant
+-   \~ 20% recherche sur capitalisation des innnovations, notamment sur le financement innovant (Driss E.) et restauration
+-   Correspondante du dP Amazonie à la fois géographique et thématique
+-   3 axes: 1. Résilience & préservation des ressources naturelles, 2. chaînes de valeurs durables, 3. Gouvernance
+-   Depuis Paragominas jusqu'à un réseau de sites avec une approche territoriale
+-   15-20 insitutions (en ccroissance)
+-   DR Brésil, fiches thématiques ur le dP amazonien
+
+### 23/09/15 Manuel B.
+
+-   SHS, éthnobotanique, doctorant laboratoire Francis Hallé
+-   Recherche participatives
+-   Implication des communautés dans la gestion des territoires forestiers
+-   Biodiversité, Zone aires protégées
+-   Implication des communautés dans les MRV
+-   Au CIFOR depuis \~16 ans and Indonésie (MRV) et Éthiopie (restauration des terres dégradées avec communauté)
+-   dP SALSEA en Asie du Sud Est (Philipinnes, Malaisie, Indonésie)
+-   LMI (labo mixte international, IRD) sur suivi biodiversité marine Indonésie
+-   A travaillé sur le monitoring par les communautés des espèces et du CC ([papier perception de l saisonnalité par les communautés](https://www.jstor.org/stable/e02d8260-d1c4-3dca-8dfb-2fb5d12a6cb5))
+
+### 23/09/18 Direction UPR & tuteurs
+
+-   **Contacter Laurence Le Calvez (laurence.le_calvez\@cirad.fr) pour entretien carrière et Sophie Beurrier pour rencontre (sophie.beurier\@cirad.fr) DIMS**
+-   Plinio S. fait partie de Science Panel for the Amazon
+-   Idiée Plinio S. est une mission début 2021 au Brésil à São Paulo pour rencontrer Carlos Nobre et commencer la construction de partenariat
+-   Création de réseau :
+    -   Jhan-Carlo Espinoza IRD Péruvien actuellement à Lima: Impacts de la variabilité climatique en hydrologie sur le bassin amazinien et en Amérique du Sud Tropicale (https://sites.google.com/site/jhancarloespinoza)
+    -   Renan Le Roux (renan.le-roux\@inrae.fr), unité INRAE d'Avignon sur la formation aux question de traitement de données CC pour analyses territoriales, **à contacter**
+    -   Vincent Durbeuil, LETG Rennes (https://perso.univ-rennes2.fr/vincent.dubreuil),
+    -   Sylvain Bigot, Univ Grenoble Alpe,
+    -   Nathalie Philippon, Univ Grenoble Alpe,
+    -   Beatriz M. Funatsu, LETG Nantes, porteuse du projet ANR SOCRATES qui va être reproposé à l'appel d'offre du PEPRS FORESTT - axe multirisque sur l'effet des changments d'usage des terres sur les événements climatiques extrèmes
+    -   GDR Point de Bascul, **essayer de participer au coloque**
+    -   Jean Paul Metzger, Institute of Bioscience, University of São Paulo, **entretien semaine prochaine**, séminaire UR fin 3/24, 1 axe environnement forêt et CC
+    -   Vincent Blanfort, CIRAD, animateur CC pour le CTS CIRAD
+    -   Aude Valade, CIRAD Eco&Sol, Provision of ecosystem services by tropical plantations faced with climate change
+-   Rédiger le plan de compagnonage (**demander modèle Julie**)
+-   Stratégie UPR:
+    -   Arthur P. à Santarèm sur la gestion forestière communautaire dans le cadre d'un projet FFEM
+    -   Géraldine Derroire à Brasilia
+    -   Isabelle Tritsch sur les forêts sèches du Brésil
+    -   Lilian, Marion, Julie sur TerrAmaz
+    -   Marie Ange Ngo Bieng, FFEM, Guatemala & Santarém
+    -   Beatriz Bellón, postdoc Julie, exemple éologie pysage oiseaux
+    -   **Se placer sur terrAmaz2 pour questions CC (!semaines à venirs)**, à discuter avec Marie Gabrielle Piketty (UMR SENS) et voir projet terrAmaz (Lilian, Marion, Julie)
+-   Mes questions (prospectif):
+    -   Déforestation au Cerrado \> dynamique forêts humide / savannes Cerrado
+    -   Question d'échelles, parcelle (mécaniste) \> territoire (UPR) \> région (projections), voir changement d'échelle avec Camille P.
+    -   À construire avec les intéractions mais aussi prévoir de s"adapter selon l'appel à financement et les questions dans collaborations (bien que ce serait bien qu'avec 4 chercheurs l'UPR porte ses propres projets au Brésil)
+-   **Priorités: formation & discussion partenaires recherches potentiels et questions de recherche (faire le point début 2024)**
+-   Financement mission international via plan compagnonage (1 mission mais peut être mixte Isabelle Tritsch à Fortaleza, Carlos Nobre à Sao Paulo avec Plinio, et terrAmaz Cotriguacu avec Julie et Lilian (Mars))
+-   Financement petite moibilité métropole avec budget chercheur CIRAD (\~2400€) à voir avec Marie-Jo lors de mise en place de mission (ex. GDR ou Avignon)
+-   Possibilité de financement de postdoc (plus facile) ou thèse (moins facile) au travers des appels du CNES : candidat à envoyer à l'oral, 2 pages de projet, 2 ans en télédétection, demander à Julie
+-   Développé le projet "AFRICLIM2", intérèt de Julie et autres
+
+### 23/09/19 Clarisse V.
+
+-   Formation transformation bois ENSTIB Epinal
+-   Guyane, Réunion, Congo transformation bois
+-   2021 M2 Géomatique alternance UPR F&S puis recrutement
+-   Poste transversal IR appuie recherche
+-   Besoin géomatique, analyse spatiale, télédétection, données satellitaires
+-   Réalisation &!/ou accompagnement
+-   60% PUDT en appui géomatique
+-   Outils R, Qgis, \~googleearthengine
+
+### 23/09/19 Frédéric M.
+
+-   PhD Climat + Enquete + Présence seule depuis 1970 dans la région soudano-sahélienne
+-   Analyse de processus ponctuels marqués
+-   Inclusion possible dans le comité de thèse pour voir lien avec dynamique du climat
+-   Vivien Rossi se pose aussi des question sur les échelles multiples, depuis une vision locale mécaliste à un agrandissement probabiliste
+
+### 23/09/19 Direction ES
+
+-   Réseau intra-CIRAD car thématique majeur mais sur peu de chercheurs dispersés
+-   Y inclus, TETIS, Aude Valade, et Rémi Prudhomme
+
+### Ideas on the fly
+
+-   TmFO (or first Guyafor) + TROLL + LoggingLab + soil + climate
+-   Build trajectory and calibrate on observations from ground and teledetection
+-   Local & regional projection of CC & logging
+
+### 23/09/19 Géraldine D.
+
+-   Envisage expat Brasilia l'EMBRAPA
+-   Q exploitation TmFO Amazonie
+-   Q restauration passive et active sur trajectoire alternative d'ecosystème (possible lien point de bascule)
+-   Contact Lucas Mazzei de l'EMBRAPA lors passage CESAB
+
+### 29/09/20 Livre Forêt Humain
+
+-   Les forêts et les humains sont ils compatibles ?
+-   Pas un livre sceintifique mais un essai de pensée par des scientifiques
+-   Contributions courte (3-4 pages) avec peu de références
+
+1.  Origines écologiques, culturelles, et sociétales d'une présumé incompatibilité
+    1.  Forêt permanente ?
+    2.  Regard occidental exporté
+    3.  Histoire de l'évolution de la foresterie
+2.  Forêts et territoires
+    1.  Penser forêts et territoires
+    2.  S'appuyer sur la communauté - Faune
+    3.  Gestion communautaire - Ligneux
+    4.  Populationl locale et cartographie mentale
+    5.  "Mise en jeu" des forêts
+3.  Changements globaux : regarder autrement les forêts
+    1.  Regards forêts en recomposition (+)
+    2.  Préserver forêts / droits des occupants
+    3.  Aires protégées remises en question
+    4.  Feux ? (+)
+    5.  Forêts secondaires et émergentes
+    6.  Déforestion importée et déforestation durable
+4.  Synthèse réfléxive sur le rapport entre sciences et forêts
+    1.  Incertitudes (+)
+    2.  Étrangeté
+    3.  Arbres en tant qu'acteurs ?
+    4.  Causes de la déforestation et de la dégradation
+    5.  Forêts entre sciences et sociétés, penser la science entre forêts et sociétés
+
+### 23/09/20 ODM
+
+-   Intranet \> Acès direct \> tout formulaire \> DCAF \> ODM NDF
+-   Dépt C = ES \> Structure
+-   Code projet foncitonnement chercheur = A01T004
+-   2400€/agent mais pro rata
+-   Frais à rembourser: hébergement, repas (max 20.2), transport (i.e. métro)
+-   Frais engagé: ex train
+-   Envoi Marie-Jo et Julie C.
+-   Puis post mission NDF + pdf justificatifs
+
+### 23/09/20 Carto Biomasse CI Soulémane
+
+-   Forest cover
+    -   LandSat (from GoogleEarthEngine or Planetary currently used by Camille) \> Composite (\>1) \> NDVI \> Random Forest \> Forest Cover
+    -   Land cover 1992:Present from CDS to evaluate with sensitivity and precision <https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview>
+-   Biomass
+    -   Drop VOD because not retained by model because too coarse
+    -   MODIS indices of vegetation (NDVI, EVI, LAI, FPAR) 2013-2017, that could be replaced by CDS similar products for longer periods
+    -   Climate from WorldClim2 mean of 1970-2000
+    -   Soil (origin?)
+    -   Landscape structure from forest cover
+-   To share
+    -   getEra & singularity image
+    -   rcontroll example of CDS data
+    -   netcdf4 package
+    -   CDS link to products similar to MODIS indices
+    -   AfriClim article and data access
+-   To ask
+    -   Forge for Camille's code
+    -   CI forest cover maps
+-   Idea on the fly: build a local data dictionary with origin download all metadata (ex CDS) tracked changed on GitHub to ease data stockage across computers and working
+
+### 23/09/20 Plinio S.
+
+-   DU depuis 2015
+-   Thèse Paris 6 Guyane française régénération du palmier à la piste de Saint Élie de 85 à 89
+-   Avant expatrié 9 ans en Indonésie et 9 ans au Brésil
+-   Impact exploitation forestière sur dispositif STREC du CIRAD à Bornéo
+-   Mise en avant du rôle de l'intensité
+-   CIFOR mise en place d'un dispositif à intensitées fixées en bloc de 100 ha
+-   Belem projet EU sur la foresterie de s zones agraires obligé par le code forestier et projet FFEM sur la valorisation des forêts communautaire de petits paysans
+-   2010 retour à Montpellier et construction du réseau TmFO actuellement projet CESAB (**mail Camille idée rcontroll + logginglab + climate forcing + TmFO**)
+-   Depuis DU encadrement Camille, Andes en Indonésie et démarrage futur d'un PhD sur STREC
