@@ -1,0 +1,77 @@
+# Projects {.unnumbered}
+
+## Climate
+
+*downscaling, characterisation, definition, multi-scale, ...*
+
+### Tool for downscaling (Major)
+
+*G. Vieilledent, T. Arsouze, Achille Mauri, B. Hérault?. J. Betbeder?*
+
+-   Problem: a lot of local projection rely on downscales GCM projections with very low spatial resolution on known baseline (e.g. CHELSA, WolrdClim, ...)
+-   Idea: a tool to derive projections from CORDEX regionalisation experiments [@platts2014] on a defined baseline
+-   Study area: French Guiana, New Caledonia, Ivory Coast. Opportunistic following G. Vieilledent and B. Hérault needs but also different hypothesis. New Caledonia as an important topographic variation. Ivory Coast as an important climatic variations. On the opposite French Guiana is mainly lowland and homogeneous as a control.
+-   Validation: (1) explore the possibility to do a projection on observed year (e.g. 2005\>2020) even if the differences between scenarii (RCP or SSP) will not be significant, and (2) explore the difference on ecology for instance with forest climatic extent with this product versus classical products.
+
+### *Amazon forests climatic typology (minor)*
+
+Characterization of different forest types in relation to climate/season (radiation, cloud, precipitation, evapotranspiration) and ecosystem dynamics (greenness, GPP, etc., N. Philippon, V. Gond, ...). Similarly to @philippon2019. Beware the importance of hydrology and inundation in Amazonia [@fleischmann2022; @fassoni-andrade2021].
+
+## Amazon dynamics
+
+*tipping point, die-back, degradation, deforestation, large-scale, theory, ecology, dynamcis*
+
+### Amazonian Landscape in Transition (ALT, Major)
+
+*I. Maréchaux, J. Chave, F. Fischer, postdoc*
+
+[My webpage on the project](https://main–altpages.netlify.app/)
+
+1.  TROLL V4 description (I. Maréchaux)
+2.  TROLL V4 validation Paracou, Santarèm, Caxiuanã (me & I. Maréchaux)
+3.  Role of biodiversity in response to climate change locally (postdoc co-supervised by I. Maréchaux & me)
+4.  Simulation of forest response to logging in relation to climate at the scale of TmFO South America (C. Piponiot, G. Derroire, CESAB, EI PEPR FORESTT - PC RegeAdapt?, link with M. Aubry-Kientz Regeneration project?)
+5.  Multi-scale modelling of Amazonia with TROLL following @rödig2017, @rödig2018, & @rödig2019 with (1) response to climate change and/or (2) simulation of diversity with validation using ATDN?
+
+### The Amazon tipping point (Major)
+
+*C. Nobre, P. Sist, ...*
+
+-   Similar approaches to @dakos2022 and @boulton2022 but see Tao et al. (in press) Nature Climate Change in response
+-   Discuss with J. Betbeder possible products in Amazonia for such studies and with multiple entry point for multiple arguments
+
+### *Extreme events (?)*
+
+*B. Funatsu, Emeline Chaste, PEPR FORESTT - PC2 Multirisques*
+
+Characterization and effects of extreme climatic events on tropical forest dynamics (SOCRATES)
+
+## Landscape and development
+
+*territory, remote sensing, management, local actors*
+
+### Landscape and local climate (Major)
+
+*L. Blanc, J. Betbeder, Guido Briceño, TerrAmaz*
+
+-   Indices to support management
+-   Projections
+-   Effect of deforestation on climate (*to be discussed with Guido and Lilian*)
+
+### *Landscape trajectories and fires (minor)*
+
+*B. Bellon, J. Betbeder, L. Blanc*
+
+-   Amazonian landscape trajectory in Brazil explroe B. Bellon
+-   Could be linked to tropical moist forest fires using several products (e;g. MapBiomass, TMF, ...)
+
+## Other
+
+-   Biomass maps in Ivory Coast for S. Traore's PhD with C. Deforceville and B. Hérault
+-   L. Baptiste manuscript on species growth in cacao agroforestry in Ivory Coast with B. Hérault
+-   Local data dictionary for remote sensing data coupled with GitHub including data definition, download scripts, and eventually pre-processing
+-   Particpation to Julien's PhD about climate effect on *Dicorynia guianensis* population genetics with climate expertise
+-   Anne Baranger's manuscript on cocoa agroforestry with B. Hérault
+-   Climate distribution of tree species in central africa with Charles Doumengue (building-up on the tool for downscaling?)
+-   Tree species distribution in Sudano-Sahelian region since 1970 from presence-only occurrences and trying to identify climatic envelope evolutions. PhD co-supervised by Frédéric Mortier. Opportunity to join the CST
+-   TROLL formatting with P. Verley, T. Arsouze, and I. Maréchaux for future developments and/or student supervision

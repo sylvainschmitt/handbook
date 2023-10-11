@@ -3,10 +3,28 @@
 ## To read
 
 -   @malhi2008
-
 -   @lovejoy2018
-
--   @nobre2016
+-   @nobre2016 🤎
+-   @leroux2022 🤎
+-   @werth2002
+-   @werth2005
+-   @werth2005a
+-   @prevedello2019 🤎
+-   @winckler2019
+-   @lawrence2022 🤎
+-   @dosreis2021 🤎
+-   @depragabaião2023
+-   @song2023
+-   @sloan2022
+-   @vannes2014
+-   @cochrane2003 🤎🤎
+-   scale: @rödig2019
+-   scale: @rödig2017 ++
+-   scale: @rödig2018
+-   tipping point: @dietz2021
+-   tipping point: @vannes2014
+-   local climatic variation with deforestation: @wongchuig2023 (J.C. Espinoza)
+-   fires: FEM issue <https://www.sciencedirect.com/journal/forest-ecology-and-management/special-issue/10MGRJLZDHP>
 
 ## To sort
 

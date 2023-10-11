@@ -8,12 +8,15 @@ book:
   date: last-modified
   chapters:
     - index.qmd
-    - part: admin.qmd
+    - part: projects.qmd
+      chapters: 
+        - proj-description.qmd
     - part: climatology.qmd
       chapters: 
         - clim-resources.qmd
   appendices:
     - meetings.qmd
+    - admin.qmd
     - literature.qmd
     - references.qmd
 

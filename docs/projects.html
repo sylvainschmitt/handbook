@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CIRAD handbook - Appendix A — Administrative</title>
+<title>CIRAD handbook - Projects</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +49,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./literature.html" rel="next">
-<link href="./meetings.html" rel="prev">
+<link href="./proj-description.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./meetings.html">Appendices</a></li><li class="breadcrumb-item"><a href="./admin.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Administrative</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./projects.html">Projects</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -107,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./projects.html" class="sidebar-item-text sidebar-link">
+            <a href="./projects.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Projects</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -156,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./admin.html" class="sidebar-item-text sidebar-link active">
+  <a href="./admin.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Administrative</span></span></a>
   </div>
 </li>
@@ -184,8 +203,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general"><span class="header-section-number">A.1</span> General</a></li>
-  <li><a href="#intranet" id="toc-intranet" class="nav-link" data-scroll-target="#intranet"><span class="header-section-number">A.2</span> Intranet</a></li>
+  <li><a href="#climate" id="toc-climate" class="nav-link active" data-scroll-target="#climate">Climate</a>
+  <ul class="collapse">
+  <li><a href="#tool-for-downscaling-major" id="toc-tool-for-downscaling-major" class="nav-link" data-scroll-target="#tool-for-downscaling-major">Tool for downscaling (Major)</a></li>
+  <li><a href="#amazon-forests-climatic-typology-minor" id="toc-amazon-forests-climatic-typology-minor" class="nav-link" data-scroll-target="#amazon-forests-climatic-typology-minor"><em>Amazon forests climatic typology (minor)</em></a></li>
+  </ul></li>
+  <li><a href="#amazon-dynamics" id="toc-amazon-dynamics" class="nav-link" data-scroll-target="#amazon-dynamics">Amazon dynamics</a>
+  <ul class="collapse">
+  <li><a href="#amazonian-landscape-in-transition-alt-major" id="toc-amazonian-landscape-in-transition-alt-major" class="nav-link" data-scroll-target="#amazonian-landscape-in-transition-alt-major">Amazonian Landscape in Transition (ALT, Major)</a></li>
+  <li><a href="#the-amazon-tipping-point-major" id="toc-the-amazon-tipping-point-major" class="nav-link" data-scroll-target="#the-amazon-tipping-point-major">The Amazon tipping point (Major)</a></li>
+  <li><a href="#extreme-events" id="toc-extreme-events" class="nav-link" data-scroll-target="#extreme-events"><em>Extreme events (?)</em></a></li>
+  </ul></li>
+  <li><a href="#landscape-and-development" id="toc-landscape-and-development" class="nav-link" data-scroll-target="#landscape-and-development">Landscape and development</a>
+  <ul class="collapse">
+  <li><a href="#landscape-and-local-climate-major" id="toc-landscape-and-local-climate-major" class="nav-link" data-scroll-target="#landscape-and-local-climate-major">Landscape and local climate (Major)</a></li>
+  <li><a href="#landscape-trajectories-and-fires-minor" id="toc-landscape-trajectories-and-fires-minor" class="nav-link" data-scroll-target="#landscape-trajectories-and-fires-minor"><em>Landscape trajectories and fires (minor)</em></a></li>
+  </ul></li>
+  <li><a href="#other" id="toc-other" class="nav-link" data-scroll-target="#other">Other</a></li>
   </ul>
 </nav>
     </div>
@@ -194,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix A — Administrative</h1>
+<h1 class="title">Projects</h1>
 </div>
 
 
@@ -209,24 +243,117 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="general" class="level2" data-number="A.1">
-<h2 data-number="A.1" class="anchored" data-anchor-id="general"><span class="header-section-number">A.1</span> General</h2>
+<section id="climate" class="level2">
+<h2 class="anchored" data-anchor-id="climate">Climate</h2>
+<p><em>downscaling, characterisation, definition, multi-scale, …</em></p>
+<section id="tool-for-downscaling-major" class="level3">
+<h3 class="anchored" data-anchor-id="tool-for-downscaling-major">Tool for downscaling (Major)</h3>
+<p><em>G. Vieilledent, T. Arsouze, Achille Mauri, B. Hérault?. J. Betbeder?</em></p>
+<ul>
+<li>Problem: a lot of local projection rely on downscales GCM projections with very low spatial resolution on known baseline (e.g.&nbsp;CHELSA, WolrdClim, …)</li>
+<li>Idea: a tool to derive projections from CORDEX regionalisation experiments <span class="citation" data-cites="platts2014">(<a href="references.html#ref-platts2014" role="doc-biblioref">Platts, Omeny, and Marchant 2014</a>)</span> on a defined baseline</li>
+<li>Study area: French Guiana, New Caledonia, Ivory Coast. Opportunistic following G. Vieilledent and B. Hérault needs but also different hypothesis. New Caledonia as an important topographic variation. Ivory Coast as an important climatic variations. On the opposite French Guiana is mainly lowland and homogeneous as a control.</li>
+<li>Validation: (1) explore the possibility to do a projection on observed year (e.g.&nbsp;2005&gt;2020) even if the differences between scenarii (RCP or SSP) will not be significant, and (2) explore the difference on ecology for instance with forest climatic extent with this product versus classical products.</li>
+</ul>
 </section>
-<section id="intranet" class="level2" data-number="A.2">
-<h2 data-number="A.2" class="anchored" data-anchor-id="intranet"><span class="header-section-number">A.2</span> Intranet</h2>
+<section id="amazon-forests-climatic-typology-minor" class="level3">
+<h3 class="anchored" data-anchor-id="amazon-forests-climatic-typology-minor"><em>Amazon forests climatic typology (minor)</em></h3>
+<p>Characterization of different forest types in relation to climate/season (radiation, cloud, precipitation, evapotranspiration) and ecosystem dynamics (greenness, GPP, etc., N. Philippon, V. Gond, …). Similarly to <span class="citation" data-cites="philippon2019">Philippon et al. (<a href="references.html#ref-philippon2019" role="doc-biblioref">2019</a>)</span>. Beware the importance of hydrology and inundation in Amazonia <span class="citation" data-cites="fleischmann2022 fassoni-andrade2021">(<a href="references.html#ref-fleischmann2022" role="doc-biblioref">Fleischmann et al. 2022</a>; <a href="references.html#ref-fassoni-andrade2021" role="doc-biblioref">Fassoni-Andrade et al. 2021</a>)</span>.</p>
+</section>
+</section>
+<section id="amazon-dynamics" class="level2">
+<h2 class="anchored" data-anchor-id="amazon-dynamics">Amazon dynamics</h2>
+<p><em>tipping point, die-back, degradation, deforestation, large-scale, theory, ecology, dynamcis</em></p>
+<section id="amazonian-landscape-in-transition-alt-major" class="level3">
+<h3 class="anchored" data-anchor-id="amazonian-landscape-in-transition-alt-major">Amazonian Landscape in Transition (ALT, Major)</h3>
+<p><em>I. Maréchaux, J. Chave, F. Fischer, postdoc</em></p>
+<p><a href="https://main–altpages.netlify.app/">My webpage on the project</a></p>
+<ol type="1">
+<li>TROLL V4 description (I. Maréchaux)</li>
+<li>TROLL V4 validation Paracou, Santarèm, Caxiuanã (me &amp; I. Maréchaux)</li>
+<li>Role of biodiversity in response to climate change locally (postdoc co-supervised by I. Maréchaux &amp; me)</li>
+<li>Simulation of forest response to logging in relation to climate at the scale of TmFO South America (C. Piponiot, G. Derroire, CESAB, EI PEPR FORESTT - PC RegeAdapt?, link with M. Aubry-Kientz Regeneration project?)</li>
+<li>Multi-scale modelling of Amazonia with TROLL following <span class="citation" data-cites="rödig2017">Rödig et al. (<a href="references.html#ref-rödig2017" role="doc-biblioref">2017</a>)</span>, <span class="citation" data-cites="rödig2018">Rödig et al. (<a href="references.html#ref-rödig2018" role="doc-biblioref">2018</a>)</span>, &amp; <span class="citation" data-cites="rödig2019">Rödig et al. (<a href="references.html#ref-rödig2019" role="doc-biblioref">2019</a>)</span> with (1) response to climate change and/or (2) simulation of diversity with validation using ATDN?</li>
+</ol>
+</section>
+<section id="the-amazon-tipping-point-major" class="level3">
+<h3 class="anchored" data-anchor-id="the-amazon-tipping-point-major">The Amazon tipping point (Major)</h3>
+<p><em>C. Nobre, P. Sist, …</em></p>
 <ul>
-<li><a href="https://espace-perso.cirad.fr/user/sschmitt">Espace personnel</a></li>
-<li><a href="https://intranet.cirad.fr/acces-direct">Intranet</a>
+<li>Similar approaches to <span class="citation" data-cites="dakos2022">Dakos and Kéfi (<a href="references.html#ref-dakos2022" role="doc-biblioref">2022</a>)</span> and <span class="citation" data-cites="boulton2022">Boulton, Lenton, and Boers (<a href="references.html#ref-boulton2022" role="doc-biblioref">2022</a>)</span> but see Tao et al.&nbsp;(in press) Nature Climate Change in response</li>
+<li>Discuss with J. Betbeder possible products in Amazonia for such studies and with multiple entry point for multiple arguments</li>
+</ul>
+</section>
+<section id="extreme-events" class="level3">
+<h3 class="anchored" data-anchor-id="extreme-events"><em>Extreme events (?)</em></h3>
+<p><em>B. Funatsu, Emeline Chaste, PEPR FORESTT - PC2 Multirisques</em></p>
+<p>Characterization and effects of extreme climatic events on tropical forest dynamics (SOCRATES)</p>
+</section>
+</section>
+<section id="landscape-and-development" class="level2">
+<h2 class="anchored" data-anchor-id="landscape-and-development">Landscape and development</h2>
+<p><em>territory, remote sensing, management, local actors</em></p>
+<section id="landscape-and-local-climate-major" class="level3">
+<h3 class="anchored" data-anchor-id="landscape-and-local-climate-major">Landscape and local climate (Major)</h3>
+<p><em>L. Blanc, J. Betbeder, Guido Briceño, TerrAmaz</em></p>
 <ul>
-<li><a href="https://intranet-drh.cirad.fr/outils/formulaires">Formulaires</a></li>
-<li><a href="https://intranet-dsst.cirad.fr/">DSST</a></li>
-<li><a href="https://intranet-dsi.cirad.fr/">DSI</a></li>
-<li><a href="https://intranet-ditam.cirad.fr/fonctionnement-sur-les-centres">DITAM</a></li>
-</ul></li>
-<li><a href="https://docs.google.com/spreadsheets/d/1Ma-GRtZf3jj_7qvlsXFMGT7b8rlXZBELW3Jqalqs1XI/edit#gid=1441240739">Planning UR</a></li>
+<li>Indices to support management</li>
+<li>Projections</li>
+<li>Effect of deforestation on climate (<em>to be discussed with Guido and Lilian</em>)</li>
+</ul>
+</section>
+<section id="landscape-trajectories-and-fires-minor" class="level3">
+<h3 class="anchored" data-anchor-id="landscape-trajectories-and-fires-minor"><em>Landscape trajectories and fires (minor)</em></h3>
+<p><em>B. Bellon, J. Betbeder, L. Blanc</em></p>
+<ul>
+<li>Amazonian landscape trajectory in Brazil explroe B. Bellon</li>
+<li>Could be linked to tropical moist forest fires using several products (e;g. MapBiomass, TMF, …)</li>
+</ul>
+</section>
+</section>
+<section id="other" class="level2">
+<h2 class="anchored" data-anchor-id="other">Other</h2>
+<ul>
+<li>Biomass maps in Ivory Coast for S. Traore’s PhD with C. Deforceville and B. Hérault</li>
+<li>L. Baptiste manuscript on species growth in cacao agroforestry in Ivory Coast with B. Hérault</li>
+<li>Local data dictionary for remote sensing data coupled with GitHub including data definition, download scripts, and eventually pre-processing</li>
+<li>Particpation to Julien’s PhD about climate effect on <em>Dicorynia guianensis</em> population genetics with climate expertise</li>
+<li>Anne Baranger’s manuscript on cocoa agroforestry with B. Hérault</li>
+<li>Climate distribution of tree species in central africa with Charles Doumengue (building-up on the tool for downscaling?)</li>
+<li>Tree species distribution in Sudano-Sahelian region since 1970 from presence-only occurrences and trying to identify climatic envelope evolutions. PhD co-supervised by Frédéric Mortier. Opportunity to join the CST</li>
+<li>TROLL formatting with P. Verley, T. Arsouze, and I. Maréchaux for future developments and/or student supervision</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-boulton2022" class="csl-entry" role="listitem">
+Boulton, Chris A., Timothy M. Lenton, and Niklas Boers. 2022. <span>“Pronounced Loss of Amazon Rainforest Resilience Since the Early 2000s.”</span> <em>Nature Climate Change</em> 12 (3): 271–78. <a href="https://doi.org/10.1038/s41558-022-01287-8">https://doi.org/10.1038/s41558-022-01287-8</a>.
+</div>
+<div id="ref-dakos2022" class="csl-entry" role="listitem">
+Dakos, Vasilis, and Sonia Kéfi. 2022. <span>“Ecological Resilience: What to Measure and How.”</span> <em>Environmental Research Letters</em> 17 (4): 043003. <a href="https://doi.org/10.1088/1748-9326/ac5767">https://doi.org/10.1088/1748-9326/ac5767</a>.
+</div>
+<div id="ref-fassoni-andrade2021" class="csl-entry" role="listitem">
+Fassoni-Andrade, Alice César, Ayan Santos Fleischmann, Fabrice Papa, Rodrigo Cauduro Dias de Paiva, Sly Wongchuig, John M. Melack, Adriana Aparecida Moreira, et al. 2021. <span>“Amazon Hydrology From Space: Scientific Advances and Future Challenges.”</span> <em>Reviews of Geophysics</em> 59 (4). <a href="https://doi.org/10.1029/2020rg000728">https://doi.org/10.1029/2020rg000728</a>.
+</div>
+<div id="ref-fleischmann2022" class="csl-entry" role="listitem">
+Fleischmann, Ayan Santos, Fabrice Papa, Alice Fassoni-Andrade, John M. Melack, Sly Wongchuig, Rodrigo Cauduro Dias Paiva, Stephen K. Hamilton, et al. 2022. <span>“How Much Inundation Occurs in the Amazon River Basin?”</span> <em>Remote Sensing of Environment</em> 278 (September): 113099. <a href="https://doi.org/10.1016/j.rse.2022.113099">https://doi.org/10.1016/j.rse.2022.113099</a>.
+</div>
+<div id="ref-philippon2019" class="csl-entry" role="listitem">
+Philippon, Nathalie, Guillaume Cornu, Lou Monteil, Valery Gond, Vincent Moron, Julien Pergaud, Geneviève Sèze, et al. 2019. <span>“The Light-Deficient Climates of Western Central African Evergreen Forests.”</span> <em>Environmental Research Letters</em> 14 (3): 034007. <a href="https://doi.org/10.1088/1748-9326/aaf5d8">https://doi.org/10.1088/1748-9326/aaf5d8</a>.
+</div>
+<div id="ref-platts2014" class="csl-entry" role="listitem">
+Platts, Philip J., Peter A. Omeny, and Rob Marchant. 2014. <span>“AFRICLIM: High-Resolution Climate Projections for Ecological Applications in Africa.”</span> <em>African Journal of Ecology</em> 53 (1): 103–8. <a href="https://doi.org/10.1111/aje.12180">https://doi.org/10.1111/aje.12180</a>.
+</div>
+<div id="ref-rödig2017" class="csl-entry" role="listitem">
+Rödig, Edna, Matthias Cuntz, Jens Heinke, Anja Rammig, and Andreas Huth. 2017. <span>“Spatial Heterogeneity of Biomass and Forest Structure of the Amazon Rain Forest: Linking Remote Sensing, Forest Modelling and Field Inventory.”</span> <em>Global Ecology and Biogeography</em> 26 (11): 1292–302. <a href="https://doi.org/10.1111/geb.12639">https://doi.org/10.1111/geb.12639</a>.
+</div>
+<div id="ref-rödig2018" class="csl-entry" role="listitem">
+Rödig, Edna, Matthias Cuntz, Anja Rammig, Rico Fischer, Franziska Taubert, and Andreas Huth. 2018. <span>“The Importance of Forest Structure for Carbon Fluxes of the Amazon Rainforest.”</span> <em>Environmental Research Letters</em> 13 (5): 054013. <a href="https://doi.org/10.1088/1748-9326/aabc61">https://doi.org/10.1088/1748-9326/aabc61</a>.
+</div>
+<div id="ref-rödig2019" class="csl-entry" role="listitem">
+Rödig, Edna, Nikolai Knapp, Rico Fischer, Friedrich J. Bohn, Ralph Dubayah, Hao Tang, and Andreas Huth. 2019. <span>“From Small-Scale Forest Structure to Amazon-Wide Carbon Estimates.”</span> <em>Nature Communications</em> 10 (1). <a href="https://doi.org/10.1038/s41467-019-13063-y">https://doi.org/10.1038/s41467-019-13063-y</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -465,13 +592,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./meetings.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Meetings</span>
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./literature.html" class="pagination-link">
-        <span class="nav-page-text">Literature</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./proj-description.html" class="pagination-link">
+        <span class="nav-page-text">Description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
