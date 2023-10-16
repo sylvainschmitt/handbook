@@ -14,6 +14,7 @@ book:
     - part: climatology.qmd
       chapters: 
         - clim-resources.qmd
+        - clim-ci.qmd
   appendices:
     - meetings.qmd
     - admin.qmd

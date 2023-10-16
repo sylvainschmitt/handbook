@@ -33,6 +33,16 @@ Characterization of different forest types in relation to climate/season (radiat
 4.  Simulation of forest response to logging in relation to climate at the scale of TmFO South America (C. Piponiot, G. Derroire, CESAB, EI PEPR FORESTT - PC RegeAdapt?, link with M. Aubry-Kientz Regeneration project?)
 5.  Multi-scale modelling of Amazonia with TROLL following @rödig2017, @rödig2018, & @rödig2019 with (1) response to climate change and/or (2) simulation of diversity with validation using ATDN?
 
+### Paracou dynamics under climate change across scales (Major)
+
+*B. Hérault*
+
+-   Growth ind, sp, ecosyst in time using TreeGrowth results
+-   Link with climate from ERA5-Land and the EddyFlux
+-   Work with climate and growth anomalies
+-   Link with ecosystem functioning using Eddy fluxes and remote sensing products (SIF, VOD, LAI, NDVI, ...)
+-   Explore tipping points with AR(1)
+
 ### The Amazon tipping point (Major)
 
 *C. Nobre, P. Sist, ...*

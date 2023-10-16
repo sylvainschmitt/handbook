@@ -1,0 +1,129 @@
+```{r}
+#| include: false
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(tidyverse)
+library(terra)
+library(sf)
+```
+
+# Côte d'Ivoire
+
+Content.
+
+## Climatic zones
+
+```{r climzoneci}
+#| warning: false
+ci <- st_read("~/Documents/data/limits/ci/ci.shp", quiet = TRUE)
+cz <- st_read("~/Documents/data/CI/Zone_phytogeographique_rci/Zone_climatique.shp", 
+              quiet = TRUE)%>% group_by(Zone) %>% 
+  summarise() %>% 
+  st_cast("POLYGON")
+ggplot() +
+  geom_sf(data = cz, aes(fill = Zone)) +
+  geom_sf(data = ci, fill = NA) +
+  theme_bw()
+```
+
+## WorldClim
+
+One file is 8.5 Go for a resolution of 30 seconds against 33.4 Mo for a resolution of 10 minutes. Explorations will be done at 10 minutes.
+
+We need:
+
+-   2 30-years periods: 2030 & 2050
+-   2 BioClimatic variables (BIO): BIO11 & BIO19
+-   3 Scenarios (SSP): SSP 1 2.6, SSP 2 4.5, & SSP 5 8.5
+-   22 Models (GCM): ACCESS-CM2, CMCC-ESM2, EC-Earth3-Veg, FIO-ESM-2-0, GISS-E2-1-G, HadGEM3-GC31-LL, INM-CM5-0, IPSL-CM6A-LR, MIROC6, MPI-ESM1-2-HR, MRI-ESM2-0, UKESM1-0-LL
+
+> BIO11 = Mean Temperature of Coldest Quarter and BIO19 = Precipitation of Coldest Quarter
+
+```{r dproj, eval=FALSE}
+download_proj <- function(
+    base_url = "https://geodata.ucdavis.edu/cmip6",
+    resolution = "10m",
+    model = "ACCESS-CM2",
+    scenario = "ssp126",
+    version = "wc2.1",
+    variable = "bioc",
+    period = "2021-2040"
+){
+  file <- paste0(version, "_", resolution, "_", variable, "_",
+                 model, "_", scenario, "_", period, ".tif")
+  url <- paste0(base_url, "/", resolution, "/", model, "/", scenario, "/", file)
+  if(!file.exists(file.path("~/Documents/data/CI/wc_raw", file)))
+    download.file(url, file.path("~/Documents/data/CI/wc_raw", file))
+}
+
+models <- c("ACCESS-CM2", "CMCC-ESM2", "EC-Earth3-Veg", 
+            "FIO-ESM-2-0", "GISS-E2-1-G", "HadGEM3-GC31-LL",
+            "INM-CM5-0", "IPSL-CM6A-LR", "MIROC6", "MPI-ESM1-2-HR", "MRI-ESM2-0", "UKESM1-0-LL")
+scenario <- c("ssp126", "ssp585")
+period <- c("2021-2040", "2041-2060")
+lapply(models, function(m) 
+  lapply(scenario, function(s)
+    lapply(period, function(p)
+      download_proj(model = m, scenario = s, period = p)
+    )
+  )
+)
+
+list.files("~/Documents/data/CI/wc_raw") %>% 
+  lapply(function(file) {
+    rast(file.path("~/Documents/data/CI/wc_raw", file)) %>% 
+      crop(ci) %>% 
+      select(bio11, bio19) %>% 
+      project(crs(cz)) %>% 
+      writeRaster(file.path("~/Documents/data/CI/wc", file),
+                  overwrite = TRUE)
+  })
+```
+
+```{r projs}
+extract_proj <- function(file) {
+  r <- rast(file.path("~/Documents/data/CI/wc", file))
+  lapply(c("min", "mean", "max"), function(m)
+    extract(r, cz, fun = m, na.rm=TRUE) %>% 
+      mutate(zone = cz$Zone) %>% 
+      select(-ID) %>% 
+      gather(variable, value, -zone) %>% 
+      mutate(metric = m)
+  ) %>% bind_rows() %>% 
+    mutate(file = file)
+}
+
+projs <- list.files("~/Documents/data/CI/wc") %>% 
+  lapply(extract_proj) %>% 
+  bind_rows() %>% 
+  separate(file, c("version", "resolution", "var_type", "gcm", "ssp", "period"), "_") %>% 
+  mutate(period = gsub(".tif", "", period)) %>% 
+  pivot_wider(names_from = metric, values_from = value) %>% 
+  mutate(zone = gsub("Secteur ", "", zone))
+```
+
+```{r bio11}
+projs %>% 
+  filter(variable == "bio11") %>% 
+  ggplot(aes(gcm, mean)) +
+  geom_point() +
+  geom_linerange(aes(ymin = min, ymax = max)) +
+  theme_bw() +
+  facet_grid(zone ~ period + ssp) +
+  ylab("Mean Temperature of Coldest Quarter (BIO11, °C)") + xlab("") +
+  coord_flip() +
+  theme(axis.text.y = element_text(size = 5))
+```
+
+```{r bio19}
+projs %>% 
+  filter(variable == "bio19") %>% 
+  ggplot(aes(gcm, mean/10^3)) +
+  geom_point() +
+  geom_linerange(aes(ymin = min/10^3, ymax = max/10^3)) +
+  theme_bw() +
+  facet_grid(zone ~ period + ssp) +
+  ylab("Precipitation of Coldest Quarter (BIO19, m)") + xlab("") +
+  coord_flip() +
+  theme(axis.text.y = element_text(size = 5), 
+        axis.text.x = element_text(size = 8, angle = 45))
+```
