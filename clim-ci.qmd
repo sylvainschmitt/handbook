@@ -127,3 +127,32 @@ projs %>%
   theme(axis.text.y = element_text(size = 5), 
         axis.text.x = element_text(size = 8, angle = 45))
 ```
+
+### Present versus future
+
+```{r chull}
+#| warning: false
+future <- list.files("~/Documents/data/CI/wc/", full.names = T) %>% 
+  lapply(rast) %>% 
+  lapply(values) %>% 
+  lapply(as.data.frame) %>% 
+  bind_rows()
+present <- data.frame(
+  bio11 = rast("~/Documents/data/CI/wc2.1_10m_bio/wc2.1_10m_bio_11.tif") %>% 
+  crop(ci) %>% 
+  values() %>% 
+  as.vector(),
+  bio19 = rast("~/Documents/data/CI/wc2.1_10m_bio/wc2.1_10m_bio_19.tif") %>% 
+  crop(ci) %>% 
+  values() %>% 
+  as.vector()
+)
+ggplot(future, aes(bio11, bio19)) +
+  geom_point(alpha = 0.1, aes(col = "future")) +
+  geom_point(alpha = 0.5, aes(col = "present"), data = present) +
+  microViz::stat_chull(aes(col = "future")) +
+  microViz::stat_chull(aes(col = "present"), data = present) +
+  theme_bw() +
+  xlab("Mean Temperature of Coldest Quarter (BIO11, °C)") + 
+  ylab("Precipitation of Coldest Quarter (BIO19, mm)")
+```
