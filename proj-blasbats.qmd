@@ -1,0 +1,48 @@
+```{r setup}
+#| include: false
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+library(tidyverse)
+```
+
+# B. Lasbats {.unnumbered}
+
+*Description.*
+
+```{r data}
+projs <- readRDS("~/Documents/data/blasbats/231017_climate_scenarios_2071-2100.rds")
+projs <- lapply(projs, bind_rows, .id = "scenario") %>% 
+  bind_rows(.id = "model")
+```
+
+```{r allprojs}
+projs %>% 
+  gather(variable, value, -model, -scenario, -clus, -type) %>% 
+  ggplot(aes(model, value, col = scenario)) +
+  geom_boxplot() +
+  theme_bw() +
+  facet_wrap(~ variable, scales = "free_x") +
+  coord_flip() + xlab("") + ylab("") +
+  theme(legend.position = c(0.8, 0.1))
+```
+
+```{r projstpp}
+projs %>% 
+  gather(variable, value, -model, -scenario, -clus, -type) %>% 
+  filter(variable %in% c("T_mean (°C)", "Rainfall_year (kg/m2/year)")) %>% 
+  ggplot(aes(model, value, col = scenario)) +
+  geom_boxplot() +
+  theme_bw() +
+  facet_wrap(~ variable, scales = "free_x") +
+  coord_flip() + xlab("") + ylab("")
+```
+
+```{r projstpclusp}
+projs %>% 
+  gather(variable, value, -model, -scenario, -clus, -type) %>% 
+  filter(variable %in% c("T_mean (°C)", "Rainfall_year (kg/m2/year)")) %>% 
+  ggplot(aes(clus, value, col = scenario)) +
+  geom_boxplot() +
+  theme_bw() +
+  facet_wrap(~ variable, scales = "free_x") +
+  coord_flip() + xlab("") + ylab("")
+```

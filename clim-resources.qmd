@@ -6,7 +6,7 @@ library(terra)
 library(sf)
 ```
 
-# Resources
+# Resources {.unnumbered}
 
 Content.
 
@@ -195,13 +195,4 @@ c(ib, vodca) %>%
   ggpubr::stat_cor() +
   ggtitle("ASCAT-IB-VOD vs. VODCA for 2015 in CI") +
   xlab("") + ylab("")
-```
-
-```{r, eval=FALSE}
-ci <- st_read("~/Documents/data/limits/ci/ci.shp", quiet = TRUE)
-test <- rast("~/Téléchargements/dataset-satellite-land-cover-ce75f68c-f5d5-4dd0-9704-7786c35acb28/ESACCI-LC-L4-LCCS-Map-300m-P1Y-1992-v2.0.7cds.nc") %>% 
-  crop(ci)
-plot(test)
-ncdf4::nc_open("~/Téléchargements/dataset-satellite-land-cover-ce75f68c-f5d5-4dd0-9704-7786c35acb28/ESACCI-LC-L4-LCCS-Map-300m-P1Y-1992-v2.0.7cds.nc")
-(test$lccs_class == 40) %>% plot()
 ```

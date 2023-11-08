@@ -25,6 +25,8 @@
 -   tipping point: @vannes2014
 -   local climatic variation with deforestation: @wongchuig2023 (J.C. Espinoza)
 -   fires: FEM issue <https://www.sciencedirect.com/journal/forest-ecology-and-management/special-issue/10MGRJLZDHP>
+-   Fire mechanist modelling SpitFire: @thonicke2010 🤎🤎
+-   Risk of plantation for fires: @stevens2023
 
 ## To sort
 

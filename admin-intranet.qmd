@@ -1,9 +1,0 @@
-# Intranet
-
-* [Espace personnel](https://espace-perso.cirad.fr/user/sschmitt)
-* [Intranet](https://intranet.cirad.fr/acces-direct)
-    * [Formulaires](https://intranet-drh.cirad.fr/outils/formulaires)
-    * [DSST](https://intranet-dsst.cirad.fr/)
-    * [DSI](https://intranet-dsi.cirad.fr/)
-    * [DITAM](https://intranet-ditam.cirad.fr/fonctionnement-sur-les-centres)
-* [Planning UR](https://docs.google.com/spreadsheets/d/1Ma-GRtZf3jj_7qvlsXFMGT7b8rlXZBELW3Jqalqs1XI/edit#gid=1441240739)

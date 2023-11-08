@@ -1,4 +1,4 @@
-```{r}
+```{r setup}
 #| include: false
 rm(list = ls()) ; invisible(gc()) ; set.seed(42)
 library(tidyverse)
@@ -6,9 +6,9 @@ library(terra)
 library(sf)
 ```
 
-# Côte d'Ivoire
+# S. Traore {.unnumbered}
 
-Content.
+*Description.*
 
 ## Climatic zones
 

@@ -10,11 +10,11 @@ book:
     - index.qmd
     - part: projects.qmd
       chapters: 
-        - proj-description.qmd
+        - proj-blasbats.qmd
+        - proj-straore.qmd
     - part: climatology.qmd
       chapters: 
         - clim-resources.qmd
-        - clim-ci.qmd
   appendices:
     - meetings.qmd
     - admin.qmd
