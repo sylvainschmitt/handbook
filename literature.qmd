@@ -27,6 +27,9 @@
 -   fires: FEM issue <https://www.sciencedirect.com/journal/forest-ecology-and-management/special-issue/10MGRJLZDHP>
 -   Fire mechanist modelling SpitFire: @thonicke2010 🤎🤎
 -   Risk of plantation for fires: @stevens2023
+-   Fire: @silvestrini2011
+-   Amazonia roads simulation: <https://csr.ufmg.br/simamazonia/>
+-   Fires: @brando2020; @soares-filho2012
 
 ## To sort
 

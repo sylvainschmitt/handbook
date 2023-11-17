@@ -79,6 +79,7 @@ Characterization and effects of extreme climatic events on tropical forest dynam
 -   Effect of deforestation on climate
 -   Example for Temperature following @butt2023
 -   Projections with future climates
+-   DB Mato Grosso and regional climate changes?
 
 ### *Landscape trajectories and fires (?)*
 

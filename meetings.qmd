@@ -691,3 +691,29 @@
 -   Projet jeu fête de la science ClimateRush
 -   Contact Jhan-Carlo Espinoza en me mettant dans la boucle
 -   Projet FFEM Gestion Forestière Communautaire
+
+### 24/11/09 Jean Paul Metzger
+
+-   Service écosystémique de régulation du climat: C storage, cooling, water dynamics (etp)
+-   Nouveau institut dans L'université de Sao Paulo avec le FAPESP: Centre Étude de l'Amazonie (Centro de Estudos da Amazônia Sustentável) avec Paulo Artaxo
+-   Volonté travail Mata Atlantica
+-   Mise en place IRC avec CNRS, contact Jérôme Chave
+-   Mission Février avec Joannès Guillemot de Eco&Sol
+
+### 24/11/17 Bruno Pinho AMAP
+
+-   Importance of landscape scale studies Lehore Farig e.g. 2017
+-   FragSAD dataset about fragmentation
+-   Match JP Metzger paper
+-   40% threshold of forest cover
+-   **Demander les diapos**
+
+### 24/11/17 Julie B, Lilian B
+
+-   Link landscape structure and trajectories to climate dynamics + projections
+-   Looked at mean climate, climate extremes, and progressively to fires risk
+-   Worked on the Amazon deforestation front with Beatriz B. trajectories
+-   Julie can produce several metrics of landscape structure
+-   To be linked with forest local functioning based on remote products (maybe linked to trajectories)
+-   Need to define the weather product to be used (satellite, gauges, re analyses...) depending on temporal and spatial scale and avoiding smoothing of the anomalies we are looking for
+-   Julie super interested by link structure and dynamic of landscape to climate evolution
