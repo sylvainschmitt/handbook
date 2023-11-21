@@ -1,6 +1,6 @@
 ```{r setup}
 #| include: false
-rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+# rm(list = ls()) ; invisible(gc()) ; set.seed(42)
 library(tidyverse)
 library(terra)
 library(sf)
@@ -9,6 +9,92 @@ library(sf)
 # S. Traore {.unnumbered}
 
 *Description.*
+
+## Biomass
+
+```{r}
+path <- "~/Documents/data/straore/"
+
+save_path <- file.path(path, "agb_change")
+dir.create(save_path)
+
+biomass <- list.files(file.path(path, "agb_map_masked"), 
+           pattern = "map_with_veg", full.names = TRUE) %>% 
+  rast() %>% 
+  project("EPSG:32630")
+
+biomass <- biomass * (res(biomass)[1]^2 / 10^4)
+
+names(biomass) <- gsub("map_with_veg_", "", names(biomass))
+values(biomass)[is.na(values(biomass))] <- 0
+
+years <- as.numeric(names(biomass)[-1])
+stats <- data.frame(year = years,
+                    deforest = NA,
+                    loss = NA,
+                    gain = NA)
+
+for(y in years){
+  biomass0 <- biomass[[as.character(y-1)]]
+  biomass1 <- biomass[[as.character(y)]]
+  
+  # delta AGB & no_forest
+  delta <- biomass1 - biomass0    
+  
+  # deforestation: delta AGB < 0 & no_forest (biomass1 == 0)
+  deforest <- delta * (biomass1 == 0) * (biomass0 > 0)
+  
+  # degradation: delta AGB < 0 & forest (biomass1 > 0)
+  loss <- delta * (biomass1 > 0) * (biomass0 > 0) * (delta < 0)
+  
+  # degradation: delta AGB < 0 & forest (biomass1 > 0)
+  gain <- delta * (biomass1 > 0) * (biomass0 > 0)  * (delta > 0)
+  
+  # save stat
+  stats[stats$year == y,2:4] <- c(sum(values(deforest)), 
+                                  sum(values(loss)),
+                                  sum(values(gain)))
+  
+  # raster
+  writeRaster(deforest, overwrite = T,
+          filename = file.path(save_path, 
+                               paste0("deforest_", y, ".tif")))
+  writeRaster(loss, overwrite = T,
+              filename = file.path(save_path, 
+                                   paste0("loss_", y, ".tif")))
+  writeRaster(gain, overwrite = T,
+              filename = file.path(save_path, 
+                                   paste0("gain_", y, ".tif")))
+}
+
+stats <- stats %>% 
+  mutate(agb_change = gain + loss) %>% 
+  mutate(deforest_cum = cumsum(deforest),
+         loss_cum = cumsum(loss),
+         gain_cum = cumsum(gain),
+         agb_change_cum  = cumsum(agb_change))
+  
+write_tsv(stats, file = file.path(path, "stats.tsv"))
+
+stats %>% 
+  select(year, deforest, loss, gain, agb_change) %>% 
+  gather(variable, value, -year) %>% 
+  ggplot(aes(year, value/10^6, col = variable)) +
+  geom_line() +
+  theme_bw() +
+  xlab("Year") + ylab("AGB (tC)") 
+
+stats %>% 
+  select(-deforest, -loss, -gain, -agb_change) %>% 
+  gather(variable, value, -year) %>% 
+  ggplot(aes(year, value/10^6, col = variable)) +
+  geom_line() +
+  theme_bw() +
+  xlab("Year") + ylab("Cummulated AGB (tC)") +
+  geom_smooth(se = FALSE)
+  
+
+```
 
 ## Climatic zones
 
@@ -156,3 +242,5 @@ ggplot(future, aes(bio11, bio19)) +
   xlab("Mean Temperature of Coldest Quarter (BIO11, °C)") + 
   ylab("Precipitation of Coldest Quarter (BIO19, mm)")
 ```
+
+## 
