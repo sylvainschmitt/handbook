@@ -37,6 +37,8 @@ stats <- data.frame(year = years,
                     loss_area = NA,
                     gain_area = NA)
 
+seuil <- 0.01
+
 for(y in years){
   biomass0 <- biomass[[as.character(y-1)]]
   biomass1 <- biomass[[as.character(y)]]
@@ -47,10 +49,10 @@ for(y in years){
   # deforestation: delta AGB < 0 & no_forest (biomass1 == 0)
   deforest <- delta * (biomass1 == 0) * (biomass0 > 0)
   
-  # degradation: delta AGB < 0 & forest (biomass1 > 0)
+  # loss: delta AGB < 0 & forest (biomass1 > 0)
   loss <- delta * (biomass1 > 0) * (biomass0 > 0) * (delta < 0)
   
-  # degradation: delta AGB < 0 & forest (biomass1 > 0)
+  # gain: delta AGB < 0 & forest (biomass1 > 0)
   gain <- delta * (biomass1 > 0) * (biomass0 > 0)  * (delta > 0)
   
   # save stat
@@ -59,8 +61,8 @@ for(y in years){
                                   sum(values(loss)),
                                   sum(values(gain)),
                                   -sum(values(deforest < 0))*fact,
-                                  -sum(values(loss < 0))*fact,
-                                  sum(values(gain > 0))*fact)
+                                  -sum(values(-loss > seuil*biomass0))*fact,
+                                  sum(values(gain > seuil*biomass0))*fact)
   
   # raster
   writeRaster(deforest, overwrite = T,
@@ -69,6 +71,9 @@ for(y in years){
   writeRaster(loss, overwrite = T,
               filename = file.path(save_path, 
                                    paste0("loss_", y, ".tif")))
+  writeRaster(loss/biomass0*100, overwrite = T,
+              filename = file.path(save_path, 
+                                   paste0("ploss_", y, ".tif")))
   writeRaster(gain, overwrite = T,
               filename = file.path(save_path, 
                                    paste0("gain_", y, ".tif")))
@@ -86,16 +91,9 @@ stats <- stats %>%
 write_tsv(stats, file = file.path(path, "stats.tsv"))
 
 stats %>% 
-  ggplot(aes(year, value/10^6, col = type)) +
-  geom_line() +
-  theme_bw() +
-  geom_smooth(se = FALSE) +
-  facet_wrap(~ variable, scales = "free")
-
-stats %>% 
   filter(type %in% c("change", "deforest")) %>% 
   mutate(variable_long = recode(variable, 
-                                "agb" = "Biomasse (ktC)",
+                                "agb" = "Biomasse (MtC)",
                                 "area" = "Surface (Mha)")) %>% 
   mutate(type_long = recode(type,
                             "change" = "Degradation",
@@ -107,6 +105,59 @@ stats %>%
   facet_wrap(~ variable_long, scales = "free") + 
   scale_color_discrete("") +
   theme(axis.title = element_blank(), legend.position = "bottom")
+```
+
+```{r}
+ploss <- list.files("~/Documents/data/straore/agb_change/", 
+           pattern = "ploss", full = TRUE) %>% 
+  rast() %>% 
+  as.data.frame() %>% 
+  gather(year, loss) %>% 
+  filter(loss < 0)
+data <- sample(log10(-ploss$loss), 10^5)
+```
+
+```{r}
+#| eval: false
+library(VGAM)
+fit <- vglm(data ~ 1, 
+            mix2normal(eq.sd = FALSE), 
+            iphi=0.005, imu=0, imu2=2, isd1=1, isd2=1)
+pars = as.vector(coef(fit))
+w = logit(pars[1], inverse=TRUE)
+m1 = pars[2]
+sd1 = exp(pars[3])
+m2 = pars[4]
+sd2 = exp(pars[5])
+```
+
+-   poids: 0.3483403
+-   mu1: -0.03484159, soit 0.92%
+-   sd1: 0.6321144
+-   mu2: 0.7023864, soit 5.04%
+-   sd2: 0.3510682
+
+```{r}
+w <- 0.3483403
+m1 <- -0.03484159
+m2 <- 0.7023864
+sd1 <- 0.6321144
+sd2 <- 0.3510682
+hist(data, 30, col="black", freq=F)
+x <- seq(-3, 3, 0.1)
+points(x, w*dnorm(x, m1, sd1)+(1-w)*dnorm(x,m2,sd2), "l", col="red", lwd=2)
+```
+
+```{r}
+ploss %>% 
+  group_by(year) %>% 
+  sample_n(10^4) %>% 
+  ggplot(aes(-loss, col = year)) +
+  geom_density(bw = 0.1) +
+  theme_bw() +
+  scale_x_log10() +
+  geom_vline(xintercept = c(10^m1, 10^m2)) +
+  geom_vline(xintercept = 1, linetype = "dashed")
 ```
 
 ## Climatic zones
