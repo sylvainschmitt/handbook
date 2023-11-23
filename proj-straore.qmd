@@ -30,9 +30,12 @@ values(biomass)[is.na(values(biomass))] <- 0
 
 years <- as.numeric(names(biomass)[-1])
 stats <- data.frame(year = years,
-                    deforest = NA,
-                    loss = NA,
-                    gain = NA)
+                    deforest_agb = NA,
+                    loss_agb = NA,
+                    gain_agb = NA,
+                    deforest_area = NA,
+                    loss_area = NA,
+                    gain_area = NA)
 
 for(y in years){
   biomass0 <- biomass[[as.character(y-1)]]
@@ -51,9 +54,13 @@ for(y in years){
   gain <- delta * (biomass1 > 0) * (biomass0 > 0)  * (delta > 0)
   
   # save stat
-  stats[stats$year == y,2:4] <- c(sum(values(deforest)), 
+  fact <- res(deforest)[1]^2/10^4
+  stats[stats$year == y,2:7] <- c(sum(values(deforest)), 
                                   sum(values(loss)),
-                                  sum(values(gain)))
+                                  sum(values(gain)),
+                                  -sum(values(deforest < 0))*fact,
+                                  -sum(values(loss < 0))*fact,
+                                  sum(values(gain > 0))*fact)
   
   # raster
   writeRaster(deforest, overwrite = T,
@@ -68,32 +75,38 @@ for(y in years){
 }
 
 stats <- stats %>% 
-  mutate(agb_change = gain + loss) %>% 
-  mutate(deforest_cum = cumsum(deforest),
-         loss_cum = cumsum(loss),
-         gain_cum = cumsum(gain),
-         agb_change_cum  = cumsum(agb_change))
+  mutate(change_agb = gain_agb + loss_agb) %>% 
+  mutate(change_area = gain_area + loss_area) %>% 
+  gather(variable, value, -year) %>% 
+  group_by(variable) %>% 
+  arrange(year) %>% 
+  mutate(cumul = cumsum(value)) %>% 
+  separate(variable, c("type", "variable"))
   
 write_tsv(stats, file = file.path(path, "stats.tsv"))
 
 stats %>% 
-  select(year, deforest, loss, gain, agb_change) %>% 
-  gather(variable, value, -year) %>% 
-  ggplot(aes(year, value/10^6, col = variable)) +
+  ggplot(aes(year, value/10^6, col = type)) +
   geom_line() +
   theme_bw() +
-  xlab("Year") + ylab("AGB (tC)") 
+  geom_smooth(se = FALSE) +
+  facet_wrap(~ variable, scales = "free")
 
 stats %>% 
-  select(-deforest, -loss, -gain, -agb_change) %>% 
-  gather(variable, value, -year) %>% 
-  ggplot(aes(year, value/10^6, col = variable)) +
+  filter(type %in% c("change", "deforest")) %>% 
+  mutate(variable_long = recode(variable, 
+                                "agb" = "Biomasse (ktC)",
+                                "area" = "Surface (Mha)")) %>% 
+  mutate(type_long = recode(type,
+                            "change" = "Degradation",
+                            "deforest" = "Deforestation")) %>% 
+  ggplot(aes(year, cumul/10^6, col = type_long)) +
   geom_line() +
   theme_bw() +
-  xlab("Year") + ylab("Cummulated AGB (tC)") +
-  geom_smooth(se = FALSE)
-  
-
+  geom_smooth(se = FALSE) +
+  facet_wrap(~ variable_long, scales = "free") + 
+  scale_color_discrete("") +
+  theme(axis.title = element_blank(), legend.position = "bottom")
 ```
 
 ## Climatic zones
