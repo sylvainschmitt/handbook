@@ -155,5 +155,57 @@ climate %>%
 
 ```{r treedata}
 path <- "~/Documents/data/blasbats/"
-trees <- readRDS(file.path(path, "treeDB.RDS"))
+wsg <- readRDS(file.path(path, "treeDB.RDS")) %>% 
+  mutate(species = paste(genus, species)) %>% 
+  group_by(species) %>% 
+  summarise(wsg = mean(WDmean))
+wsg_quantiles <- data.frame(quantile = c(0.05, 0.25, 0.5, 0.75, 0.95)) %>% 
+  expand_grid(wsg) %>% 
+  group_by(quantile) %>% 
+  summarise(wsg = unique(quantile(wsg, probs = quantile)))
+```
+
+```{r}
+#| message: false
+ggplot(wsg, aes(wsg)) +
+  geom_histogram() +
+  theme_bw() +
+  xlab("Wood Specific Gravity") + ylab("") +
+  geom_vline(data = wsg_quantiles, aes(xintercept = wsg), col= "red")
+```
+
+## Parameters
+
+```{r fitdata}
+path <- "~/Documents/data/blasbats/"
+n <- 10^3
+fit <- readRDS(file.path(path, "231009_fit5Vars_WDclim.RDS"))$chains %>% 
+  mutate(iter = 1:n()) %>% 
+  sample_n(n) %>% 
+  gather(parameter, value, -iter) %>% 
+  filter(grepl('theta_clim', parameter))
+```
+
+```{r}
+#| message: false
+ggplot(fit, aes(value)) +
+  geom_histogram() +
+  facet_wrap(~ parameter) +
+  theme_bw() +
+  theme(axis.title = element_blank()) +
+  geom_vline(xintercept = 0, col = "red", linewidth = 1.2)
+```
+
+## Assembly
+
+```{r}
+#| eval: false
+clim_fit <- climate %>% 
+  filter(variable %in% c("pr", "tas_max", "srad", "bio15", "bio4")) %>% 
+  select(-unit, -var_long) %>% 
+  pivot_wider(names_from = variable, values_from = value)
+all <- fit %>% 
+  pivot_wider(names_from = parameter, values_from = value) %>% 
+  expand_grid(clim_fit) %>% 
+  expand_grid(wsg_quantiles)
 ```
