@@ -8,41 +8,152 @@ library(tidyverse)
 
 *Description.*
 
-```{r data}
-projs <- readRDS("~/Documents/data/blasbats/231017_climate_scenarios_2071-2100.rds")
-projs <- lapply(projs, bind_rows, .id = "scenario") %>% 
-  bind_rows(.id = "model")
+## Climate
+
+```{r climdata}
+#| message: false
+path <- "~/Documents/data/blasbats/"
+projs <- readRDS(file.path(path, "231017_climate_scenarios_2071-2100.rds")) %>% 
+  lapply(bind_rows, .id = "scenario") %>% 
+  bind_rows(.id = "model") %>% 
+  mutate(period = "2071-2100") %>% 
+  gather(variable, value, -model, -scenario, -clus, -type, -period) %>% 
+  mutate(variable = recode(variable,
+                           "Prec (kg/m2/month)" = "pr",
+                           "T_mean (°C)" = "bio1",
+                           "T_min (°C)" = "tas_min",       
+                           "T_max (°C)" = "tas_max",
+                           "T_seas (°C/100)" = "bio4",
+                           "Rainfall_year (kg/m2/year)" = "bio12",
+                           "Rainfall_seas (kg/m2)" = "bio15",
+                           "Sol_rad..MJ.m2.day." = "srad")) %>% 
+  mutate(type = as.numeric(type))
+
+current <- read_csv(file.path(path, "clim_data.csv")) %>% 
+  select(-`...1`) %>% 
+  mutate(model = "data", scenario = "current", period = "current") %>% 
+  gather(variable, value, -model, -scenario, -clus, -type, -period) %>% 
+  mutate(variable = recode(variable,
+                           "P.EvapoT (kg/m2/month)" = "pet",
+                           "Prec (kg/m2/month)" = "pr",   
+                           "T_mean (°C)"  = "bio1",             
+                           "T_min (°C)" = "tas_min",            
+                           "T_max (°C)" = "tas_max",
+                           "Sol_rad (MJ/m2/day)" = "srad",       
+                           "T_seas (°C/100)" = "bio4",          
+                           "Rainfall_year (kg/m2/year)"  = "bio12",
+                           "Rainfall_seas (kg/m2)" = "bio15"))
+
+climate <- bind_rows(current, projs) %>% 
+  mutate(var_long = recode(variable,
+                           "pet" = "Potential Evapotranspiration",
+                           "pr" = "Precipitation", 
+                           "bio1" = "Annual Mean Temperature",
+                           "tas_min" = "Annual Minimum Temperature",
+                           "tas_max" = "Annual Maximum Temperature",
+                           "srad" = "Solar Radiation",  
+                           "bio4" = "Temperature Seasonality",  
+                           "bio12" = "Annual Precipitation",
+                           "bio15" = "Precipitation Seasonality")) %>% 
+  mutate(unit = recode(variable,
+                           "pet" = "kg/m2/month",
+                           "pr" = "kg/m2/month", 
+                           "bio1" = "°C",
+                           "tas_min" = "°C",
+                           "tas_max" = "°C",
+                           "srad" = "MJ/m2/day",  
+                           "bio4" = "100°C",  
+                           "bio12" = "kg/m2/year",
+                           "bio15" = "kg/m2"))
 ```
 
-```{r allprojs}
-projs %>% 
-  gather(variable, value, -model, -scenario, -clus, -type) %>% 
-  ggplot(aes(model, value, col = scenario)) +
+```{r}
+climate %>% 
+  filter(variable != "pet") %>% 
+  ggplot(aes(model, value, 
+             col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
-  theme_bw() +
   facet_wrap(~ variable, scales = "free_x") +
-  coord_flip() + xlab("") + ylab("") +
-  theme(legend.position = c(0.8, 0.1))
+  theme_bw() +
+  coord_flip() +
+  scale_color_discrete("") +
+  theme(legend.position = "bottom", axis.title = element_blank()) +
+  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
 ```
 
-```{r projstpp}
-projs %>% 
-  gather(variable, value, -model, -scenario, -clus, -type) %>% 
-  filter(variable %in% c("T_mean (°C)", "Rainfall_year (kg/m2/year)")) %>% 
-  ggplot(aes(model, value, col = scenario)) +
+> -   What is the difference between "Rainfall_year (kg/m2/year)" (bio12) and "Prec (kg/m2/month)" (pr)?
+> -   Are "T_min (°C)" (tas_min) and "T_max (°C)" (tas_max) annual extrema or computed for warmest and coldest month or quarter (as bioclimatic variables)?
+
+```{r}
+climate %>% 
+  filter(!(variable %in% c("pet", "srad", "pr"))) %>% 
+  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  ggplot(aes(model, value, 
+             col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
-  theme_bw() +
   facet_wrap(~ variable, scales = "free_x") +
-  coord_flip() + xlab("") + ylab("")
+  theme_bw() +
+  coord_flip() +
+  scale_color_discrete("") +
+  theme(legend.position = "bottom", axis.title = element_blank()) +
+  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
 ```
 
-```{r projstpclusp}
-projs %>% 
-  gather(variable, value, -model, -scenario, -clus, -type) %>% 
-  filter(variable %in% c("T_mean (°C)", "Rainfall_year (kg/m2/year)")) %>% 
-  ggplot(aes(clus, value, col = scenario)) +
+> GFDL-ESM4 is stronger for bio12 (Annual Precipitation), bio15 (Precipitation Seasonality) and bio4 (Temperature Seasonality).
+
+```{r}
+climate %>% 
+  filter(variable %in% c("bio12")) %>% 
+  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  ggplot(aes(model, value/10^3, 
+             col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
+  facet_wrap(~ clus) +
   theme_bw() +
-  facet_wrap(~ variable, scales = "free_x") +
-  coord_flip() + xlab("") + ylab("")
+  coord_flip() +
+  scale_color_discrete(guide = "none") +
+  theme(legend.position = "bottom", axis.title = element_blank()) +
+  ggtitle("BIO12 (Annual Precipitation, m)") +
+  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
+```
+
+```{r}
+climate %>% 
+  filter(variable %in% c("bio15")) %>% 
+  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  ggplot(aes(model, value, 
+             col = scenario, fill = (model == "GFDL-ESM4"))) +
+  geom_boxplot() +
+  facet_wrap(~ clus) +
+  theme_bw() +
+  coord_flip() +
+  scale_color_discrete(guide = "none") +
+  theme(legend.position = "bottom", axis.title = element_blank()) +
+  ggtitle("BIO15 (Precipitation Seasonality)") +
+  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
+```
+
+```{r}
+climate %>% 
+  filter(variable %in% c("bio4")) %>% 
+  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  ggplot(aes(model, value, 
+             col = scenario, fill = (model == "GFDL-ESM4"))) +
+  geom_boxplot() +
+  facet_wrap(~ clus) +
+  theme_bw() +
+  coord_flip() +
+  scale_color_discrete(guide = "none") +
+  theme(legend.position = "bottom", axis.title = element_blank()) +
+  ggtitle("BIO4 (Temperature Seasonality)") +
+  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
+```
+
+> Not sure, to be explored in climate weights, but it seems that GFDL-ESM4 shows extreme values in cluster for BIO4 (Temperature Seasonality), that could results in the observed discrepancies.
+
+## Trees
+
+```{r treedata}
+path <- "~/Documents/data/blasbats/"
+trees <- readRDS(file.path(path, "treeDB.RDS"))
 ```
