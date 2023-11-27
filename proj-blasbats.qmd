@@ -83,7 +83,7 @@ climate %>%
 climate %>% 
   filter(variable %in% c("bio12", "bio5", "bio15", "bio4")) %>% 
   ggplot(aes(model, value, 
-             col = scenario, fill = (model == "GFDL-ESM4"))) +
+             col = scenario, fill = (model == "MPI-ESM1-2-HR"))) +
   geom_boxplot() +
   facet_wrap(~ variable, scales = "free_x") +
   theme_bw() +
@@ -92,58 +92,6 @@ climate %>%
   theme(legend.position = "bottom", axis.title = element_blank()) +
   scale_fill_manual(guide = "none", values = c("NA", "yellow"))
 ```
-
-> GFDL-ESM4 is stronger for bio12 (Annual Precipitation), bio15 (Precipitation Seasonality) and bio4 (Temperature Seasonality).
-
-```{r climfigbio12}
-climate %>% 
-  filter(variable %in% c("bio12")) %>% 
-  filter(scenario %in% c("Current", "SSP5-8.5")) %>% 
-  ggplot(aes(model, value/10^3, 
-             col = scenario, fill = (model == "GFDL-ESM4"))) +
-  geom_boxplot() +
-  facet_wrap(~ clus) +
-  theme_bw() +
-  coord_flip() +
-  scale_color_discrete(guide = "none") +
-  theme(legend.position = "bottom", axis.title = element_blank()) +
-  ggtitle("BIO12 (Annual Precipitation)") +
-  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
-```
-
-```{r climfigbio15}
-climate %>% 
-  filter(variable %in% c("bio15")) %>% 
-  filter(scenario %in% c("Current", "SSP5-8.5")) %>% 
-  ggplot(aes(model, value, 
-             col = scenario, fill = (model == "GFDL-ESM4"))) +
-  geom_boxplot() +
-  facet_wrap(~ clus) +
-  theme_bw() +
-  coord_flip() +
-  scale_color_discrete(guide = "none") +
-  theme(legend.position = "bottom", axis.title = element_blank()) +
-  ggtitle("BIO15 (Precipitation Seasonality)") +
-  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
-```
-
-```{r climfigbio4}
-climate %>% 
-  filter(variable %in% c("bio4")) %>% 
-  filter(scenario %in% c("Current", "SSP5-8.5")) %>% 
-  ggplot(aes(model, value, 
-             col = scenario, fill = (model == "GFDL-ESM4"))) +
-  geom_boxplot() +
-  facet_wrap(~ clus) +
-  theme_bw() +
-  coord_flip() +
-  scale_color_discrete(guide = "none") +
-  theme(legend.position = "bottom", axis.title = element_blank()) +
-  ggtitle("BIO4 (Temperature Seasonality)") +
-  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
-```
-
-> Not sure, to be explored in climate weights, but it seems that GFDL-ESM4 shows extreme values in cluster for BIO4 (Temperature Seasonality), that could results in the observed discrepancies.
 
 ## Trees
 
@@ -282,9 +230,23 @@ all <- new_pars %>%
            delta3*srad*wsg +
            delta4*bio15*wsg +
            delta5*bio4*wsg) %>% 
-  select(-alpha, -beta, -starts_with("gamma"), -starts_with("delta")) %>% 
-  gather(climate_variable, climate_value, -iter, -clus, -type, -model, -scenario,
-         -period, -wsg_quantile, -wsg, -log_climate_effect)
+  group_by(clus, type, model, scenario, period, 
+           bio12, bio5, srad, bio15, bio4,
+           wsg_quantile, wsg) %>% 
+  summarise("0.05" = quantile(log_climate_effect, 0.05),
+            "0.25" = quantile(log_climate_effect, 0.25),
+            "0.5" = quantile(log_climate_effect, 0.5),
+            "0.75" = quantile(log_climate_effect, 0.75),
+            "0.95" = quantile(log_climate_effect, 0.95)) %>% 
+  gather(quantile_climate_effect, log_climate_effect,
+         -clus, -type, -model, -scenario, -period, 
+         -bio12, -bio5, -srad, -bio15, -bio4,
+         -wsg_quantile, -wsg) %>% 
+  mutate(quantile_climate_effect = as.numeric(quantile_climate_effect)) %>% 
+  gather(climate_variable, climate_value,
+         -quantile_climate_effect, -log_climate_effect,
+         -clus, -type, -model, -scenario, -period, 
+         -wsg_quantile, -wsg)
 vroom::vroom_write(all, file.path(path, "all.tsv"))
 ```
 
@@ -292,14 +254,13 @@ vroom::vroom_write(all, file.path(path, "all.tsv"))
 #| message: false
 path <- "~/Documents/data/blasbats/"
 fig_dat <- vroom::vroom(file.path(path, "all.tsv")) %>% 
-  filter(wsg_quantile == 0.5) %>% 
-  group_by(iter, clus, type, model, scenario, period) %>% 
-  summarise(log_climate_effect = mean(log_climate_effect))
+  filter(wsg_quantile == 0.5, quantile_climate_effect == 0.5)
 ggplot(fig_dat, aes(model, log_climate_effect, col = scenario)) +
   geom_boxplot() +
   theme_bw() +
   coord_flip() +
   theme(axis.title = element_blank(), legend.position = "bottom") +
   scale_color_discrete("") +
-  ggtitle("Logarithm of climate effect")
+  ggtitle("Logarithm of climate effect ", 
+          "Mean climate effect (Q0.5), mean WSG (Q0.5) for all clusters")
 ```
