@@ -21,36 +21,41 @@ projs <- readRDS(file.path(path, "231017_climate_scenarios_2071-2100.rds")) %>%
   mutate(variable = recode(variable,
                            "Prec (kg/m2/month)" = "pr",
                            "T_mean (°C)" = "bio1",
-                           "T_min (°C)" = "tas_min",       
-                           "T_max (°C)" = "tas_max",
+                           "T_min (°C)" = "bio6",       
+                           "T_max (°C)" = "bio5",
                            "T_seas (°C/100)" = "bio4",
                            "Rainfall_year (kg/m2/year)" = "bio12",
                            "Rainfall_seas (kg/m2)" = "bio15",
                            "Sol_rad..MJ.m2.day." = "srad")) %>% 
-  mutate(type = as.numeric(type))
+  mutate(type = as.numeric(type)) %>% 
+  mutate(scenario = recode(scenario,
+                           "+1.8°C" = "SSP1-2.6",
+                           "+3.6°C" = "SSP3-7.0",
+                           "+4.4°C" = "SSP5-8.5"))
 
 current <- read_csv(file.path(path, "clim_data.csv")) %>% 
   select(-`...1`) %>% 
-  mutate(model = "data", scenario = "current", period = "current") %>% 
+  mutate(model = "data", scenario = "Current", period = "Current") %>% 
   gather(variable, value, -model, -scenario, -clus, -type, -period) %>% 
   mutate(variable = recode(variable,
                            "P.EvapoT (kg/m2/month)" = "pet",
                            "Prec (kg/m2/month)" = "pr",   
                            "T_mean (°C)"  = "bio1",             
-                           "T_min (°C)" = "tas_min",            
-                           "T_max (°C)" = "tas_max",
+                           "T_min (°C)" = "bio6",            
+                           "T_max (°C)" = "bio5",
                            "Sol_rad (MJ/m2/day)" = "srad",       
                            "T_seas (°C/100)" = "bio4",          
                            "Rainfall_year (kg/m2/year)"  = "bio12",
                            "Rainfall_seas (kg/m2)" = "bio15"))
 
 climate <- bind_rows(current, projs) %>% 
+  filter(!(variable %in% c("pet", "pr"))) %>% 
   mutate(var_long = recode(variable,
                            "pet" = "Potential Evapotranspiration",
                            "pr" = "Precipitation", 
                            "bio1" = "Annual Mean Temperature",
-                           "tas_min" = "Annual Minimum Temperature",
-                           "tas_max" = "Annual Maximum Temperature",
+                           "bio6" = "Annual Minimum Temperature",
+                           "bio5" = "Annual Maximum Temperature",
                            "srad" = "Solar Radiation",  
                            "bio4" = "Temperature Seasonality",  
                            "bio12" = "Annual Precipitation",
@@ -59,35 +64,24 @@ climate <- bind_rows(current, projs) %>%
                            "pet" = "kg/m2/month",
                            "pr" = "kg/m2/month", 
                            "bio1" = "°C",
-                           "tas_min" = "°C",
-                           "tas_max" = "°C",
+                           "bio6" = "°C",
+                           "bio5" = "°C",
                            "srad" = "MJ/m2/day",  
                            "bio4" = "100°C",  
                            "bio12" = "kg/m2/year",
                            "bio15" = "kg/m2"))
 ```
 
-```{r}
+```{r climtab}
 climate %>% 
-  filter(variable != "pet") %>% 
-  ggplot(aes(model, value, 
-             col = scenario, fill = (model == "GFDL-ESM4"))) +
-  geom_boxplot() +
-  facet_wrap(~ variable, scales = "free_x") +
-  theme_bw() +
-  coord_flip() +
-  scale_color_discrete("") +
-  theme(legend.position = "bottom", axis.title = element_blank()) +
-  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
+  select(variable, var_long, unit) %>% 
+  unique() %>% 
+  knitr::kable()
 ```
 
-> -   What is the difference between "Rainfall_year (kg/m2/year)" (bio12) and "Prec (kg/m2/month)" (pr)?
-> -   Are "T_min (°C)" (tas_min) and "T_max (°C)" (tas_max) annual extrema or computed for warmest and coldest month or quarter (as bioclimatic variables)?
-
-```{r}
+```{r climfigall}
 climate %>% 
-  filter(!(variable %in% c("pet", "srad", "pr"))) %>% 
-  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  filter(variable %in% c("bio12", "bio5", "bio15", "bio4")) %>% 
   ggplot(aes(model, value, 
              col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
@@ -101,10 +95,10 @@ climate %>%
 
 > GFDL-ESM4 is stronger for bio12 (Annual Precipitation), bio15 (Precipitation Seasonality) and bio4 (Temperature Seasonality).
 
-```{r}
+```{r climfigbio12}
 climate %>% 
   filter(variable %in% c("bio12")) %>% 
-  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  filter(scenario %in% c("Current", "SSP5-8.5")) %>% 
   ggplot(aes(model, value/10^3, 
              col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
@@ -113,14 +107,14 @@ climate %>%
   coord_flip() +
   scale_color_discrete(guide = "none") +
   theme(legend.position = "bottom", axis.title = element_blank()) +
-  ggtitle("BIO12 (Annual Precipitation, m)") +
+  ggtitle("BIO12 (Annual Precipitation)") +
   scale_fill_manual(guide = "none", values = c("NA", "yellow"))
 ```
 
-```{r}
+```{r climfigbio15}
 climate %>% 
   filter(variable %in% c("bio15")) %>% 
-  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  filter(scenario %in% c("Current", "SSP5-8.5")) %>% 
   ggplot(aes(model, value, 
              col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
@@ -133,10 +127,10 @@ climate %>%
   scale_fill_manual(guide = "none", values = c("NA", "yellow"))
 ```
 
-```{r}
+```{r climfigbio4}
 climate %>% 
   filter(variable %in% c("bio4")) %>% 
-  filter(scenario %in% c("current", "+4.4°C")) %>% 
+  filter(scenario %in% c("Current", "SSP5-8.5")) %>% 
   ggplot(aes(model, value, 
              col = scenario, fill = (model == "GFDL-ESM4"))) +
   geom_boxplot() +
@@ -159,13 +153,13 @@ wsg <- readRDS(file.path(path, "treeDB.RDS")) %>%
   mutate(species = paste(genus, species)) %>% 
   group_by(species) %>% 
   summarise(wsg = mean(WDmean))
-wsg_quantiles <- data.frame(quantile = c(0.05, 0.25, 0.5, 0.75, 0.95)) %>% 
+wsg_quantiles <- data.frame(wsg_quantile = c(0.05, 0.25, 0.5, 0.75, 0.95)) %>% 
   expand_grid(wsg) %>% 
-  group_by(quantile) %>% 
-  summarise(wsg = unique(quantile(wsg, probs = quantile)))
+  group_by(wsg_quantile) %>% 
+  summarise(wsg = unique(quantile(wsg, probs = wsg_quantile)))
 ```
 
-```{r}
+```{r wsgfig}
 #| message: false
 ggplot(wsg, aes(wsg)) +
   geom_histogram() +
@@ -176,7 +170,32 @@ ggplot(wsg, aes(wsg)) +
 
 ## Parameters
 
-```{r fitdata}
+We have:
+
+$$
+log(climate~effect) = \sum_c [\theta_c . \frac{climate_c - \mu_c}{\sigma_c} + \omega_c . \frac{climate_c - \mu_c}{\sigma_c} . wsg]
+$$
+
+That we can develop as:
+
+$$
+log(climate~effect) = \sum_c [-\frac{\mu_c.\theta_c}{\sigma_c} -\frac{\mu_c.\omega_c}{\sigma_c}wsg+\frac{\theta_c}{\sigma_c}.climate_c+\frac{\omega_c}{\sigma_c}.climate_c.wsg]
+$$
+
+Than we can express again as:
+
+$$
+log(climate~effect) = \alpha+\beta.wsg+\sum_c [\delta_c . climate_c+\gamma_c.climate_c.wsg]
+$$
+
+With:
+
+-   $\alpha = \sum_c[-\frac{\mu_c.\theta_c}{\sigma_c}]$
+-   $\beta = \sum_c[-\frac{\mu_c.\omega_c}{\sigma_c}]$
+-   $\delta_c = \frac{\theta_c}{\sigma_c}$
+-   $\gamma_c = \frac{\omega_c}{\sigma_c}$
+
+```{r posteriors}
 path <- "~/Documents/data/blasbats/"
 n <- 10^3
 fit <- readRDS(file.path(path, "231009_fit5Vars_WDclim.RDS"))$chains %>% 
@@ -184,9 +203,42 @@ fit <- readRDS(file.path(path, "231009_fit5Vars_WDclim.RDS"))$chains %>%
   sample_n(n) %>% 
   gather(parameter, value, -iter) %>% 
   filter(grepl('theta_clim', parameter))
+musd <- current %>% 
+  filter(variable %in% c("bio12", "bio5", "srad", "bio15", "bio4")) %>% 
+  group_by(variable) %>% 
+  summarise(mu = mean(value), sigma = sd(value)) %>% 
+  mutate(climate = paste0("clim", 1:5))
+mu <- musd$mu
+names(mu) <- musd$climate
+sigma <- musd$sigma
+names(sigma) <- musd$climate
+new_pars <- fit %>% 
+  pivot_wider(names_from = parameter, values_from = value) %>% 
+  mutate(alpha = -(mu[1]/sigma[1]*theta_clim1 +
+                     mu[2]/sigma[2]*theta_clim2 +
+                     mu[3]/sigma[3]*theta_clim3 +
+                     mu[4]/sigma[4]*theta_clim4 +
+                     mu[5]/sigma[5]*theta_clim5)) %>% 
+  mutate(beta = -(mu[1]/sigma[1]*theta_clim1_WD +
+                     mu[2]/sigma[2]*theta_clim2_WD +
+                     mu[3]/sigma[3]*theta_clim3_WD +
+                     mu[4]/sigma[4]*theta_clim4_WD +
+                     mu[5]/sigma[5]*theta_clim5_WD)) %>% 
+  mutate(gamma1 = theta_clim1/sigma[1]) %>% 
+  mutate(gamma2 = theta_clim2/sigma[2]) %>% 
+  mutate(gamma3 = theta_clim3/sigma[3]) %>% 
+  mutate(gamma4 = theta_clim4/sigma[4]) %>% 
+  mutate(gamma5 = theta_clim5/sigma[5]) %>% 
+  mutate(delta1 = theta_clim1_WD/sigma[1]) %>% 
+  mutate(delta2 = theta_clim2_WD/sigma[2]) %>% 
+  mutate(delta3 = theta_clim3_WD/sigma[3]) %>% 
+  mutate(delta4 = theta_clim4_WD/sigma[4]) %>% 
+  mutate(delta5 = theta_clim5_WD/sigma[5]) %>% 
+  gather(parameter, value, -iter) %>% 
+  filter(!grepl('theta_clim', parameter))
 ```
 
-```{r}
+```{r rawparsfig}
 #| message: false
 ggplot(fit, aes(value)) +
   geom_histogram() +
@@ -196,16 +248,58 @@ ggplot(fit, aes(value)) +
   geom_vline(xintercept = 0, col = "red", linewidth = 1.2)
 ```
 
+```{r newparsfig}
+#| message: false
+ggplot(new_pars, aes(value)) +
+  geom_histogram() +
+  facet_wrap(~ parameter, scales = "free_x") +
+  theme_bw() +
+  theme(axis.title = element_blank())
+```
+
 ## Assembly
 
-```{r}
+```{r assembleall}
 #| eval: false
 clim_fit <- climate %>% 
-  filter(variable %in% c("pr", "tas_max", "srad", "bio15", "bio4")) %>% 
+  filter(variable %in% c("bio12", "bio5", "srad", "bio15", "bio4")) %>% 
   select(-unit, -var_long) %>% 
   pivot_wider(names_from = variable, values_from = value)
-all <- fit %>% 
+all <- new_pars %>% 
   pivot_wider(names_from = parameter, values_from = value) %>% 
   expand_grid(clim_fit) %>% 
-  expand_grid(wsg_quantiles)
+  expand_grid(wsg_quantiles) %>% 
+  mutate(log_climate_effect = 
+           alpha + 
+           beta*wsg +
+           gamma1*bio12 +
+           gamma2*bio5 +
+           gamma3*srad +
+           gamma4*bio15 +
+           gamma5*bio4 +
+           delta1*bio12*wsg +
+           delta2*bio5*wsg +
+           delta3*srad*wsg +
+           delta4*bio15*wsg +
+           delta5*bio4*wsg) %>% 
+  select(-alpha, -beta, -starts_with("gamma"), -starts_with("delta")) %>% 
+  gather(climate_variable, climate_value, -iter, -clus, -type, -model, -scenario,
+         -period, -wsg_quantile, -wsg, -log_climate_effect)
+vroom::vroom_write(all, file.path(path, "all.tsv"))
+```
+
+```{r exfig}
+#| message: false
+path <- "~/Documents/data/blasbats/"
+fig_dat <- vroom::vroom(file.path(path, "all.tsv")) %>% 
+  filter(wsg_quantile == 0.5) %>% 
+  group_by(iter, clus, type, model, scenario, period) %>% 
+  summarise(log_climate_effect = mean(log_climate_effect))
+ggplot(fig_dat, aes(model, log_climate_effect, col = scenario)) +
+  geom_boxplot() +
+  theme_bw() +
+  coord_flip() +
+  theme(axis.title = element_blank(), legend.position = "bottom") +
+  scale_color_discrete("") +
+  ggtitle("Logarithm of climate effect")
 ```
