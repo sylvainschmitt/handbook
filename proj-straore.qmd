@@ -1,6 +1,6 @@
 ```{r setup}
 #| include: false
-rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+# rm(list = ls()) ; invisible(gc()) ; set.seed(42)
 library(tidyverse)
 library(terra)
 library(sf)
@@ -304,6 +304,103 @@ g <- cowplot::plot_grid(
 
 cowplot::save_plot(file.path(path, "comparison.png"), g, dpi = 1000, 
                    base_width = 10, base_height = 10, bg = "white")
+```
+
+```{r}
+#| eval: false
+library(colorplaner) # remotes::install_github("wmurphyrd/colorplaner")
+ci <- geodata::gadm("Côte d'Ivoire", path = path, leval = 0) %>% 
+  st_as_sf()
+ci_df <- ci %>% 
+  as_Spatial() %>% 
+  fortify() %>% 
+  as.data.frame()
+deforest <- list.files("~/Documents/data/straore/agb_change/", 
+           pattern = "deforest", full = TRUE) %>% 
+  rast()
+deforest_summary <- c(
+  deforest[[as.character(2001:2007)]] %>% sum(),
+  deforest[[as.character(2008:2015)]] %>% sum(),
+  deforest[[as.character(2016:2022)]] %>% sum()
+)
+names(deforest_summary) <- c("2000-2007", "2008-2015", "2016-2022")
+deforest_summary[deforest_summary == 0] <- NA
+deforest_summary <- project(deforest_summary, crs(ci))
+degrad <- list.files("~/Documents/data/straore/agb_change/", 
+           pattern = "floss", full = TRUE) %>% 
+  rast()
+degrad_summary <- c(
+  degrad[[as.character(2001:2007)]] %>% sum(),
+  degrad[[as.character(2008:2015)]] %>% sum(),
+  degrad[[as.character(2016:2022)]] %>% sum()
+)
+names(degrad_summary) <- c("2000-2007", "2008-2015", "2016-2022")
+degrad_summary[degrad_summary == 0] <- NA
+degrad_summary <- project(degrad_summary, crs(ci))
+stat <- as.data.frame(degrad_summary, xy = T) %>% 
+  gather(year, degradation, -x, -y) %>% 
+    full_join(as.data.frame(deforest_summary, xy = T) %>% 
+                gather(year, deforestation, -x, -y)) %>% 
+    mutate(degradation = -degradation/21.22, deforestation = -deforestation/21.22)
+
+stat2 <- stat %>% 
+  mutate_all(~ ifelse(is.na(.), 0, .)) %>% 
+  mutate(degradation = degradation+1, 
+         deforestation=deforestation+1)
+
+relab <- function(val) round(val-1)
+
+g.comp <- ggplot() +
+  geom_polygon(data = ci_df, aes(x = long, y = lat,
+                                 group = group), 
+               fill = NA, col = "black") +
+  geom_tile(data = stat2, aes(x = x, y = y, 
+                             fill = degradation, 
+                             fill2 = deforestation)) +
+  scale_fill_colorplane(name = "", 
+                        axis_title = "Degradation",
+                        axis_title_y = "Deforestation (tC/ha)",
+                        trans = "log",
+                        labels = relab,
+                        labels_y = relab) +
+  facet_wrap(~ year, nrow = 2) +
+  theme_bw() +
+  coord_sf() +
+  theme(legend.position = c(0.8, 0.2), legend.key.size = unit(30, "pt")) +
+  xlab("") + ylab("")
+g.deforest <- ggplot() +
+  geom_polygon(data = ci_df, aes(x = long, y = lat,
+                                 group = group), 
+               fill = NA, col = "black") +
+  geom_tile(data = stat, 
+            aes(x = x, y = y, fill = deforestation)) +
+  scale_fill_viridis_c("Deforestation (tC/ha)", 
+                       na.value = "grey90",
+                       labels = round, direction = -1) +
+  facet_wrap(~ year, nrow = 2) +
+  theme_bw() +
+  coord_sf() +
+  theme(legend.position = c(0.8, 0.2)) +
+  xlab("") + ylab("")
+g.degrad <- ggplot() +
+  geom_polygon(data = ci_df, aes(x = long, y = lat,
+                                 group = group), 
+               fill = NA, col = "black") +
+  geom_tile(data = stat, aes(x = x, y = y, 
+                             fill = degradation)) +
+  scale_fill_viridis_c("Degradation (tC/ha)", na.value = "grey90",
+                       labels = round, direction = -1) +
+  facet_wrap(~ year, nrow = 2) +
+  theme_bw() +
+  coord_sf() +
+  theme(legend.position = c(0.8, 0.2)) +
+  xlab("") + ylab("")
+ggsave(file.path(path, "deforestation.png"), g.deforest, dpi = 1000, 
+       width = 10, height = 10, bg = "white")
+ggsave(file.path(path, "degradation.png"), g.degrad, dpi = 1000, 
+       width = 10, height = 10, bg = "white")
+ggsave(file.path(path, "comparison.png"), g.comp, dpi = 1000, 
+       width = 10, height = 10, bg = "white")
 ```
 
 ## Climatic zones
