@@ -676,7 +676,7 @@
 -   Très intéressée projet type SOCRATES avec un triangle Climat - Dyn forêt - Décision/Gouvernance centré sur la question des événements extrèmes et des feux
 -   Intérèt pour modélisaiton plus large échelle voir multiple dans de tel projet (TROLL, ORCHIDEE)
 
-### 24/10/19 Marie Ange Ngo Bieng
+### 23/10/19 Marie Ange Ngo Bieng
 
 -   Cursus tempéré - écologie forestière
 -   Distribution spatiale, statistiques appliquées, modèles de structure forestière
@@ -692,7 +692,7 @@
 -   Contact Jhan-Carlo Espinoza en me mettant dans la boucle
 -   Projet FFEM Gestion Forestière Communautaire
 
-### 24/11/09 Jean Paul Metzger
+### 23/11/09 Jean Paul Metzger
 
 -   Service écosystémique de régulation du climat: C storage, cooling, water dynamics (etp)
 -   Nouveau institut dans L'université de Sao Paulo avec le FAPESP: Centre Étude de l'Amazonie (Centro de Estudos da Amazônia Sustentável) avec Paulo Artaxo
@@ -700,7 +700,7 @@
 -   Mise en place IRC avec CNRS, contact Jérôme Chave
 -   Mission Février avec Joannès Guillemot de Eco&Sol
 
-### 24/11/17 Bruno Pinho AMAP
+### 23/11/17 Bruno Pinho AMAP
 
 -   Importance of landscape scale studies Lehore Farig e.g. 2017
 -   FragSAD dataset about fragmentation
@@ -708,7 +708,7 @@
 -   40% threshold of forest cover
 -   **Demander les diapos**
 
-### 24/11/17 Julie B, Lilian B
+### 23/11/17 Julie B, Lilian B
 
 -   Link landscape structure and trajectories to climate dynamics + projections
 -   Looked at mean climate, climate extremes, and progressively to fires risk
@@ -717,3 +717,40 @@
 -   To be linked with forest local functioning based on remote products (maybe linked to trajectories)
 -   Need to define the weather product to be used (satellite, gauges, re analyses...) depending on temporal and spatial scale and avoiding smoothing of the anomalies we are looking for
 -   Julie super interested by link structure and dynamic of landscape to climate evolution
+
+### 23/12/13 Renan Leroux
+
+-   Données µclim: CHIRPS, Cloud products (e.g. ERA5Land High And Low cloud cover, or globally gridded daily cloud properties from satellite)
+-   Regarder synoptique (uelques milliers de kilomètres pour les dimensions horizontales, quelques kilomètres pour la imension verticale et quelques jours pour la durée)
+-   R: synoptReg <https://github.com/lemuscanovas/synoptReg>
+-   Modèle de bilan hydrique Biljou
+-   Damien Arvor contact saison des pluies
+-   CRB (Clim Afrique) - Benjamin Pol
+-   Climat Brésil Véronique Michot Paris 7
+-   Grenoble Afrique Sylvain Bigot
+-   NC + GF = modèle pluie avec réanalyse à 1km: AROME
+-   RMT Aforce
+-   Albert Alioso
+
+## 2024
+
+### 24/01/17 Groupe Amérique Latine
+
+-   Laurène, Mexique. Palmùier huile 23/24. Connectivité Selva Maia (**à recontacter pour questions risques climatiques**) dans l'esprit One Health sur mouvemements de la faune sauvage avec le CC et les risques liés de zoonose
+-   Valéry. Costa Rica Mangrove avec thèse. Cuba carto marabou
+-   Driss Colombie. Projet Abrig Economie eco TerrAmaz. Projet CIAT 3 ans paiements services ecosystemiques.
+-   Julie. TerrAmaz. IDEAS. Indicateurs SE. Mangrove Costa Rica. Projet définition forêts (**Q Climat ?**)
+-   Isabelle (Fortaleza). Projet CERTAIN sur gouvernance multiéchelle de l'eau
+-   Helene. IDAES, TerrAmaz, SOCRATE, CTS approches territoriales
+-   Lilian; TerrAmaz (1.5 ans restants)
+-   Arthur. Perceptions acteur des événemùents extremes climatiques (à discuter avec lui). Lien acteurs territoires avec relations sensibles. FFEM gestion forestiere communautaire. Coanimateur PC1 PEPR FORESTT.
+-   Marie Ange (Guatemala). These Maiori biodiv sys forêts secondaires et paysages. Climate Rush. FFEM Gestion Forestiere Communautaire Selva Maia.
+-   Plinio. coordination TmFO. Partage expérience via mission. Représentant CIRAD PEPR.
+-   Géraldine. Projet ALT. Expat Brasilia EMBRAPA impact et trajectoires postexploitation. Données postexploitation Tapajos et Santarem. Restauration ecologique et production en Amazonie et Cerrado. Plantation comme moteur de régénération Santarem. Liens Guyane et Brésil (e.g. réu UG et USP).
+-   Marion. IDEAS, UE, Colombie, \>25, stabilisation front agricole, cencertaion avec ForLand, futurs souhgaités. TerrAmaz: financement innovant et restauration. Cuba experimentation gestion agricole especes invasives. Correspondante dP Amazonie (Roraimpa ? **Demander à être ajouté**). Expatriation Colombie. Propose de se structure pour mieux répondre aux appels à projets (+).
+-   Plinio. Marie-Gabrielle a évoqué un TerrAmaz2 en Brésil et Colombie seulement. Attention la DG réclame des expats financées pour tous.
+-   Trois objectifs: animations partage d'infos et réunions trimestriels (moi), cartographie des compétences (Arthur) et montage projets avec TerrAmaz2 (Lilian appuyé par Marion, peut proposer appui aussi).
+-   Proposer à toute l'UR de se joindre au groupe pour sa formalisation.
+-   Recontacter Laurene pour son projet au Mexique.
+-   Si je cherche Marion a du **travail sur IDEAS avec Climat**
+-   idée en vrac: discuter avec Jérôme et Isabelle d'un éventuel montage de projet TmFO + TROLL + LoggingLab

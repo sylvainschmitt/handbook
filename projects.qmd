@@ -76,10 +76,48 @@ Characterization and effects of extreme climatic events on tropical forest dynam
 *L. Blanc, J. Betbeder, Guido Briceño, TerrAmaz*
 
 -   Indices to support management
+
 -   Effect of deforestation on climate
+
 -   Example for Temperature following @butt2023
+
 -   Projections with future climates
+
 -   DB Mato Grosso and regional climate changes?
+
+-   <https://www.pnas.org/doi/epdf/10.1073/pnas.2317456120>
+
+-   <https://www.nature.com/articles/nclimate3238>
+
+-   <https://www.nature.com/articles/nclimate3226>
+
+-   <https://www.nature.com/articles/nature10717>
+
+-   <https://www.pnas.org/doi/full/10.1073/pnas.0810156106>
+
+-   <https://rmets.onlinelibrary.wiley.com/doi/epdf/10.1002/joc.1475> (++)
+
+-   <https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011GL047436>
+
+-   <https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2014GB005080>
+
+-   <https://www.pnas.org/doi/full/10.1073/pnas.1302584110>
+
+-   <https://www.nature.com/articles/s41558-018-0177-y>
+
+-   <https://www.nature.com/articles/s41558-023-01776-4>
+
+-   <https://www.nature.com/articles/s41467-021-22840-7> (Fig. 2 +)
+
+-   <https://link.springer.com/article/10.1007/s40641-021-00178-y> (review)
+
+-   <https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015GL066063>
+
+-   <https://nph.onlinelibrary.wiley.com/doi/full/10.1111/j.1469-8137.2010.03358.x>
+
+-   <https://www.sciencedirect.com/science/article/pii/S0048969721072107> (big review of climate and lulcc for Brazil ++)
+
+-   <https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/04-1675>
 
 ### *Landscape trajectories and fires (?)*
 
@@ -88,16 +126,6 @@ Characterization and effects of extreme climatic events on tropical forest dynam
 -   Amazonian landscape trajectory in Brazil explored by B. Bellon
 -   Could be linked to tropical moist forest fires using several products (e;g. MapBiomass, TMF, ...)
 
-### *Forest landscape projections (?)*
-
-*L. Blanc, J. Betbeder, I. Maréchaux, J. Chave*
-
--   developing and scaling up the TROLL simulator to simulate landscape
--   landscape forest modelling (LFM)
--   Similarly to LandClim (from ForClim) or ILand
--   Forest lanscape response to CC, management, and fires
--   Statistical approaches or other simulator could be used to
-
 ## Other
 
 -   Biomass maps in Ivory Coast for S. Traore's PhD with C. Deforceville and B. Hérault
@@ -105,6 +133,4 @@ Characterization and effects of extreme climatic events on tropical forest dynam
 -   Local data dictionary for remote sensing and other data coupled with GitHub including data definition, download scripts, and eventually pre-processing
 -   Particpation to Julien's PhD about climate effect on *Dicorynia guianensis* population genetics with climate expertise
 -   Anne Baranger's manuscript on cocoa agroforestry with B. Hérault
--   Climate distribution of tree species in central africa with Charles Doumengue (building-up on the tool for downscaling?)
 -   Tree species distribution in Sudano-Sahelian region since 1970 from presence-only occurrences and trying to identify climatic envelope evolutions. PhD co-supervised by Frédéric Mortier. Opportunity to join the CST.
--   TROLL formatting with P. Verley, T. Arsouze, and I. Maréchaux for future developments and/or student supervision.

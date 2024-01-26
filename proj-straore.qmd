@@ -1,6 +1,7 @@
 ```{r setup}
 #| include: false
-# rm(list = ls()) ; invisible(gc()) ; set.seed(42)
+
+rm(list = ls()) ; invisible(gc()) ; set.seed(42)
 library(tidyverse)
 library(terra)
 library(sf)

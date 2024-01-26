@@ -12,9 +12,6 @@ book:
       chapters: 
         - proj-blasbats.qmd
         - proj-straore.qmd
-    - part: climatology.qmd
-      chapters: 
-        - clim-resources.qmd
   appendices:
     - meetings.qmd
     - admin.qmd
