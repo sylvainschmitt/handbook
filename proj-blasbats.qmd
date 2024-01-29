@@ -1,266 +1,51 @@
 ```{r setup}
 #| include: false
-rm(list = ls()) ; invisible(gc()) ; set.seed(42)
 library(tidyverse)
+library(sf)
+library(terra)
 ```
 
 # B. Lasbats {.unnumbered}
 
-*Description.*
+## Figure
 
-## Climate
-
-```{r climdata}
+```{r figdat}
 #| message: false
+#| warning: false
 path <- "~/Documents/data/blasbats/"
-projs <- readRDS(file.path(path, "231017_climate_scenarios_2071-2100.rds")) %>% 
-  lapply(bind_rows, .id = "scenario") %>% 
-  bind_rows(.id = "model") %>% 
-  mutate(period = "2071-2100") %>% 
-  gather(variable, value, -model, -scenario, -clus, -type, -period) %>% 
-  mutate(variable = recode(variable,
-                           "Prec (kg/m2/month)" = "pr",
-                           "T_mean (°C)" = "bio1",
-                           "T_min (°C)" = "bio6",       
-                           "T_max (°C)" = "bio5",
-                           "T_seas (°C/100)" = "bio4",
-                           "Rainfall_year (kg/m2/year)" = "bio12",
-                           "Rainfall_seas (kg/m2)" = "bio15",
-                           "Sol_rad..MJ.m2.day." = "srad")) %>% 
-  mutate(type = as.numeric(type)) %>% 
-  mutate(scenario = recode(scenario,
-                           "+1.8°C" = "SSP1-2.6",
-                           "+3.6°C" = "SSP3-7.0",
-                           "+4.4°C" = "SSP5-8.5"))
-
-current <- read_csv(file.path(path, "clim_data.csv")) %>% 
-  select(-`...1`) %>% 
-  mutate(model = "data", scenario = "Current", period = "Current") %>% 
-  gather(variable, value, -model, -scenario, -clus, -type, -period) %>% 
-  mutate(variable = recode(variable,
-                           "P.EvapoT (kg/m2/month)" = "pet",
-                           "Prec (kg/m2/month)" = "pr",   
-                           "T_mean (°C)"  = "bio1",             
-                           "T_min (°C)" = "bio6",            
-                           "T_max (°C)" = "bio5",
-                           "Sol_rad (MJ/m2/day)" = "srad",       
-                           "T_seas (°C/100)" = "bio4",          
-                           "Rainfall_year (kg/m2/year)"  = "bio12",
-                           "Rainfall_seas (kg/m2)" = "bio15"))
-
-climate <- bind_rows(current, projs) %>% 
-  filter(!(variable %in% c("pet", "pr"))) %>% 
-  mutate(var_long = recode(variable,
-                           "pet" = "Potential Evapotranspiration",
-                           "pr" = "Precipitation", 
-                           "bio1" = "Annual Mean Temperature",
-                           "bio6" = "Annual Minimum Temperature",
-                           "bio5" = "Annual Maximum Temperature",
-                           "srad" = "Solar Radiation",  
-                           "bio4" = "Temperature Seasonality",  
-                           "bio12" = "Annual Precipitation",
-                           "bio15" = "Precipitation Seasonality")) %>% 
-  mutate(unit = recode(variable,
-                           "pet" = "kg/m2/month",
-                           "pr" = "kg/m2/month", 
-                           "bio1" = "°C",
-                           "bio6" = "°C",
-                           "bio5" = "°C",
-                           "srad" = "MJ/m2/day",  
-                           "bio4" = "100°C",  
-                           "bio12" = "kg/m2/year",
-                           "bio15" = "kg/m2"))
+ci <- st_read("~/Documents/data/blasbats/Archive/IC_coords.shp", quiet = T)
+clust <- st_read("~/Documents/data/blasbats/Archive/sampling.shp", quiet = T)
+sf_use_s2(FALSE)
+clust_ctr <- clust %>% 
+  group_by(clus) %>% 
+  sample_n(1) %>% 
+  st_centroid()
+clust_ctr_df <- clust_ctr %>% 
+  st_coordinates() %>% 
+  as.data.frame() %>% 
+  mutate(clust = clust_ctr$clus)
+clim <- rast("~/Documents/data/CI/wc/wc2.1_10m_bioc_ACCESS-CM2_ssp126_2021-2040.tif")
 ```
 
-```{r climtab}
-climate %>% 
-  select(variable, var_long, unit) %>% 
-  unique() %>% 
-  knitr::kable()
-```
-
-```{r climfigall}
-climate %>% 
-  filter(variable %in% c("bio12", "bio5", "bio15", "bio4")) %>% 
-  ggplot(aes(model, value, 
-             col = scenario, fill = (model == "MPI-ESM1-2-HR"))) +
-  geom_boxplot() +
-  facet_wrap(~ variable, scales = "free_x") +
+```{r fig}
+g <- ggplot() +
+  tidyterra::geom_spatraster(data = clim[[1]], alpha = 0.5) +
+  geom_sf(data = ci, fill = NA, linewidth = 1.5, col = "#454746") +
+  geom_sf(data = clust, fill = NA, linewidth = 1.2, col = "black") +
+  ggrepel::geom_text_repel(
+    data = clust_ctr,
+    aes(label = clus, geometry = geometry),
+    stat = "sf_coordinates"
+  ) +
   theme_bw() +
-  coord_flip() +
-  scale_color_discrete("") +
-  theme(legend.position = "bottom", axis.title = element_blank()) +
-  scale_fill_manual(guide = "none", values = c("NA", "yellow"))
-```
-
-## Trees
-
-```{r treedata}
-path <- "~/Documents/data/blasbats/"
-wsg <- readRDS(file.path(path, "treeDB.RDS")) %>% 
-  mutate(species = paste(genus, species)) %>% 
-  group_by(species) %>% 
-  summarise(wsg = mean(WDmean))
-wsg_quantiles <- data.frame(wsg_quantile = c(0.05, 0.25, 0.5, 0.75, 0.95)) %>% 
-  expand_grid(wsg) %>% 
-  group_by(wsg_quantile) %>% 
-  summarise(wsg = unique(quantile(wsg, probs = wsg_quantile)))
-```
-
-```{r wsgfig}
-#| message: false
-ggplot(wsg, aes(wsg)) +
-  geom_histogram() +
-  theme_bw() +
-  xlab("Wood Specific Gravity") + ylab("") +
-  geom_vline(data = wsg_quantiles, aes(xintercept = wsg), col= "red")
-```
-
-## Parameters
-
-We have:
-
-$$
-log(climate~effect) = \sum_c [\theta_c . \frac{climate_c - \mu_c}{\sigma_c} + \omega_c . \frac{climate_c - \mu_c}{\sigma_c} . wsg]
-$$
-
-That we can develop as:
-
-$$
-log(climate~effect) = \sum_c [-\frac{\mu_c.\theta_c}{\sigma_c} -\frac{\mu_c.\omega_c}{\sigma_c}wsg+\frac{\theta_c}{\sigma_c}.climate_c+\frac{\omega_c}{\sigma_c}.climate_c.wsg]
-$$
-
-Than we can express again as:
-
-$$
-log(climate~effect) = \alpha+\beta.wsg+\sum_c [\delta_c . climate_c+\gamma_c.climate_c.wsg]
-$$
-
-With:
-
--   $\alpha = \sum_c[-\frac{\mu_c.\theta_c}{\sigma_c}]$
--   $\beta = \sum_c[-\frac{\mu_c.\omega_c}{\sigma_c}]$
--   $\delta_c = \frac{\theta_c}{\sigma_c}$
--   $\gamma_c = \frac{\omega_c}{\sigma_c}$
-
-```{r posteriors}
-path <- "~/Documents/data/blasbats/"
-n <- 10^3
-fit <- readRDS(file.path(path, "231009_fit5Vars_WDclim.RDS"))$chains %>% 
-  mutate(iter = 1:n()) %>% 
-  sample_n(n) %>% 
-  gather(parameter, value, -iter) %>% 
-  filter(grepl('theta_clim', parameter))
-musd <- current %>% 
-  filter(variable %in% c("bio12", "bio5", "srad", "bio15", "bio4")) %>% 
-  group_by(variable) %>% 
-  summarise(mu = mean(value), sigma = sd(value)) %>% 
-  mutate(climate = paste0("clim", 1:5))
-mu <- musd$mu
-names(mu) <- musd$climate
-sigma <- musd$sigma
-names(sigma) <- musd$climate
-new_pars <- fit %>% 
-  pivot_wider(names_from = parameter, values_from = value) %>% 
-  mutate(alpha = -(mu[1]/sigma[1]*theta_clim1 +
-                     mu[2]/sigma[2]*theta_clim2 +
-                     mu[3]/sigma[3]*theta_clim3 +
-                     mu[4]/sigma[4]*theta_clim4 +
-                     mu[5]/sigma[5]*theta_clim5)) %>% 
-  mutate(beta = -(mu[1]/sigma[1]*theta_clim1_WD +
-                     mu[2]/sigma[2]*theta_clim2_WD +
-                     mu[3]/sigma[3]*theta_clim3_WD +
-                     mu[4]/sigma[4]*theta_clim4_WD +
-                     mu[5]/sigma[5]*theta_clim5_WD)) %>% 
-  mutate(gamma1 = theta_clim1/sigma[1]) %>% 
-  mutate(gamma2 = theta_clim2/sigma[2]) %>% 
-  mutate(gamma3 = theta_clim3/sigma[3]) %>% 
-  mutate(gamma4 = theta_clim4/sigma[4]) %>% 
-  mutate(gamma5 = theta_clim5/sigma[5]) %>% 
-  mutate(delta1 = theta_clim1_WD/sigma[1]) %>% 
-  mutate(delta2 = theta_clim2_WD/sigma[2]) %>% 
-  mutate(delta3 = theta_clim3_WD/sigma[3]) %>% 
-  mutate(delta4 = theta_clim4_WD/sigma[4]) %>% 
-  mutate(delta5 = theta_clim5_WD/sigma[5]) %>% 
-  gather(parameter, value, -iter) %>% 
-  filter(!grepl('theta_clim', parameter))
-```
-
-```{r rawparsfig}
-#| message: false
-ggplot(fit, aes(value)) +
-  geom_histogram() +
-  facet_wrap(~ parameter) +
-  theme_bw() +
-  theme(axis.title = element_blank()) +
-  geom_vline(xintercept = 0, col = "red", linewidth = 1.2)
-```
-
-```{r newparsfig}
-#| message: false
-ggplot(new_pars, aes(value)) +
-  geom_histogram() +
-  facet_wrap(~ parameter, scales = "free_x") +
-  theme_bw() +
+  scale_fill_viridis_c("T(°C)", na.value = NA)  +
   theme(axis.title = element_blank())
+ggsave("~/Documents/data/blasbats/ex.png", g,
+       dpi = 1000, width = 8, height = 9, bg = "white")
+ggsave("~/Documents/data/blasbats/ex.pdf", g, 
+       dpi = 1000, width = 8, height = 9)
 ```
 
-## Assembly
-
-```{r assembleall}
-#| eval: false
-clim_fit <- climate %>% 
-  filter(variable %in% c("bio12", "bio5", "srad", "bio15", "bio4")) %>% 
-  select(-unit, -var_long) %>% 
-  pivot_wider(names_from = variable, values_from = value)
-all <- new_pars %>% 
-  pivot_wider(names_from = parameter, values_from = value) %>% 
-  expand_grid(clim_fit) %>% 
-  expand_grid(wsg_quantiles) %>% 
-  mutate(log_climate_effect = 
-           alpha + 
-           beta*wsg +
-           gamma1*bio12 +
-           gamma2*bio5 +
-           gamma3*srad +
-           gamma4*bio15 +
-           gamma5*bio4 +
-           delta1*bio12*wsg +
-           delta2*bio5*wsg +
-           delta3*srad*wsg +
-           delta4*bio15*wsg +
-           delta5*bio4*wsg) %>% 
-  group_by(clus, type, model, scenario, period, 
-           bio12, bio5, srad, bio15, bio4,
-           wsg_quantile, wsg) %>% 
-  summarise("0.05" = quantile(log_climate_effect, 0.05),
-            "0.25" = quantile(log_climate_effect, 0.25),
-            "0.5" = quantile(log_climate_effect, 0.5),
-            "0.75" = quantile(log_climate_effect, 0.75),
-            "0.95" = quantile(log_climate_effect, 0.95)) %>% 
-  gather(quantile_climate_effect, log_climate_effect,
-         -clus, -type, -model, -scenario, -period, 
-         -bio12, -bio5, -srad, -bio15, -bio4,
-         -wsg_quantile, -wsg) %>% 
-  mutate(quantile_climate_effect = as.numeric(quantile_climate_effect)) %>% 
-  gather(climate_variable, climate_value,
-         -quantile_climate_effect, -log_climate_effect,
-         -clus, -type, -model, -scenario, -period, 
-         -wsg_quantile, -wsg)
-vroom::vroom_write(all, file.path(path, "all.tsv"))
-```
-
-```{r exfig}
-#| message: false
-path <- "~/Documents/data/blasbats/"
-fig_dat <- vroom::vroom(file.path(path, "all.tsv")) %>% 
-  filter(wsg_quantile == 0.5, quantile_climate_effect == 0.5)
-ggplot(fig_dat, aes(model, log_climate_effect, col = scenario)) +
-  geom_boxplot() +
-  theme_bw() +
-  coord_flip() +
-  theme(axis.title = element_blank(), legend.position = "bottom") +
-  scale_color_discrete("") +
-  ggtitle("Logarithm of climate effect ", 
-          "Mean climate effect (Q0.5), mean WSG (Q0.5) for all clusters")
+```{r figshow}
+g
 ```
