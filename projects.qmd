@@ -2,135 +2,81 @@
 
 ## Climate
 
-*downscaling, characterisation, definition, multi-scale, ...*
+*downscaling, characterisation, definition, multi-scale, …*
 
-### Tool for downscaling (+)
+### DownClim
 
 *G. Vieilledent, T. Arsouze, Achille Mauri*
 
 -   Problem: a lot of local projection rely on downscales GCM projections with very low spatial resolution on known baseline (e.g. CHELSA, WolrdClim, ...)
--   Idea: a tool to derive projections from CORDEX regionalisation experiments [@platts2014] on a defined baseline
+-   DownClim derive projections from CORDEX regionalisation experiments [@platts2014] on a defined baseline
 -   Study area: French Guiana, New Caledonia, Ivory Coast. Opportunistic following G. Vieilledent and B. Hérault needs but also different hypothesis. New Caledonia as an important topographic variation. Ivory Coast as an important climatic variations. On the opposite French Guiana is mainly lowland and homogeneous as a control.
 -   Validation: (1) explore the possibility to do a projection on observed year (e.g. 2005\>2020) even if the differences between scenarii (RCP or SSP) will not be significant, and (2) explore the difference on ecology for instance with forest climatic extent with this product versus classical products.
 
-### *Amazon forests climatic typology (-)*
-
-*N. Phillipon, V. Gond?*
-
-Characterization of different forest types in relation to climate/season (radiation, cloud, precipitation, evapotranspiration) and ecosystem dynamics (greenness, GPP, etc., N. Philippon, V. Gond, ...). Similarly to @philippon2019. Beware the importance of hydrology and inundation in Amazonia [@fleischmann2022; @fassoni-andrade2021].
-
-## Amazon
+## Forest
 
 *tipping point, die-back, degradation, deforestation, large-scale, theory, ecology, dynamcis*
 
-### Amazonian Landscape in Transition (+)
+### Amazonian Landscape in Transition
 
-*I. Maréchaux, J. Chave, F. Fischer, postdoc Montpellier, postdoc Toulouse*
+*I. Maréchaux, J. Chave, F. Fischer*
 
-[My webpage on the project](https://main–altpages.netlify.app/)
+[ALT webpage](https://main–altpages.netlify.app/)
 
 1.  TROLL V4 description (*IM*)
-2.  TROLL V4 validation Paracou, Santarèm, Caxiuanã (*SS*)
-3.  Role of biodiversity in response to climate change locally (*PM*)
-4.  Forest response to CC projected to the scale of French Guiana (*PT*)
+2.  TROLL V4 validation Paracou, Santarèm (*SS*)
+3.  Role of biodiversity in response to climate change locally (postodoc Isa)
+4.  Forest response to CC projected to the scale of French Guiana (postdoc Jérôme)
+5.  Regeneration dynamics (m2 Mélaine)
 
-### *Regeneration of exploited Amazonian forests in the face of climate change (=)*
+### *Regeneration of exploited Amazonian forests in the face of climate change (project to develop)*
 
 *I Maréchaux, G Derroire, M Aubry-Kientz, C Piponiot-Laroche, et al.*
 
-Simulation of forest response to logging in relation to climate at the scale of TmFO South America (C. Piponiot, G. Derroire, CESAB, EI PEPR FORESTT - PC RegeAdapt?, link with M. Aubry-Kientz Regeneration project?)
+*Simulation of forest response to logging in relation to climate change in selectively logged Amazonian forests, taking advantage of TmFO, TROLL and LoggingLab. Possibly extended to other continents with for instance CI data. Discuss funding with Plinio & Valéry. Discuss idea with Jérôme and Isabelle.*
 
-submitted as an [EI to PEPR FORESTT PC2 REGE-ADAPT](https://docs.google.com/document/d/12GChS5BLZc-oB2idSKHaNzPICkKILpR2CXLMuNEli8A/edit?usp=sharing), in preparation for an FSPI project
+### *Paracou dynamics under climate change across scales (idea)* {style="color: grey"}
 
-### *Paracou dynamics under climate change across scales (-)*
-
-*B. Hérault*
-
--   Growth ind, sp, ecosyst in time using TreeGrowth results
--   Link with climate from ERA5-Land and the EddyFlux
--   Work with climate and growth anomalies
--   Link with ecosystem functioning using Eddy fluxes and remote sensing products (SIF, VOD, LAI, NDVI, ...)
--   Explore tipping points with AR(1)
-
-### *Individual-based projections of the Amazon (-)*
-
-Multi-scale modelling of Amazonia with TROLL following @rödig2017, @rödig2018, & @rödig2019 with (1) response to climate change and/or (2) simulation of diversity with validation using ATDN?
-
-### *The Amazon tipping point* *(-)*
-
--   Similar approaches to @dakos2022 and @boulton2022 but see Tao et al. (in press) Nature Climate Change in response
--   Discuss with J. Betbeder possible products in Amazonia for such studies and with multiple entry point for multiple arguments
-
-### *Extreme events (?)*
-
-*B. Funatsu, Emeline Chaste, PEPR FORESTT - PC2 Multirisques*
-
-Characterization and effects of extreme climatic events on tropical forest dynamics (SOCRATES)
+*Dynamics (mainly growth) of individuals, species, and forest locally (inventories, fluxes) and remotely sensed (TROMPOMI SIF...) in time starting from TreeGrowth results against local (Guyaflux), remotely sensed (e.g. MODIS) and reanalysed (e.g. ERA5-Land) climates (exploring tipping points with AR(1)).*
 
 ## Landscape
 
 *territory, remote sensing, management, local actors*
 
-### *Landscape and local climate (?)*
+### Landscape trajectories and local climate
 
-*L. Blanc, J. Betbeder, Guido Briceño, TerrAmaz*
+*L. Blanc, J. Betbeder, Marion Chesnes, Betriz Bellon, Guido Briceño*
 
 -   Indices to support management
-
--   Effect of deforestation on climate
-
+-   Effect of lande use cover changes, degradation and deforestation, on climate
 -   Example for Temperature following @butt2023
-
--   Projections with future climates
-
--   DB Mato Grosso and regional climate changes?
-
--   <https://www.pnas.org/doi/epdf/10.1073/pnas.2317456120>
-
--   <https://www.nature.com/articles/nclimate3238>
-
--   <https://www.nature.com/articles/nclimate3226>
-
--   <https://www.nature.com/articles/nature10717>
-
--   <https://www.pnas.org/doi/full/10.1073/pnas.0810156106>
-
--   <https://rmets.onlinelibrary.wiley.com/doi/epdf/10.1002/joc.1475> (++)
-
--   <https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011GL047436>
-
--   <https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2014GB005080>
-
--   <https://www.pnas.org/doi/full/10.1073/pnas.1302584110>
-
--   <https://www.nature.com/articles/s41558-018-0177-y>
-
--   <https://www.nature.com/articles/s41558-023-01776-4>
-
--   <https://www.nature.com/articles/s41467-021-22840-7> (Fig. 2 +)
-
--   <https://link.springer.com/article/10.1007/s40641-021-00178-y> (review)
-
--   <https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015GL066063>
-
--   <https://nph.onlinelibrary.wiley.com/doi/full/10.1111/j.1469-8137.2010.03358.x>
-
--   <https://www.sciencedirect.com/science/article/pii/S0048969721072107> (big review of climate and lulcc for Brazil ++)
-
--   <https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/04-1675>
-
-### *Landscape trajectories and fires (?)*
-
-*B. Bellon, J. Betbeder, L. Blanc*
-
+-   *Projections with future climates?*
+-   *DB Mato Grosso and regional climate changes?*
 -   Amazonian landscape trajectory in Brazil explored by B. Bellon
 -   Could be linked to tropical moist forest fires using several products (e;g. MapBiomass, TMF, ...)
+-   Currently for IDEAS & TerrAmaz
+-   [IDAES webpage](https://sylvainschmitt.github.io/ideas/)
+
+## Basin {style="color: grey"}
+
+### *Amazon forests climatic typology (idea)* {style="color: grey"}
+
+*N. Phillipon, V. Gond*
+
+*Characterization of different forest types in relation to climate/season (radiation, cloud, precipitation, evapotranspiration) and ecosystem dynamics (greenness, GPP, etc., N. Philippon, V. Gond, ...). Similarly to @philippon2019. Beware the importance of hydrology and inundation in Amazonia [@fleischmann2022; @fassoni-andrade2021].*
+
+### *Individual-based projections of the Amazon (idea)* {style="color: grey"}
+
+*Multi-scale modelling of Amazonia with TROLL following @rödig2017, @rödig2018, & @rödig2019 with (1) response to climate change and/or (2) simulation of diversity with validation using ATDN.*
+
+### *The Amazon tipping point* *(idea)* {style="color: grey"}
+
+*Similarly to @dakos2022 and @boulton2022 (but see Tao et al. (in press) Nature Climate Change in response), using multiple entry point for multiple arguments (disc. products with Julie).*
 
 ## Other
 
 -   Biomass maps in Ivory Coast for S. Traore's PhD with C. Deforceville and B. Hérault
 -   L. Baptiste manuscript on species growth in cacao agroforestry in Ivory Coast with B. Hérault
--   Local data dictionary for remote sensing and other data coupled with GitHub including data definition, download scripts, and eventually pre-processing
 -   Particpation to Julien's PhD about climate effect on *Dicorynia guianensis* population genetics with climate expertise
 -   Anne Baranger's manuscript on cocoa agroforestry with B. Hérault
 -   Tree species distribution in Sudano-Sahelian region since 1970 from presence-only occurrences and trying to identify climatic envelope evolutions. PhD co-supervised by Frédéric Mortier. Opportunity to join the CST.

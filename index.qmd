@@ -1,9 +1,3 @@
 # Preface {.unnumbered}
 
-This is a personal handbook test for all my activity as a researcher at CIRAD.
-
-## Content
-
-## ToDo
-
--   Describe content
+This is a personal handbook for all my activity as a researcher at CIRAD.
