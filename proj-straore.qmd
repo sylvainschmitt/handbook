@@ -473,7 +473,7 @@ list.files("~/Documents/data/CI/wc_raw") %>%
   })
 ```
 
-```{r projs}
+```{r projs, eval=FALSE}
 extract_proj <- function(file) {
   r <- rast(file.path("~/Documents/data/CI/wc", file))
   lapply(c("min", "mean", "max"), function(m)
@@ -495,7 +495,7 @@ projs <- list.files("~/Documents/data/CI/wc") %>%
   mutate(zone = gsub("Secteur ", "", zone))
 ```
 
-```{r bio11}
+```{r bio11, eval=FALSE}
 projs %>% 
   filter(variable == "bio11") %>% 
   ggplot(aes(gcm, mean)) +
@@ -508,7 +508,7 @@ projs %>%
   theme(axis.text.y = element_text(size = 5))
 ```
 
-```{r bio19}
+```{r bio19, eval=FALSE}
 projs %>% 
   filter(variable == "bio19") %>% 
   ggplot(aes(gcm, mean/10^3)) +
@@ -524,7 +524,7 @@ projs %>%
 
 ### Present versus future
 
-```{r chull}
+```{r chull, eval=FALSE}
 #| warning: false
 future <- list.files("~/Documents/data/CI/wc/", full.names = T) %>% 
   lapply(rast) %>% 

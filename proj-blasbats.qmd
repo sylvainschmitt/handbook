@@ -7,45 +7,52 @@ library(terra)
 
 # B. Lasbats {.unnumbered}
 
-## Figure
+```{r prep_data}
+#| eval: false
+historical <- rast(c("~/Documents/data/blasbats/clim/raw/wc2.1_30s_bio/wc2.1_30s_bio_4.tif", 
+     "~/Documents/data/blasbats/clim/raw/wc2.1_30s_bio/wc2.1_30s_bio_15.tif"))
+ci <- st_read("~/Documents/data/blasbats/Archive/IC_coords.shp", quiet = T)  %>% 
+  st_transform(crs = crs(historical))
+historical <- crop(historical, ci)
+names(historical) <- c("Ts", "Ps")
+data <- lapply(c("GFDL-ESM4", "IPSL-CM6A-LR", "MPI-ESM1-2-HR", "MRI-ESM2-0", "UKESM1-0-LL"), 
+       function(m){
+         t <- rast(paste0(
+           "~/Documents/data/blasbats/clim/raw/wc2.1_30s_bioc_", m, 
+           "_ssp370_2081-2100.tif"))[[c(4,15)]] %>% crop(ci)
+         names(t) <- c("Ts", "Ps")
+         anom <- t - historical
+         return(as.data.frame(anom, xy = T) %>% 
+                  mutate(model = m, exp = "ssp370"))
+       }) %>% 
+  bind_rows()
+write_tsv(data, "~/Documents/data/anomalies.tsv")
+```
 
-```{r figdat}
+```{r ts}
 #| message: false
 #| warning: false
-path <- "~/Documents/data/blasbats/"
-ci <- st_read("~/Documents/data/blasbats/Archive/IC_coords.shp", quiet = T)
-clust <- st_read("~/Documents/data/blasbats/Archive/sampling.shp", quiet = T)
-sf_use_s2(FALSE)
-clust_ctr <- clust %>% 
-  group_by(clus) %>% 
-  sample_n(1) %>% 
-  st_centroid()
-clust_ctr_df <- clust_ctr %>% 
-  st_coordinates() %>% 
-  as.data.frame() %>% 
-  mutate(clust = clust_ctr$clus)
-clim <- rast("~/Documents/data/CI/wc/wc2.1_10m_bioc_ACCESS-CM2_ssp126_2021-2040.tif")
-```
-
-```{r fig}
-g <- ggplot() +
-  tidyterra::geom_spatraster(data = clim[[1]], alpha = 0.5) +
-  geom_sf(data = ci, fill = NA, linewidth = 1.5, col = "#454746") +
-  geom_sf(data = clust, fill = NA, linewidth = 1.2, col = "black") +
-  ggrepel::geom_text_repel(
-    data = clust_ctr,
-    aes(label = clus, geometry = geometry),
-    stat = "sf_coordinates"
-  ) +
+read_tsv("~/Documents/data/anomalies.tsv") %>% 
+  ggplot(aes(x, y, fill = Ts)) +
+  geom_raster() +
+  coord_equal() +
   theme_bw() +
-  scale_fill_viridis_c("T(°C)", na.value = NA)  +
-  theme(axis.title = element_blank())
-ggsave("~/Documents/data/blasbats/ex.png", g,
-       dpi = 1000, width = 8, height = 9, bg = "white")
-ggsave("~/Documents/data/blasbats/ex.pdf", g, 
-       dpi = 1000, width = 8, height = 9)
+  facet_wrap(~ model) +
+  scale_fill_gradient2("Temperature\nseasonality\nanomalies") +
+  theme(axis.title = element_blank(), axis.text = element_blank()) +
+  ggtitle("SSP3-7.0 - 2081-2100")
 ```
 
-```{r figshow}
-g
+```{r}
+#| message: false
+#| warning: false
+read_tsv("~/Documents/data/anomalies.tsv") %>% 
+  ggplot(aes(x, y, fill = Ps)) +
+  geom_raster() +
+  coord_equal() +
+  theme_bw() +
+  facet_wrap(~ model) +
+  scale_fill_gradient2("Precipitation\nseasonality\nanomalies") +
+  theme(axis.title = element_blank(), axis.text = element_blank()) +
+  ggtitle("SSP3-7.0 - 2081-2100")
 ```
