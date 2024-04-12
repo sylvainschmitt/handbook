@@ -1,0 +1,85 @@
+# Projects {.unnumbered}
+
+The primary objective of my research is to understand and model the fate of tropical forests in the face of global change and increasing anthropic disturbances, from the individual tree to the forest basin, in order to improve our ability to manage these ecosystems and predict their responses. I use several complementary and mutually informative approaches - functional & community ecology, remote sensing & climate projections - based on advanced modeling and simulations of tropical forests at multiple spatial and temporal scales.
+
+## **Historical and future climates**
+
+My research activities start with climate data on multiple temporal and spatial scales and from multiple sources, from local weather stations and eddy flux towers to global remote sensing products via regional and global reanalyses, which I combine with multiple dynamic projections from global and regional climate models developed by the climate model intercomparison projects of the IPCC. I am currently working on the development of an automated tool for the statistical downscaling of dynamic regional climate projections on a national and territorial scale, based on multiple climate references, in order to better support applied sciences such as ecology and forestry, which need projections on such a fine scale.
+
+### DownClim
+
+*G. Vieilledent, T. Arsouze, Achille Mauri*
+
+The project pages an be found here: <https://sylvainschmitt.github.io/DownClim/>.
+
+## Local forest dynamics
+
+I am assimilating repeated field surveys, eddy flux tower measurements, local drone surveys and remotely sensed forest measurements to calibrate and evaluate the TROLL individual-based and spatially explicit forest simulator for jointly simulating biodiversity, carbon and water dynamics in forest ecosystems. I would therefore like to take advantage of explicit species modeling that takes into account the immense biodiversity of tropical forests and individual modeling to project the joint effects of climate change and forest management practices on the future trajectories of the different types of tropical forests and the ecosystem services they provide.
+
+### Amazonian Landscape in Transition (ALT)
+
+*I. Maréchaux, J. Chave, F. Fischer, Mélaine Aubry-Kientz, Audrey Bourgois*
+
+The project pages an be found here: <https://main--altpages.netlify.app/>. And the evaluation of TROLL version 4 can be found here: <https://sylvainschmitt.github.io/troll_eval/>. The current tasks are:
+
+1.  TROLL V4 description (*IM*)
+2.  TROLL V4 validation Paracou, Santarèm (*SS*)
+3.  Role of biodiversity in response to climate change locally (*postodoc IM*)
+4.  Forest response to CC projected to the scale of French Guiana (*postdoc JC*)
+5.  Regeneration dynamics (*AB*)
+
+### **BioForest: effects of logging disturbance on tropical forest diversity - a global assessment** 
+
+The project pages an be found here: <https://github.com/Bioforest-project/LoggingDiversity>.
+
+### *Simulating the regeneration of exploited Amazonian forests in the face of climate change (project to develop)*
+
+***G Derroire** with I Maréchaux, C Piponiot-Laroche, TmFO,* *et al.*
+
+*Simulation of forest response to logging in relation to climate change in selectively logged Amazonian forests, taking advantage of TmFO, TROLL and LoggingLab. Possibly extended to other continents with for instance CI data. Discuss funding with Plinio & Valéry. Discuss idea with Jérôme and Isabelle.*
+
+### *Paracou dynamics under climate change across scales (idea)* {style="color: grey"}
+
+*Dynamics (mainly growth) of individuals, species, and forest locally (inventories, fluxes) and remotely sensed (TROMPOMI SIF...) in time starting from TreeGrowth results (*<https://sylvainschmitt.github.io/treegrowth/>*) against local (Guyaflux), remotely sensed (e.g. MODIS) and reanalysed (e.g. ERA5-Land) climates (exploring tipping points with AR(1)).*
+
+## Forests in the landscape
+
+My research activities also include the link between landscape trajectories and regional climate in order to support projects using territories as levers for sustainable development in Amazonia. In particular, I am trying to establish a link between changes in forest cover and structure, i.e. degradation, deforestation and regeneration, and variations in climate, as well as the effects of climate variations on forest functioning. I study climate trends as well as extreme events and changes in fire risk in order to produce indices and projections.
+
+### Landscape trajectories and local climate
+
+*J. Betbeder et al.*
+
+See dedicated chapter.
+
+### IDEAS: Investigación y Desarrollo para la Estabilización de la frontera Agropecuaria en Colombia
+
+*Marion Chesnes et al.*
+
+The project pages an be found here: <https://sylvainschmitt.github.io/ideas/>.
+
+## Basin {style="color: grey"}
+
+Beyond understanding the local dynamics of forests and their dynamics within the landscape, I would like to study the dynamics of tropical forests in the Amazon basin as a whole in relation to the bi-stability of ecosystems, in particular between tropical moist forests and savannas, in order to better characterize potential tipping points in Amazonia, focusing on the little-studied role of biodiversity in stability and on a better spatio-temporal characterisation of possible forest trajectories.
+
+### *Amazon forests climatic typology (idea)* {style="color: grey"}
+
+*N. Phillipon, V. Gond*
+
+*Characterization of different forest types in relation to climate/season (radiation, cloud, precipitation, evapotranspiration) and ecosystem dynamics (greenness, GPP, etc., N. Philippon, V. Gond, ...). Similarly to @philippon2019. Beware the importance of hydrology and inundation in Amazonia [@fleischmann2022; @fassoni-andrade2021].*
+
+### *Individual-based projections of the Amazon (idea)* {style="color: grey"}
+
+*Multi-scale modelling of Amazonia with TROLL following @rödig2017, @rödig2018, & @rödig2019 with (1) response to climate change and/or (2) simulation of diversity with validation using ATDN.*
+
+### *The Amazon tipping point* *(idea)* {style="color: grey"}
+
+*Similarly to @dakos2022 and @boulton2022 (but see Tao et al. (in press) Nature Climate Change in response), using multiple entry point for multiple arguments (disc. products with Julie).*
+
+## Other
+
+-   Biomass maps in Ivory Coast for S. Traore's PhD with C. Deforceville and B. Hérault
+-   L. Baptiste manuscript on species growth in cacao agroforestry in Ivory Coast with B. Hérault
+-   Particpation to Julien's PhD about climate effect on *Dicorynia guianensis* population genetics with climate expertise
+-   Anne Baranger's manuscript on cocoa agroforestry with B. Hérault
+-   Tree species distribution in Sudano-Sahelian region since 1970 from presence-only occurrences and trying to identify climatic envelope evolutions. PhD co-supervised by Frédéric Mortier. Opportunity to join the CST.

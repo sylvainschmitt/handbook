@@ -1,0 +1,106 @@
+# Landscape {.unnumbered}
+
+I have recently added to my research activities the study of the link between landscape trajectories and regional climate in order to support projects using territories as levers for sustainable development in Amazonia. Recent studies revealed among others regional warming due to deforestation and degradation, with an increase in evapotranspiration and a decrease in precipitation modifying the dry season critical to tropical forest dynamics. However, understanding the effects of deforestation and degradation on atmospheric moisture fluxes and precipitation remains a challenge, as it depends on the spatial extent of land surface changes and on the east-west forest precipitation chains, with up to half of west regional precipitation linked to tree transpiration in the eastern regions of the Amazon. Moreover, the patterns are highly heterogeneous in time and space, as illustrated by the increasing frequency of dry and wet El Niño and La Niña years. Finally, increased forest disturbance combined with more frequent drought conditions increases the risk of fire, which contributes to accelerating change by releasing forest carbon into the atmosphere and disturbing forests while maintaining ecosystem changes. I am therefore exploring the effect of changes in forest cover and structure in landscapes at multiple temporal and spatial scales on variations in regional climatic conditions, which are themselves important for forest dynamics and stability, by integrating the feedback loop of regional climate on the functioning of local forests. In particular, I want to integrate climate trends and extreme events, including fire risks, with advanced characterisation of forest landscape trajectories based on the landscape ecology expertise of my colleagues.
+
+Ideas:
+
+-   Effect of land use cover changes, degradation and deforestation, on climate
+-   Developing the apporach for temperature of @butt2023
+-   Projections with future climates taking advantage of DownClim
+-   Amazonian landscape trajectory in Brazil explored by B. Bellon
+-   Could be linked to tropical moist forest fires using several products (e;g. MapBiomass, TMF, ...)
+
+Connexions:
+
+-   Brasil Amazon post forest trajectories (e.g. forest \> grassland \> soya) from B. Bellon
+-   Guido multiple metrics used to classify archetype of deforested areas in TerrAmaz (percent loss and degraded, speed of deforestation and degradation - maximum slop of loess, regrowth, regrowth age, baseline 90s, forest left, activeness)
+-   fragmentation metrics currently used by Lucas to be linked with forest productivity e.g. NDVI/EVI trends (could use SIF too)
+
+## Literature
+
+### Review / general - basin wide
+
+-   Review CC and deforestation on the Amazon @malhi2008
+-   The Amazon tipping point @lovejoy2018
+-   Review land-use & CC on the Amazon @nobre2016
+-   The Amazon basin in transition @davidson2012
+
+### Deforestation
+
+#### All
+
+-   Simulating global and local effect of deforestation in the Amazon @werth2002
+-   Deforestation \~ Climate biophysics \~ Carbon worldwide @lawrence2022
+-   Local Biogeophysical Effects of Deforestation @winckler2019
+-   Deforestation & Degradation on T & ET @reygadas2023
+-   **Review**: Land Use Effects on Climate: Current State, Recent Progress, and Emerging Topics @pongratz2021
+-   **Review**: Land use and land cover changes and their impacts on surface-atmosphere interactions in Brazil @caballero2022
+
+#### Water
+
+-   Deforestation and water budget @wongchuig2023 (J.C. Espinoza)
+-   Deforestation size influences rainfall @chambers2017
+-   Deforestation and dry season @khanna2017
+-   Deforestation and clouds @wang2009
+-   Deforestation & hydrological cycle @dalmeida2007
+-   Deforestation reduces rainfall and agri revenues @leite-filho2021
+-   Deforestation rainfall Amazon basin @spracklen2015
+-   forest cover and rainfall in mata atlantica @webb2005
+
+#### Temperature / Energy
+
+-   Forestation & deforestation \~ temperature worldwide @prevedello2019
+-   Deforestation \~ temperature @butt2023
+
+### Climate
+
+-   Amazon hydrological changes @gloor2015
+-   2010 drought @marengo2011
+-   Increased dry season length @fu2013
+-   Forest-rainfall cascades buffer against drought @staal2018
+-   Sensitivity of tropical forests to an extreme @bennett2023
+
+### Fires
+
+-   Fires, Sensitivity to drought, Amazon @leroux2022
+-   Fires and deforestation linked to climate in space and time in central Amazonia @dosreis2021
+-   Forest fires \~ deforestation SouthEast Atlantic rainforest @depragabaião2023
+-   Fire activity in Equatorial Asia @sloan2022
+-   Special issue in [Forest Ecology and Management](https://www.sciencedirect.com/journal/forest-ecology-and-management/special-issue/10MGRJLZDHP)
+-   Fire mechanist modelling SpitFire: @thonicke2010
+-   Risk of plantation for fires: @stevens2023
+-   Fire science for rainforests @cochrane2003
+-   Simulating fires in the Amazon with CC @silvestrini2011
+-   The Gathering Firestorm in Southern Amazonia @brando2020
+-   Forest Fragmentation, Climate Change and Understory Fire Regimes on the Amazonian Landscapes of the Xingu Headwaters @soares-filho2012
+-   Predicting understory fuels @ray2010
+
+### Data
+
+-   ET map from satellite @senay2013
+-   ERA5-Land @muñoz-sabater2021
+
+### Up-scaling
+
+*To be moved to basin wide projects of modelling*
+
+-   @rödig2019
+-   @rödig2017
+-   @rödig2018
+
+### Tipping-points
+
+*To be moved to basin wide projects on tipping points*
+
+-   @dietz2021
+-   @vannes2014
+
+### Demography and climate
+
+*To be moved to forest scale projects*
+
+-   @song2023
+
+### Other
+
+-   Amazonian roads simulation: <https://csr.ufmg.br/simamazonia/>

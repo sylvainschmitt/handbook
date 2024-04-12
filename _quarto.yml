@@ -8,15 +8,14 @@ book:
   date: last-modified
   chapters:
     - index.qmd
-    - part: projects.qmd
+    - part: 10_projects.qmd
       chapters: 
-        - proj-blasbats.qmd
-        - proj-straore.qmd
+        - 11_landscape.qmd
   appendices:
-    - meetings.qmd
-    - admin.qmd
-    - literature.qmd
-    - references.qmd
+    - 90_meetings.qmd
+    - 91_admin.qmd
+    - 92_literature.qmd
+    - 99_references.qmd
 
 bibliography: references.bib
 
