@@ -46,6 +46,7 @@ Connexions:
 -   Deforestation reduces rainfall and agri revenues @leite-filho2021
 -   Deforestation rainfall Amazon basin @spracklen2015
 -   forest cover and rainfall in mata atlantica @webb2005
+-   Moisture flow https://essd.copernicus.org/articles/12/3177/2020
 
 #### Temperature / Energy
 
